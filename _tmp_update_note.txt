@@ -1,0 +1,1 @@
+Updating Google Fonts to Playfair Display + Lato and applying colors: #2A2D34 (dark gray), #FFFFFF (white), #A78D6D (gold).
