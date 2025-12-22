@@ -60,14 +60,46 @@
             </div>
           </div>
 
-          <div style="margin-top: 48px; padding: 24px; background: linear-gradient(135deg, #f9f9f9, #ffffff); border-radius: 12px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 16px; color: var(--color-gold); text-align: center;">会場マップ</h3>
-            <p style="text-align: center; opacity: 0.7; margin-bottom: 0;">会場マップは開催直前に公開いたします。</p>
+          <div class="venue-map-section">
+            <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 24px; color: var(--color-gold); text-align: center;">会場マップ</h3>
+            <div class="map-container">
+              <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-image clickable-map" onclick="openMapModal(this)">
+              <p style="text-align: center; margin-top: 12px; opacity: 0.6; font-size: 0.9rem;">📷 クリックで拡大表示</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- マップ拡大モーダル -->
+  <div id="mapModal" class="map-modal" onclick="closeMapModal()">
+    <span class="map-modal-close">&times;</span>
+    <img class="map-modal-content" id="modalImage" alt="会場マップ拡大">
+  </div>
+
+  <script>
+    function openMapModal(img) {
+      const modal = document.getElementById('mapModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = 'flex';
+      modalImg.src = img.src;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMapModal() {
+      const modal = document.getElementById('mapModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Escキーでモーダルを閉じる
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMapModal();
+      }
+    });
+  </script>
 
   <footer class="site-footer">
     <div class="container">

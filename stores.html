@@ -26,6 +26,14 @@
       <div class="container">
         <h2 class="section-title">出店店舗</h2>
         <hr class="section-divider">
+        
+        <div class="venue-map-section" style="margin-bottom: 60px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 24px; color: var(--color-gold); text-align: center;">会場マップ</h3>
+          <div class="map-container">
+            <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-image">
+          </div>
+          <p style="text-align: center; margin-top: 16px; opacity: 0.7; font-size: 0.95rem;">マップ内の番号と店舗の対応は、各ジャンルページでご確認いただけます。</p>
+        </div>
         <ul class="genre-list">
           <li><a href="sweets.html" class="genre-link">スイーツ</a></li>
           <li><a href="drink.html" class="genre-link">ドリンク</a></li>
@@ -37,6 +45,35 @@
       </div>
     </section>
   </main>
+
+  <!-- マップ拡大モーダル -->
+  <div id="mapModal" class="map-modal" onclick="closeMapModal()">
+    <span class="map-modal-close">&times;</span>
+    <img class="map-modal-content" id="modalImage" alt="会場マップ拡大">
+  </div>
+
+  <script>
+    function openMapModal(img) {
+      const modal = document.getElementById('mapModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = 'flex';
+      modalImg.src = img.src;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMapModal() {
+      const modal = document.getElementById('mapModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Escキーでモーダルを閉じる
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMapModal();
+      }
+    });
+  </script>
 
   <footer class="site-footer">
     <div class="container">
