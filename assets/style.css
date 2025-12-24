@@ -775,6 +775,204 @@ body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* お問い合わせページ */
+.contact-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contact-intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contact-intro p {
+  font-size: 1.05rem;
+  color: var(--color-dark);
+  line-height: 2;
+  opacity: 0.85;
+}
+
+.contact-method-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--color-gold);
+  text-align: center;
+}
+
+.contact-method-content {
+  text-align: center;
+}
+
+.contact-method-text {
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+  color: var(--color-dark);
+  line-height: 2;
+  opacity: 0.85;
+}
+
+.contact-method-button {
+  margin-bottom: 0;
+}
+
+.contact-link {
+  color: var(--color-gold);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.contact-phone {
+  color: var(--color-gold);
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.contact-info {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  opacity: 0.7;
+}
+
+.contact-notes {
+  margin-top: 48px;
+}
+
+.contact-notes-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+  color: var(--color-dark);
+  text-align: center;
+}
+
+.contact-notes-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-notes-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.contact-notes-list li:last-child {
+  border-bottom: none;
+}
+
+/* アクセスページ */
+.access-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.access-venue-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  color: var(--color-gold);
+}
+
+.access-transport {
+  margin-top: 48px;
+}
+
+.access-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+  color: var(--color-dark);
+}
+
+.access-list {
+  margin-left: 20px;
+  margin-bottom: 24px;
+}
+
+.access-list:last-child {
+  margin-bottom: 0;
+}
+
+.venue-map-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+  color: var(--color-gold);
+  text-align: center;
+}
+
+.map-click-hint {
+  text-align: center;
+  margin-top: 12px;
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+/* aboutページ */
+.about-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-features {
+  margin-top: 48px;
+}
+
+.about-features-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  color: var(--color-gold);
+}
+
+.about-past-events {
+  margin-top: 64px;
+}
+
+.about-past-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin-bottom: 32px;
+  text-align: center;
+  color: var(--color-dark);
+}
+
+.about-past-description {
+  text-align: center;
+  opacity: 0.7;
+  font-size: 1.05rem;
+  color: var(--color-dark);
+  line-height: 2;
+}
+
+.about-instagram-button {
+  text-align: center;
+  margin-top: 32px;
+}
+
+/* 店舗紹介ページ */
+.stores-map-section {
+  margin-bottom: 60px;
+}
+
+.stores-map-note {
+  text-align: center;
+  margin-top: 16px;
+  opacity: 0.7;
+  font-size: 0.95rem;
+}
+
+/* ジャンルページ */
+.genre-back-button {
+  margin-top: 48px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .site-header .container {
     gap: 16px;
