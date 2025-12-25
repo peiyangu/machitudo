@@ -66,6 +66,50 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  position: relative;
+}
+
+/* ハンバーガーメニューボタン */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+}
+
+.hamburger-menu span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-dark);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* メニューを開いた時のスクロール防止 */
+body.menu-open {
+  overflow: hidden;
 }
 
 .site-title {
@@ -1050,42 +1094,187 @@ body {
   text-align: center;
 }
 
-@media (max-width: 768px) {
+/* レスポンシブデザイン */
+
+/* タブレット（768px～1023px） */
+@media (max-width: 1023px) {
   .site-header .container {
-    gap: 16px;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
-  .site-title {
-    font-size: 2rem;
+  /* ハンバーガーメニューを表示 */
+  .hamburger-menu {
+    display: flex;
   }
 
+  /* ナビゲーションメニュー */
   .site-nav {
-    gap: 20px;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100vh;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FDFCFB 100%);
+    flex-direction: column;
+    padding: 80px 40px 40px;
+    gap: 24px;
+    box-shadow: 4px 0 20px rgba(167, 141, 109, 0.15);
+    transition: left 0.4s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .site-nav.active {
+    left: 0;
   }
 
   .site-nav a {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(167, 141, 109, 0.1);
+  }
+
+  .site-nav a::after {
+    display: none;
+  }
+
+  .container {
+    padding: 0 20px;
   }
 
   .hero-title {
-    font-size: 1.6rem;
+    font-size: 1.9rem;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .stores-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
   }
 
+  .genre-list {
+    gap: 12px;
+  }
+
+  .genre-link {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+/* スマートフォン（～767px） */
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+  }
+
+  .site-header {
+    padding: 20px 0;
+  }
+
+  .site-header .container {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  /* ハンバーガーメニューを表示 */
+  .hamburger-menu {
+    display: flex;
+  }
+
+  /* ナビゲーションメニュー */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FDFCFB 100%);
+    flex-direction: column;
+    padding: 80px 32px 40px;
+    gap: 20px;
+    box-shadow: 4px 0 20px rgba(167, 141, 109, 0.15);
+    transition: left 0.4s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .site-nav.active {
+    left: 0;
+  }
+
+  .site-nav a {
+    font-size: 1rem;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(167, 141, 109, 0.1);
+  }
+
+  .site-nav a::after {
+    display: none;
+  }
+
+  .site-title {
+    font-size: 1.8rem;
+    letter-spacing: 0.01em;
+    margin-left: 20px;
+  }
+
+  /* ヒーローセクション */
+  .hero {
+    padding: 50px 20px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  /* セクション */
   .section {
     padding: 60px 0;
   }
 
-  .venue-map-section {
-    padding: 20px;
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  /* 開催日程セクション */
+  .event-schedule-section {
+    padding: 60px 20px;
+  }
+
+  .event-date {
+    font-size: 1.3rem;
+  }
+
+  .event-details {
+    font-size: 0.95rem;
+  }
+
+  .event-details li {
+    margin-bottom: 8px;
+  }
+
+  /* ニュースセクション */
+  .news-section {
+    padding: 60px 0;
   }
 
   .news-item {
@@ -1096,12 +1285,131 @@ body {
 
   .news-date {
     min-width: auto;
+    font-size: 0.85rem;
+  }
+
+  .news-content {
+    font-size: 1rem;
+  }
+
+  /* 店舗カード */
+  .stores-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .store-card-image {
+    height: 200px;
+  }
+
+  .store-card-body {
+    padding: 20px;
+  }
+
+  .store-name {
+    font-size: 1.3rem;
+  }
+
+  .store-description {
+    font-size: 0.9rem;
+    min-height: auto;
+  }
+
+  /* ジャンルリスト */
+  .genre-list {
+    gap: 12px;
+  }
+
+  .genre-link {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  /* Info Box */
+  .info-box {
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .info-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 0;
+  }
+
+  .info-list li strong {
+    min-width: auto;
+    display: block;
+  }
+
+  /* アクセスページ */
+  .access-venue-title,
+  .access-section-title {
+    font-size: 1.5rem;
+  }
+
+  .venue-map-title {
+    font-size: 1.5rem;
+  }
+
+  .venue-map-section {
+    padding: 24px 20px;
   }
 
   .venue-map-image {
     max-width: 100%;
   }
 
+  /* Aboutページ */
+  .about-features-title,
+  .about-past-title {
+    font-size: 1.5rem;
+  }
+
+  .content-text {
+    font-size: 1rem;
+  }
+
+  /* お問い合わせページ */
+  .contact-method-title {
+    font-size: 1.3rem;
+  }
+
+  .contact-notes-title {
+    font-size: 1.3rem;
+  }
+
+  .contact-phone {
+    font-size: 1.2rem;
+  }
+
+  .contact-link {
+    font-size: 1rem;
+  }
+
+  /* ボタン */
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+
+  /* フッター */
+  .site-footer {
+    padding: 40px 0 28px;
+    margin-top: 60px;
+  }
+
+  .footer-social a {
+    font-size: 1.3rem;
+  }
+
+  .footer-text {
+    font-size: 0.85rem;
+  }
+
+  /* マップモーダル */
   .map-modal-close {
     top: 16px;
     right: 16px;
@@ -1111,5 +1419,47 @@ body {
   .map-modal-content {
     max-width: 98%;
     max-height: 98%;
+  }
+
+  /* 会場マップ */
+  .stores-map-section {
+    margin-bottom: 48px;
+  }
+
+  .map-click-hint {
+    font-size: 0.85rem;
+  }
+}
+
+/* 小型スマートフォン（～374px） */
+@media (max-width: 374px) {
+  .site-title {
+    font-size: 1.6rem;
+  }
+
+  .site-nav {
+    gap: 12px;
+  }
+
+  .site-nav a {
+    font-size: 0.8rem;
+  }
+
+  .hero-title {
+    font-size: 1.3rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }
