@@ -1493,6 +1493,241 @@ body.menu-open {
   font-size: 0.95rem;
 }
 
+/* 注目店舗スライダー */
+.featured-stores-section {
+  margin-bottom: 80px;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #FDFCFB 0%, #FFFFFF 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(167, 141, 109, 0.1);
+}
+
+.featured-section-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: var(--color-dark);
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.featured-section-subtitle {
+  text-align: center;
+  color: rgba(42, 45, 52, 0.7);
+  font-size: 1rem;
+  margin-bottom: 48px;
+}
+
+.featured-slider {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.slider-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-track {
+  display: flex;
+  gap: 0;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slider-store-card {
+  flex: 0 0 100%;
+  min-width: 100%;
+  background: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(167, 141, 109, 0.12);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(167, 141, 109, 0.1);
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slider-store-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(167, 141, 109, 0.2);
+}
+
+.slider-card-genre {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(135deg, var(--color-gold), #B89D7D);
+  color: var(--color-white);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.slider-card-image {
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(135deg, #f8f6f3 0%, #ede8e1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(167, 141, 109, 0.15);
+  position: relative;
+}
+
+.slider-card-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.slider-store-name {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-dark);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.slider-store-description {
+  font-size: 1.05rem;
+  color: rgba(42, 45, 52, 0.7);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  min-height: auto;
+}
+
+.slider-card-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.slider-instagram-link,
+.slider-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.slider-instagram-link {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+}
+
+.slider-instagram-link:hover {
+  background-color: #8B7355;
+  transform: translateY(-2px);
+}
+
+.slider-detail-link {
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+  background-color: transparent;
+}
+
+.slider-detail-link:hover {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--color-gold), #B89D7D);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(167, 141, 109, 0.3);
+}
+
+.slider-btn:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(167, 141, 109, 0.4);
+}
+
+.slider-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.slider-btn-prev {
+  left: 0;
+}
+
+.slider-btn-next {
+  right: 0;
+}
+
+.slider-btn span {
+  line-height: 1;
+  margin-top: -4px;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(167, 141, 109, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.slider-dot:hover {
+  background-color: rgba(167, 141, 109, 0.6);
+}
+
+.slider-dot.active {
+  background-color: var(--color-gold);
+  width: 32px;
+  border-radius: 6px;
+}
+
 /* ジャンルページ */
 .genre-back-button {
   margin-top: 48px;
@@ -1933,6 +2168,83 @@ body.menu-open {
   .map-click-hint {
     font-size: 0.85rem;
   }
+  
+  /* 注目店舗スライダー */
+  .featured-stores-section {
+    padding: 40px 20px;
+    margin-bottom: 48px;
+  }
+  
+  .featured-section-title {
+    font-size: 1.8rem;
+  }
+  
+  .featured-section-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+  }
+  
+  .featured-slider {
+    padding: 0 50px;
+    max-width: 600px;
+  }
+  
+  .slider-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.8rem;
+  }
+  
+  .slider-btn-prev {
+    left: -5px;
+  }
+  
+  .slider-btn-next {
+    right: -5px;
+  }
+  
+  .slider-card-image {
+    height: 200px;
+    font-size: 1rem;
+  }
+  
+  .slider-card-body {
+    padding: 20px;
+  }
+  
+  .slider-store-name {
+    font-size: 1.3rem;
+  }
+  
+  .slider-store-description {
+    font-size: 0.95rem;
+    min-height: auto;
+  }
+  
+  .slider-card-links {
+    flex-direction: column;
+  }
+  
+  .slider-instagram-link,
+  .slider-detail-link {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 20px;
+  }
+  
+  .slider-dots {
+    gap: 8px;
+    margin-top: 24px;
+  }
+  
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .slider-dot.active {
+    width: 24px;
+  }
 }
 
 /* 小型スマートフォン（～374px） */
@@ -1964,6 +2276,29 @@ body.menu-open {
   .btn-primary,
   .btn-secondary {
     padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* 注目店舗スライダー */
+  .featured-slider {
+    padding: 0 45px;
+  }
+  
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+  
+  .slider-card-image {
+    height: 180px;
+  }
+  
+  .slider-store-name {
+    font-size: 1.1rem;
+  }
+  
+  .slider-store-description {
     font-size: 0.9rem;
   }
 }
