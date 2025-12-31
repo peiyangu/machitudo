@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ハンドメイド</title>
+  <title>その他 | machitudo</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">  <script src="assets/stores-data.js" defer></script>
   <script src="assets/stores-render.js" defer></script>  <script src="assets/script.js" defer></script>
@@ -33,19 +33,34 @@
       <div class="page-hero-overlay"></div>
       <div class="page-hero-content">
         <div class="container">
-          <h2 class="page-hero-title">ハンドメイド</h2>
-          <p class="page-hero-subtitle">作家が一つ一つ丁寧に作り上げた作品</p>
+          <h2 class="page-hero-title">その他</h2>
+          <p class="page-hero-subtitle">様々な出店者</p>
         </div>
       </div>
     </section>
 
-    <section class="section" data-genre="handmade">
+    <section class="section" data-genre="other">
       <div class="container">
-        <p class="section-subtitle">一つ一つ心を込めて作られたハンドメイド作品。世界に一つだけの宝物が見つかるかも。</p>
+        <p class="section-subtitle">様々なジャンルの出店者が集まります。</p>
         <p class="store-count" id="storeCount">読み込み中...</p>
         
         <div class="stores-grid" id="storeContainer">
           <!-- JavaScriptで店舗カードが動的に生成されます -->
+        </div>
+
+        <!-- ジャンルナビゲーション -->
+        <div class="genre-navigation">
+          <p class="genre-nav-label">他のジャンルを見る</p>
+          <div class="genre-list">
+            <a href="food.html" class="genre-link">フード</a>
+            <a href="sweets.html" class="genre-link">スイーツ</a>
+            <a href="drink.html" class="genre-link">ドリンク</a>
+            <a href="workshop.html" class="genre-link">ワークショップ</a>
+            <a href="festival.html" class="genre-link">縁日</a>
+            <a href="sales.html" class="genre-link">物販</a>
+            <a href="green.html" class="genre-link">グリーン</a>
+            <a href="other.html" class="genre-link active">その他</a>
+          </div>
         </div>
 
         <div class="genre-back-button">

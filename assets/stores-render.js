@@ -51,7 +51,7 @@ function renderStores(genre, containerId = 'storeContainer') {
            class="instagram-link" 
            target="_blank" 
            rel="noopener noreferrer">
-          📷 Instagramで見る
+          Instagramで見る
         </a>
       </div>
     `;

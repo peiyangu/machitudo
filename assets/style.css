@@ -312,7 +312,7 @@ body.menu-open {
   line-height: 2;
   margin-bottom: 24px;
   opacity: 0.85;
-  text-align: center;
+  text-align: left;
 }
 
 .site-footer {
@@ -845,6 +845,30 @@ body.menu-open {
 .genre-link:hover {
   background-color: var(--color-gold);
   color: var(--color-white);
+}
+
+.genre-link.active {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+  cursor: default;
+}
+
+/* ジャンルナビゲーション */
+.genre-navigation {
+  margin: 32px 0 40px;
+  padding: 24px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F9F7F4 100%);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(167, 141, 109, 0.08);
+}
+
+.genre-nav-label {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--color-dark);
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 600;
 }
 
 .info-box {
@@ -1673,9 +1697,7 @@ body.menu-open {
 }
 
 .slider-detail-link {
-  color: var(--color-gold);
-  border: 1px solid var(--color-gold);
-  background-color: transparent;
+  display: none;
 }
 
 .slider-detail-link:hover {
@@ -2139,6 +2161,17 @@ body.menu-open {
     overflow-wrap: break-word;
   }
 
+  /* ジャンルナビゲーション（モバイル） */
+  .genre-navigation {
+    margin: 24px 0 32px;
+    padding: 18px;
+  }
+
+  .genre-nav-label {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
   /* Info Box */
   .info-box {
     padding: 20px 18px;
@@ -2291,27 +2324,54 @@ body.menu-open {
   }
   
   .featured-slider {
-    padding: 0 50px;
-    max-width: 600px;
+    padding: 0;
+    max-width: 100%;
   }
   
   .slider-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 1.8rem;
+    display: none;
   }
   
-  .slider-btn-prev {
-    left: -5px;
+  .slider-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    scroll-padding: 0;
+    padding: 0;
   }
   
-  .slider-btn-next {
-    right: -5px;
+  .slider-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .slider-track {
+    display: flex;
+    gap: 0;
+  }
+  
+  .slider-store-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    scroll-snap-align: start;
   }
   
   .slider-card-image {
-    height: 180px;
+    height: 220px;
     font-size: 1rem;
+  }
+  
+  .slider-card-body {
+    padding: 18px;
+  }
+  
+  .slider-store-name {
+    font-size: 1.3rem;
+  }
+  
+  .slider-store-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
   }
   
   .slider-card-body {
@@ -2387,21 +2447,52 @@ body.menu-open {
   
   /* 注目店舗スライダー */
   .featured-slider {
-    padding: 0 45px;
+    padding: 0;
   }
   
   .slider-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.6rem;
+    display: none;
+  }
+  
+  .slider-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    scroll-padding: 0;
+    padding: 0;
+  }
+  
+  .slider-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .slider-track {
+    display: flex;
+    gap: 0;
+  }
+  
+  .slider-store-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    scroll-snap-align: start;
   }
   
   .slider-card-image {
-    height: 180px;
+    height: 200px;
+  }
+  
+  .slider-card-body {
+    padding: 16px;
   }
   
   .slider-store-name {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+  }
+  
+  .slider-store-description {
+    font-size: 0.9rem;
+    line-height: 1.7;
   }
   
   .slider-store-description {

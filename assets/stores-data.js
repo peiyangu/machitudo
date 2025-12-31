@@ -307,13 +307,14 @@ const allStoresData = [
  * ジャンル名のマッピング
  */
 const genreNames = {
+  food: "フード",
   sweets: "スイーツ",
   drink: "ドリンク",
-  food: "飲食",
-  cafe: "カフェ",
-  handmade: "ハンドメイド",
   workshop: "ワークショップ",
-  festival: "フェスティバル"
+  festival: "縁日",
+  sales: "物販",
+  green: "グリーン",
+  other: "その他"
 };
 
 /**
