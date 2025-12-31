@@ -158,7 +158,7 @@ body.menu-open {
 
 .hero {
   position: relative;
-  min-height: 75vh;
+  min-height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -260,7 +260,7 @@ body.menu-open {
 }
 
 .section {
-  padding: 80px 0;
+  padding: 60px 0;
   position: relative;
 }
 
@@ -398,7 +398,7 @@ body.menu-open {
 
 /* イベント情報セクション */
 .event-info-section {
-  padding: 80px 0;
+  padding: 60px 0;
   background: linear-gradient(135deg, #FFFFFF 0%, #F9F7F4 100%);
 }
 
@@ -1809,6 +1809,10 @@ body.menu-open {
     padding: 0 20px;
   }
 
+  .hero {
+    min-height: 55vh;
+  }
+
   .hero-title {
     font-size: 1.9rem;
   }
@@ -1835,11 +1839,16 @@ body.menu-open {
 /* スマートフォン（～767px） */
 @media (max-width: 767px) {
   body {
-    font-size: 15px;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .container {
+    padding: 0 18px;
   }
 
   .site-header {
-    padding: 20px 0;
+    padding: 16px 0;
   }
 
   .site-header .container {
@@ -1878,6 +1887,7 @@ body.menu-open {
     font-size: 1rem;
     padding: 12px 0;
     border-bottom: 1px solid rgba(167, 141, 109, 0.1);
+    white-space: nowrap;
   }
 
   .site-nav a::after {
@@ -1892,25 +1902,31 @@ body.menu-open {
 
   /* ヒーローセクション */
   .hero {
-    min-height: 60vh;
-    padding: 40px 20px;
+    min-height: 40vh;
+    padding: 24px 18px;
   }
 
   .hero-title {
-    font-size: 2rem;
-    line-height: 1.4;
-    margin-bottom: 16px;
+    font-size: 1.75rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    padding: 12px 10px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .hero-description {
     font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 32px;
+    line-height: 1.75;
+    margin-bottom: 24px;
+    text-align: left;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .hero-cta {
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
   }
 
   .hero-cta .btn-primary,
@@ -1927,15 +1943,20 @@ body.menu-open {
   }
 
   .event-card {
-    padding: 32px 24px;
+    padding: 28px 20px;
   }
 
   .card-icon {
     font-size: 2.5rem;
+    margin-bottom: 16px;
   }
 
   .card-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .event-date-large {
@@ -1953,39 +1974,53 @@ body.menu-open {
   }
 
   .news-card {
-    padding: 24px;
+    padding: 20px 18px;
   }
 
   .news-title {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   /* セクション */
   .section {
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
   .section-title {
     font-size: 1.8rem;
-    margin-bottom: 32px;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .section-subtitle {
     font-size: 1rem;
-    margin-bottom: 32px;
+    line-height: 1.75;
+    margin-bottom: 24px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   /* 開催日程セクション */
   .event-schedule-section {
-    padding: 60px 20px;
+    padding: 48px 18px;
   }
 
   .event-date {
     font-size: 1.3rem;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .event-details {
     font-size: 0.95rem;
+    line-height: 1.7;
   }
 
   .event-details li {
@@ -1994,13 +2029,13 @@ body.menu-open {
 
   /* ニュースセクション */
   .news-section {
-    padding: 60px 0;
+    padding: 48px 0;
   }
 
   .news-item {
     flex-direction: column;
-    gap: 8px;
-    padding: 20px;
+    gap: 6px;
+    padding: 16px;
   }
 
   .news-date {
@@ -2010,15 +2045,19 @@ body.menu-open {
 
   .news-content {
     font-size: 1rem;
+    line-height: 1.7;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   /* ページヒーロー */
   .page-hero {
-    min-height: 35vh;
+    min-height: 28vh;
   }
 
   .page-hero-title {
     font-size: 2.2rem;
+    white-space: nowrap;
   }
 
   .page-hero-subtitle {
@@ -2064,7 +2103,7 @@ body.menu-open {
   }
 
   .store-card-image {
-    height: 200px;
+    height: 180px;
   }
 
   .store-card-body {
@@ -2073,11 +2112,18 @@ body.menu-open {
 
   .store-name {
     font-size: 1.3rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .store-description {
     font-size: 0.9rem;
+    line-height: 1.7;
     min-height: auto;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   /* ジャンルリスト */
@@ -2086,13 +2132,16 @@ body.menu-open {
   }
 
   .genre-link {
-    padding: 10px 18px;
-    font-size: 0.9rem;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   /* Info Box */
   .info-box {
-    padding: 24px;
+    padding: 20px 18px;
     margin: 24px 0;
   }
 
@@ -2101,6 +2150,7 @@ body.menu-open {
     align-items: flex-start;
     gap: 4px;
     padding: 10px 0;
+    line-height: 1.7;
   }
 
   .info-list li strong {
@@ -2112,14 +2162,20 @@ body.menu-open {
   .access-venue-title,
   .access-section-title {
     font-size: 1.5rem;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .venue-map-title {
     font-size: 1.5rem;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .venue-map-section {
-    padding: 24px 20px;
+    padding: 20px 18px;
   }
 
   .venue-map-image {
@@ -2130,19 +2186,31 @@ body.menu-open {
   .about-features-title,
   .about-past-title {
     font-size: 1.5rem;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .content-text {
     font-size: 1rem;
+    line-height: 1.75;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   /* お問い合わせページ */
   .contact-method-title {
     font-size: 1.3rem;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .contact-notes-title {
     font-size: 1.3rem;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .contact-phone {
@@ -2158,12 +2226,13 @@ body.menu-open {
   .btn-secondary {
     padding: 12px 24px;
     font-size: 0.95rem;
+    line-height: 1.5;
   }
 
   /* フッター */
   .site-footer {
-    padding: 40px 0 28px;
-    margin-top: 60px;
+    padding: 32px 0 24px;
+    margin-top: 48px;
   }
 
   .footer-social a {
@@ -2188,7 +2257,7 @@ body.menu-open {
 
   /* 会場マップ */
   .stores-map-section {
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
 
   .map-click-hint {
@@ -2197,28 +2266,28 @@ body.menu-open {
   
   /* 注目店舗スライダー */
   .featured-stores-section {
-    padding: 40px 20px;
-    margin-bottom: 48px;
+    padding: 32px 18px;
+    margin-bottom: 40px;
   }
   
   .featured-section-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
   
   .featured-section-subtitle {
     font-size: 0.9rem;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
   
   /* 会場案内 */
   .venue-info-note {
-    margin: 20px auto 30px;
-    padding: 20px 16px;
+    margin: 16px auto 24px;
+    padding: 16px 14px;
   }
   
   .info-note-text {
     font-size: 0.9rem;
-    line-height: 1.8;
+    line-height: 1.7;
   }
   
   .featured-slider {
@@ -2241,12 +2310,12 @@ body.menu-open {
   }
   
   .slider-card-image {
-    height: 200px;
+    height: 180px;
     font-size: 1rem;
   }
   
   .slider-card-body {
-    padding: 20px;
+    padding: 18px;
   }
   
   .slider-store-name {
