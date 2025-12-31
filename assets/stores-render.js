@@ -37,6 +37,26 @@ function renderStores(genre, containerId = 'storeContainer') {
     // 参加日バッジの色を決定
     const daysBadgeClass = store.days.length === 2 ? 'both-days' : 'single-day';
     
+    // Instagramアカウントの有無を確認
+    const hasInstagram = store.instagram && 
+                        store.instagram !== '' && 
+                        !store.instagram.includes('利用なし') &&
+                        store.instagram !== 'https://www.instagram.com/';
+    
+    // InstagramリンクのHTML
+    const instagramLink = hasInstagram ? `
+      <a href="${store.instagram}" 
+         class="instagram-link" 
+         target="_blank" 
+         rel="noopener noreferrer">
+        Instagramで見る
+      </a>
+    ` : `
+      <span class="instagram-link disabled" title="Instagramアカウントなし">
+        Instagramアカウントなし
+      </span>
+    `;
+    
     card.innerHTML = `
       <img src="${store.image}" 
            alt="${store.name}" 
@@ -47,12 +67,7 @@ function renderStores(genre, containerId = 'storeContainer') {
         </div>
         <h3 class="store-name">${store.name}</h3>
         <p class="store-description">${store.description}</p>
-        <a href="${store.instagram}" 
-           class="instagram-link" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          Instagramで見る
-        </a>
+        ${instagramLink}
       </div>
     `;
     

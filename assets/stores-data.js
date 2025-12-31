@@ -131,7 +131,7 @@ const allStoresData = [
     name: "Farmer's Pizza ",
     description: "パティメルトバーガー、アメリカンクッキー",
     image: "",
-    instagram: "https://www.instagram.com/farmerspizzakurume /",
+    instagram: "https://www.instagram.com/farmerspizzakurume/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -619,7 +619,7 @@ const allStoresData = [
     name: "オリーブの風",
     description: "オリーブオイル全般、オリーブ苗木、ジャム、小物／凧。コマ、ランプシード",
     image: "",
-    instagram: "https://www.instagram.com/ventodi _olivia /",
+    instagram: "https://www.instagram.com/ventodi_olivia/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -723,7 +723,7 @@ const allStoresData = [
     name: "フィッシャーマンズダイナー",
     description: "牛すじ．モツ煮込み  日本酒",
     image: "",
-    instagram: "https://www.instagram.com/fishermans diner/",
+    instagram: "https://www.instagram.com/fishermansdiner/",
     days: ["2/1"],
     genre: "food"
   },
@@ -931,7 +931,7 @@ const allStoresData = [
     name: "日田焼きそば 縁",
     description: "日田焼きそば クルクルウィンナー",
     image: "",
-    instagram: "https://www.instagram.com/hitayakisoba en/",
+    instagram: "https://www.instagram.com/hitayakisobaen/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -1477,7 +1477,7 @@ const allStoresData = [
     name: "バスクチーズケーキ専門店RICO",
     description: "チーズケーキ、コーヒー、カフェラテ、ココア、　レモネード、紅茶、ワイン",
     image: "",
-    instagram: "https://www.instagram.com/Basque cheesecake rico/",
+    instagram: "https://www.instagram.com/Basquecheesecakerico/",
     days: ["1/31", "2/1"],
     genre: "sweets"
   },
@@ -1823,7 +1823,7 @@ const allStoresData = [
     name: "真夜中の珈琲",
     description: "ハンドドリップコーヒー　カフェラテ　ドーナツ　スコーン",
     image: "",
-    instagram: "https://www.instagram.com/mayonaka.coffee /",
+    instagram: "https://www.instagram.com/mayonaka.coffee/",
     days: ["2/1"],
     genre: "drink"
   },
@@ -1985,7 +1985,7 @@ const allStoresData = [
     name: "雑貨HouseちぃPan",
     description: "砂絵のワークショップ、ハンドメイド作品の販売",
     image: "",
-    instagram: "https://www.instagram.com/CHI._.PAN /",
+    instagram: "https://www.instagram.com/CHI._.PAN/",
     days: ["1/31", "2/1"],
     genre: "workshop"
   },
@@ -2011,7 +2011,7 @@ const allStoresData = [
     name: "Pirats",
     description: "カーニバルアトラクション",
     image: "",
-    instagram: "https://www.instagram.com/ pirates_funnymarche/",
+    instagram: "https://www.instagram.com/pirates_funnymarche/",
     days: ["1/31", "2/1"],
     genre: "festival"
   },
@@ -2019,7 +2019,7 @@ const allStoresData = [
     name: "carnival 7",
     description: "射的、ピンポンゲーム、釣り、くじ",
     image: "",
-    instagram: "https://www.instagram.com/poker face1053/",
+    instagram: "https://www.instagram.com/pokerface1053/",
     days: ["1/31", "2/1"],
     genre: "festival"
   },
@@ -2051,7 +2051,7 @@ const allStoresData = [
     name: "ふわこっぺ福岡飯塚店",
     description: "射的、スーパーボールすくい、ピンボールくじ、マシュマロ、ボトルドリンク",
     image: "",
-    instagram: "https://www.instagram.com/fuwakoppe_iizuka /",
+    instagram: "https://www.instagram.com/fuwakoppe_iizuka/",
     days: ["1/31", "2/1"],
     genre: "festival"
   },
@@ -2117,7 +2117,7 @@ const allStoresData = [
     name: "O3",
     description: "本革バッグ・小物",
     image: "",
-    instagram: "https://www.instagram.com/o3plus @o3often/",
+    instagram: "https://www.instagram.com/o3plus/",
     days: ["1/31", "2/1"],
     genre: "sales"
   },
@@ -2205,7 +2205,7 @@ const allStoresData = [
     name: "だんご屋",
     description: "オリジナルだんごむしグッズ（アパレル＆雑貨）",
     image: "",
-    instagram: "https://www.instagram.com/ @dangoya_official/",
+    instagram: "https://www.instagram.com/dangoya_official/",
     days: ["1/31", "2/1"],
     genre: "sales"
   },
