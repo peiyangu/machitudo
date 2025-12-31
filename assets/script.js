@@ -36,45 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// 店舗カードのスクロールアニメーション
-// エレガントなフェードイン・スライドアップ効果
-document.addEventListener('DOMContentLoaded', function() {
-  const storeCards = document.querySelectorAll('.store-card');
-  
-  // 店舗カードが存在する場合のみ実行
-  if (storeCards.length > 0) {
-    console.log('店舗カード数:', storeCards.length); // デバッグ用
-    
-    // 各カードにアニメーション用クラスを追加
-    storeCards.forEach(card => {
-      card.classList.add('animate-on-scroll');
-    });
-
-    // Intersection Observer の設定
-    const cardObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          console.log('カードが表示されました'); // デバッグ用
-          // ビューポートに入ったらアニメーションを開始
-          entry.target.classList.add('fade-in-up');
-          // 一度アニメーションしたら監視を解除（パフォーマンス向上）
-          cardObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      // 要素が少しでも見えたらアニメーション開始
-      threshold: 0.05,
-      // マージンなしで確実に検出
-      rootMargin: '0px'
-    });
-
-    // 各店舗カードを監視
-    storeCards.forEach(card => {
-      cardObserver.observe(card);
-    });
-  }
-});
-
 // 画像の遅延ロード
 document.addEventListener('DOMContentLoaded', function() {
   const images = document.querySelectorAll('img');
@@ -102,24 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!sliderTrack) return; // stores.html以外では実行しない
   
-  // 全ジャンルの店舗データ（サンプル - 実際の店舗情報に置き換えてください）
-  const allStores = [
-    { name: 'スイーツ サンプル1', genre: 'スイーツ', description: '手作りケーキとこだわりの焼き菓子をご用意しています。', link: 'sweets.html', instagram: 'https://www.instagram.com/sweets_sample1/' },
-    { name: 'スイーツ サンプル2', genre: 'スイーツ', description: '季節のフルーツを使った特製タルト専門店です。', link: 'sweets.html', instagram: 'https://www.instagram.com/sweets_sample2/' },
-    { name: 'ドリンク サンプル1', genre: 'ドリンク', description: 'スペシャルティコーヒーと紅茶の専門店です。', link: 'drink.html', instagram: 'https://www.instagram.com/drink_sample1/' },
-    { name: 'ドリンク サンプル2', genre: 'ドリンク', description: 'フレッシュジュースとスムージーをご提供します。', link: 'drink.html', instagram: 'https://www.instagram.com/drink_sample2/' },
-    { name: 'フード サンプル1', genre: 'フード', description: '地元食材を使った本格料理をお楽しみください。', link: 'food.html', instagram: 'https://www.instagram.com/food_sample1/' },
-    { name: 'フード サンプル2', genre: 'フード', description: '世界各国の料理を屋台スタイルで提供します。', link: 'food.html', instagram: 'https://www.instagram.com/food_sample2/' },
-    { name: 'カフェ サンプル1', genre: 'カフェ', description: '落ち着いた空間でゆったりとした時間を。', link: 'cafe.html', instagram: 'https://www.instagram.com/cafe_sample1/' },
-    { name: 'カフェ サンプル2', genre: 'カフェ', description: 'ラテアートとこだわりのコーヒー豆を使用。', link: 'cafe.html', instagram: 'https://www.instagram.com/cafe_sample2/' },
-    { name: 'ハンドメイド サンプル1', genre: 'ハンドメイド', description: '手作りアクセサリーと雑貨をお届けします。', link: 'handmade.html', instagram: 'https://www.instagram.com/handmade_sample1/' },
-    { name: 'ハンドメイド サンプル2', genre: 'ハンドメイド', description: 'オリジナルデザインの布製品を販売しています。', link: 'handmade.html', instagram: 'https://www.instagram.com/handmade_sample2/' },
-    { name: 'ワークショップ サンプル1', genre: 'ワークショップ', description: '親子で楽しめる体験型イベントを開催。', link: 'workshop.html', instagram: 'https://www.instagram.com/workshop_sample1/' },
-    { name: 'ワークショップ サンプル2', genre: 'ワークショップ', description: '陶芸やガラス細工の体験ができます。', link: 'workshop.html', instagram: 'https://www.instagram.com/workshop_sample2/' }
-  ];
+  // stores-data.jsからデータを取得してPICK UP用のデータを作成
+  const pickupStores = typeof allStoresData !== 'undefined' ? allStoresData.map(store => ({
+    name: store.name,
+    genre: genreNames[store.genre] || store.genre,
+    description: store.description,
+    link: `${store.genre}.html`,
+    instagram: store.instagram
+  })) : [];
   
   // ランダムに8店舗を選択
-  const shuffled = [...allStores].sort(() => 0.5 - Math.random());
+  const shuffled = [...pickupStores].sort(() => 0.5 - Math.random());
   const featured = shuffled.slice(0, 8);
   
   let currentSlide = 0;

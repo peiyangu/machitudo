@@ -627,47 +627,53 @@ body.menu-open {
   width: 100%;
   height: 240px;
   object-fit: cover;
-  background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
-}
-
-.store-card-image-placeholder {
-  width: 100%;
-  height: 240px;
   background: linear-gradient(135deg, #f8f6f3 0%, #ede8e1 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-gold);
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid rgba(167, 141, 109, 0.15);
-  position: relative;
-  overflow: hidden;
-}
-
-.store-card-image-placeholder::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba(167, 141, 109, 0.03) 10px,
-      rgba(167, 141, 109, 0.03) 20px
-    );
+  display: block;
+  min-height: 240px;
 }
 
 .store-card-body {
   padding: 24px;
   text-align: center;
+}
+
+.store-meta {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.store-days-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.store-days-badge.both-days {
+  background: linear-gradient(135deg, var(--color-gold), #B89D7D);
+}
+
+.store-days-badge.single-day {
+  background: linear-gradient(135deg, rgba(167, 141, 109, 0.6), rgba(184, 157, 125, 0.6));
+}
+
+.store-count {
+  text-align: center;
+  color: var(--color-gold);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+
+.no-stores-message {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(42, 45, 52, 0.6);
+  font-size: 1.1rem;
 }
 
 .store-name {
@@ -2338,52 +2344,33 @@ body.menu-open {
    スクロールアニメーション
    ======================================== */
 
-/* 店舗カードのスクロールアニメーション */
+/* 店舗カードのベーススタイル */
 .store-card {
-  /* デフォルトは表示状態（JSが動かなくても見える） */
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
 }
 
-/* JavaScriptがアニメーション準備用のクラスを追加した場合のみ、非表示から開始 */
-.store-card.animate-on-scroll {
+/* スクロールアニメーション用の初期状態 */
+.store-card.fade-in-on-scroll {
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(30px);
 }
 
-.store-card.animate-on-scroll.fade-in-up {
+/* スクロールして表示されたときの状態 */
+.store-card.fade-in-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* 遅延アニメーション効果 */
-.store-card.animate-on-scroll:nth-child(1) { transition-delay: 0.1s; }
-.store-card.animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
-.store-card.animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
-.store-card.animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
-.store-card.animate-on-scroll:nth-child(5) { transition-delay: 0.5s; }
-.store-card.animate-on-scroll:nth-child(6) { transition-delay: 0.6s; }
-
-/* 7番目以降は同じタイミングで表示（パフォーマンス重視） */
-.store-card.animate-on-scroll:nth-child(n+7) { transition-delay: 0.7s; }
 
 /* ホバー時のエレガントな効果 */
 .store-card:hover {
-  transform: translateY(-12px) scale(1.02);
+  transform: translateY(-8px);
   box-shadow: 0 16px 40px rgba(167, 141, 109, 0.25);
 }
 
-.store-card.fade-in-up:hover {
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.5s ease;
-}
-
-/* プリロード状態（JSで制御） */
-.stores-grid.preload .store-card {
-  opacity: 0;
-  transform: translateY(60px);
+.store-card.is-visible:hover {
+  transform: translateY(-8px);
 }
 
 /* ========================================
