@@ -1,0 +1,55 @@
+=== Instagram URLチェック結果 ===
+チェック日時: 2026年1月1日
+総チェック数: 322店舗
+問題のあるURL: 12店舗
+
+【問題のある店舗リスト】
+
+1. Farmer's Pizza 
+   URL: https://www.instagram.com/farmerspizzakurume /
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+2. オリーブの風
+   URL: https://www.instagram.com/ventodi _olivia /
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+3. フィッシャーマンズダイナー
+   URL: https://www.instagram.com/fishermans diner/
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+4. 日田焼きそば 縁
+   URL: https://www.instagram.com/hitayakisoba en/
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+5. バスクチーズケーキ専門店RICO
+   URL: https://www.instagram.com/Basque cheesecake rico/
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+6. 真夜中の珈琲
+   URL: https://www.instagram.com/mayonaka.coffee /
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+7. 雑貨HouseちぃPan
+   URL: https://www.instagram.com/CHI._.PAN /
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+8. Pirats
+   URL: https://www.instagram.com/ pirates_funnymarche/
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+9. carnival 7
+   URL: https://www.instagram.com/poker face1053/
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+10. ふわこっぺ福岡飯塚店
+   URL: https://www.instagram.com/fuwakoppe_iizuka /
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+11. O3
+   URL: https://www.instagram.com/o3plus @o3often/
+   理由: URL形式エラー（スペースや特殊文字を含む）
+
+12. だんご屋
+   URL: https://www.instagram.com/ @dangoya_official/
+   理由: URL形式エラー（スペースや特殊文字を含む）
+

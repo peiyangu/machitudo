@@ -63,27 +63,38 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!sliderTrack) return; // stores.html以外では実行しない
   
-  // stores-data.jsからデータを取得してPICK UP用のデータを作成
+  // stores-data.jsから全店舗データを取得
   const pickupStores = typeof allStoresData !== 'undefined' ? allStoresData.map(store => ({
     name: store.name,
     genre: genreNames[store.genre] || store.genre,
     description: store.description,
     link: `${store.genre}.html`,
-    instagram: store.instagram
+    instagram: store.instagram || ''
   })) : [];
   
-  // ランダムに8店舗を選択
+  // 全店舗をランダムに並び替え
   const shuffled = [...pickupStores].sort(() => 0.5 - Math.random());
-  const featured = shuffled.slice(0, 8);
+  const featured = shuffled; // 全店舗を使用
   
   let currentSlide = 0;
-  const slidesPerView = 1; // 常に1店舗ずつ表示
-  const maxSlide = featured.length - slidesPerView; // 最後に1店舗表示できる位置
+  const slidesPerView = 1;
+  const totalSlides = featured.length;
   
-  // 店舗カードを生成
-  featured.forEach((store, index) => {
+  // カード生成関数
+  function createCard(store) {
     const card = document.createElement('div');
     card.className = 'slider-store-card';
+    
+    // Instagramリンクの確認
+    const hasInstagram = store.instagram && 
+                        store.instagram !== '' && 
+                        !store.instagram.includes('利用なし') &&
+                        store.instagram !== 'https://www.instagram.com/';
+    
+    const instagramLink = hasInstagram 
+      ? `<a href="${store.instagram}" class="slider-instagram-link" target="_blank" rel="noopener noreferrer">📷 Instagram</a>`
+      : `<span class="slider-instagram-link disabled" title="Instagramアカウントなし">🚫 Instagram</span>`;
+    
     card.innerHTML = `
       <div class="slider-card-genre">${store.genre}</div>
       <div class="slider-card-image">${store.name}</div>
@@ -91,55 +102,89 @@ document.addEventListener('DOMContentLoaded', function() {
         <h4 class="slider-store-name">${store.name}</h4>
         <p class="slider-store-description">${store.description}</p>
         <div class="slider-card-links">
-          <a href="${store.instagram}" class="slider-instagram-link" target="_blank" rel="noopener noreferrer">
-            📷 Instagram
-          </a>
+          ${instagramLink}
           <a href="${store.link}" class="slider-detail-link">詳しく見る →</a>
         </div>
       </div>
     `;
-    sliderTrack.appendChild(card);
-  });
+    return card;
+  }
   
-  // ドットインジケーターを生成
+  // 無限ループ用に前後にカードを複製
+  // 最後のカードを前に追加
+  sliderTrack.appendChild(createCard(featured[featured.length - 1]));
+  // 元のカードを追加
+  featured.forEach(store => sliderTrack.appendChild(createCard(store)));
+  // 最初のカードを後に追加
+  sliderTrack.appendChild(createCard(featured[0]));
+  
+  // 初期位置を設定（複製された最初のカードの位置）
+  currentSlide = 1;
+  sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+  sliderTrack.style.transition = 'none';
+  
+  // ドットインジケーターを生成（最大20個まで）
   const dotsContainer = document.getElementById('sliderDots');
-  for (let i = 0; i <= maxSlide; i++) {
+  const maxDots = Math.min(totalSlides, 20);
+  for (let i = 0; i < maxDots; i++) {
     const dot = document.createElement('button');
     dot.className = 'slider-dot';
     if (i === 0) dot.classList.add('active');
     dot.setAttribute('aria-label', `スライド ${i + 1} に移動`);
-    dot.addEventListener('click', () => goToSlide(i));
+    dot.addEventListener('click', () => goToSlide(i + 1, true));
     dotsContainer.appendChild(dot);
   }
   
+  let isTransitioning = false;
+  
   // スライド移動関数
-  function goToSlide(index) {
-    if (index < 0) index = 0;
-    if (index > maxSlide) index = maxSlide;
+  function goToSlide(index, withAnimation = true) {
+    if (isTransitioning) return;
     
     currentSlide = index;
-    // 1枚ずつ移動（2店舗表示の場合、各カードは50%幅）
-    const cardWidthPercent = 100 / slidesPerView;
-    const offset = -(currentSlide * cardWidthPercent);
+    
+    if (withAnimation) {
+      sliderTrack.style.transition = 'transform 0.5s ease';
+      isTransitioning = true;
+    } else {
+      sliderTrack.style.transition = 'none';
+    }
+    
+    const offset = -(currentSlide * 100);
     sliderTrack.style.transform = `translateX(${offset}%)`;
     
-    // ドットの更新
+    // ドットの更新（0番目のカードは表示されない複製なのでindex-1）
+    const dotIndex = (currentSlide - 1) % totalSlides;
     document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentSlide);
+      dot.classList.toggle('active', i === dotIndex % maxDots);
     });
     
-    // ボタンの有効/無効
-    document.querySelector('.slider-btn-prev').disabled = currentSlide === 0;
-    document.querySelector('.slider-btn-next').disabled = currentSlide === maxSlide;
+    if (withAnimation) {
+      setTimeout(() => {
+        // 最後の複製カードに到達したら、最初の実カードにジャンプ
+        if (currentSlide === totalSlides + 1) {
+          goToSlide(1, false);
+        }
+        // 最初の複製カードに到達したら、最後の実カードにジャンプ
+        if (currentSlide === 0) {
+          goToSlide(totalSlides, false);
+        }
+        isTransitioning = false;
+      }, 500);
+    }
   }
   
   // ボタンイベント
   document.querySelector('.slider-btn-prev').addEventListener('click', () => {
-    goToSlide(currentSlide - 1);
+    if (!isTransitioning) {
+      goToSlide(currentSlide - 1, true);
+    }
   });
   
   document.querySelector('.slider-btn-next').addEventListener('click', () => {
-    goToSlide(currentSlide + 1);
+    if (!isTransitioning) {
+      goToSlide(currentSlide + 1, true);
+    }
   });
   
   // スワイプ操作のサポート
@@ -158,11 +203,11 @@ document.addEventListener('DOMContentLoaded', function() {
   function handleSwipe() {
     if (touchEndX < touchStartX - 50) {
       // 左スワイプ（次へ）
-      goToSlide(currentSlide + 1);
+      goToSlide(currentSlide + 1, true);
     }
     if (touchEndX > touchStartX + 50) {
       // 右スワイプ（前へ）
-      goToSlide(currentSlide - 1);
+      goToSlide(currentSlide - 1, true);
     }
   }
   
@@ -170,11 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let autoplayInterval;
   function startAutoplay() {
     autoplayInterval = setInterval(() => {
-      if (currentSlide < maxSlide) {
-        goToSlide(currentSlide + 1);
-      } else {
-        goToSlide(0);
-      }
+      goToSlide(currentSlide + 1, true);
     }, 5000); // 5秒ごと
   }
   
