@@ -57,10 +57,15 @@ function renderStores(genre, containerId = 'storeContainer') {
       </span>
     `;
     
+    // 画像があるか確認
+    const imageHtml = store.image && store.image !== '' 
+      ? `<img src="${store.image}" alt="${store.name}" class="store-card-image">`
+      : `<div class="store-card-image-placeholder">
+           <div class="placeholder-content">${store.name}</div>
+         </div>`;
+    
     card.innerHTML = `
-      <img src="${store.image}" 
-           alt="${store.name}" 
-           class="store-card-image">
+      ${imageHtml}
       <div class="store-card-body">
         <div class="store-meta">
           <span class="store-days-badge ${daysBadgeClass}">${formatDays(store.days)}</span>

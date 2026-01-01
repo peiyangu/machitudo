@@ -338,12 +338,15 @@ body.menu-open {
   color: var(--color-white);
   text-decoration: none;
   font-size: 1.5rem;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  opacity: 0.95;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .footer-social a:hover {
   opacity: 1;
+  color: var(--color-gold);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .footer-text {
@@ -632,6 +635,26 @@ body.menu-open {
   min-height: 240px;
 }
 
+/* 画像がない場合のプレースホルダー */
+.store-card-image-placeholder {
+  width: 100%;
+  height: 240px;
+  background: linear-gradient(135deg, #f8f6f3 0%, #ede8e1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 20px;
+}
+
+.placeholder-content {
+  max-width: 80%;
+}
+
 .store-card-body {
   padding: 24px;
   text-align: center;
@@ -720,8 +743,10 @@ body.menu-open {
 }
 
 .instagram-link::before {
-  content: '📷';
+  font-family: 'Font Awesome 6 Brands';
+  content: '\f16d';
   font-size: 1.1rem;
+  font-weight: 400;
 }
 
 /* Instagramアカウントなしの場合 */
@@ -737,8 +762,10 @@ body.menu-open {
 }
 
 .instagram-link.disabled::before {
-  content: '🚫';
+  font-family: 'Font Awesome 6 Free';
+  content: '\f05e';
   font-size: 1.1rem;
+  font-weight: 900;
 }
 
 .site-footer {
@@ -1570,8 +1597,8 @@ body.menu-open {
 
 /* 注目店舗スライダー */
 .featured-stores-section {
-  margin-bottom: 60px;
-  padding: 50px 0;
+  margin-bottom: 40px;
+  padding: 30px 0;
   background: linear-gradient(135deg, #FDFCFB 0%, #FFFFFF 100%);
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(167, 141, 109, 0.1);
@@ -1579,25 +1606,25 @@ body.menu-open {
 
 .featured-section-title {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: var(--color-dark);
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   font-weight: 600;
 }
 
 .featured-section-subtitle {
   text-align: center;
   color: rgba(42, 45, 52, 0.7);
-  font-size: 1rem;
-  margin-bottom: 48px;
+  font-size: 0.9rem;
+  margin-bottom: 32px;
 }
 
 .featured-slider {
   position: relative;
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
-  padding: 0 60px;
+  padding: 0 50px;
 }
 
 .slider-container {
@@ -1645,9 +1672,9 @@ body.menu-open {
   left: 16px;
   background: linear-gradient(135deg, var(--color-gold), #B89D7D);
   color: var(--color-white);
-  padding: 6px 16px;
+  padding: 8px 18px;
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   z-index: 1;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -1655,40 +1682,45 @@ body.menu-open {
 
 .slider-card-image {
   width: 100%;
-  height: 280px;
+  height: 180px;
   background: linear-gradient(135deg, #f8f6f3 0%, #ede8e1 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-gold);
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 500;
   text-align: center;
-  padding: 20px;
+  padding: 16px;
   border-bottom: 1px solid rgba(167, 141, 109, 0.15);
   position: relative;
 }
 
 .slider-card-body {
-  padding: 24px;
+  padding: 16px;
   text-align: center;
 }
 
 .slider-store-name {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: var(--color-dark);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
 .slider-store-description {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: rgba(42, 45, 52, 0.7);
-  line-height: 1.8;
-  margin-bottom: 24px;
+  line-height: 1.7;
+  margin-bottom: 18px;
   min-height: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .slider-card-links {

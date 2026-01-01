@@ -92,12 +92,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         store.instagram !== 'https://www.instagram.com/';
     
     const instagramLink = hasInstagram 
-      ? `<a href="${store.instagram}" class="slider-instagram-link" target="_blank" rel="noopener noreferrer">📷 Instagram</a>`
-      : `<span class="slider-instagram-link disabled" title="Instagramアカウントなし">🚫 Instagram</span>`;
+      ? `<a href="${store.instagram}" class="slider-instagram-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>`
+      : `<span class="slider-instagram-link disabled" title="Instagramアカウントなし"><i class="fas fa-ban"></i> Instagram</span>`;
+    
+    // 画像がある場合はimgタグ、ない場合は店舗名テキスト
+    const imageContent = store.image && store.image !== '' 
+      ? `<img src="${store.image}" alt="${store.name}" style="width: 100%; height: 100%; object-fit: cover;">`
+      : store.name;
     
     card.innerHTML = `
       <div class="slider-card-genre">${store.genre}</div>
-      <div class="slider-card-image">${store.name}</div>
+      <div class="slider-card-image">${imageContent}</div>
       <div class="slider-card-body">
         <h4 class="slider-store-name">${store.name}</h4>
         <p class="slider-store-description">${store.description}</p>

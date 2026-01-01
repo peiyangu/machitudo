@@ -56,7 +56,7 @@ const allStoresData = [
     genre: "food"
   },
   {
-    name: "COCO POULET（ココ プーレ）",
+    name: "COCO POULET",
     description: "からあげ/ヤンニョムチキン/チュロドック/ポテト/チーズいももち/日南レモネード/ゆめかわゼリー/クマボトルマンゴーネクター/あったかぜんざい/カップ入り綿菓子",
     image: "",
     instagram: "https://www.instagram.com/KITCHENCAR_COCOPOULET/",
@@ -104,7 +104,7 @@ const allStoresData = [
     genre: "food"
   },
   {
-    name: "Conny's Banhmi(コニーズバインミー)",
+    name: "Conny's Banhmi",
     description: "バインミー/チェー/台北風手羽先の唐揚げ/ベトナム風ドーナツ",
     image: "",
     instagram: "https://www.instagram.com/connys_banhmi/",
@@ -1354,7 +1354,7 @@ const allStoresData = [
     genre: "sweets"
   },
   {
-    name: "お菓子屋pique-nique(ピクニック)",
+    name: "お菓子屋pique-nique",
     description: "焼き菓子",
     image: "",
     instagram: "https://www.instagram.com/pique_nique.i/",
@@ -1838,7 +1838,7 @@ const allStoresData = [
 
   // ワークショップ
   {
-    name: "Bali Senyuw(バリセニュン)",
+    name: "Bali Senyuw",
     description: "ピアス/ヘアアクセサリー",
     image: "",
     instagram: "https://www.instagram.com/balisenyum/",
@@ -1910,7 +1910,7 @@ const allStoresData = [
     genre: "workshop"
   },
   {
-    name: "riro_factory（リロファクトリー）",
+    name: "riro_factory",
     description: "石鹸作り/キーホルダー作り",
     image: "",
     instagram: "https://www.instagram.com/riro_factory/",
@@ -2414,7 +2414,7 @@ const allStoresData = [
     genre: "other"
   },
   {
-    name: "Reon(リオン)",
+    name: "Reon",
     description: "ハンドメイド革雑貨販売",
     image: "",
     instagram: "https://www.instagram.com/reon8783/",
@@ -2462,7 +2462,7 @@ const allStoresData = [
     genre: "other"
   },
   {
-    name: "ëmeth/EMETH (エメト)",
+    name: "ëmeth/EMETH",
     description: "シルバージュエリー・皮革製品",
     image: "",
     instagram: "https://www.instagram.com/emethanchi/",
