@@ -336,14 +336,6 @@ const allStoresData = [
     genre: "food"
   },
   {
-    name: "SonoDiner",
-    description: "ホットサンド/オンザライス/燻製スペアリブ/ポテナゲ/酔わないサワー",
-    image: "",
-    instagram: "https://www.instagram.com/＠sonodiner/",
-    days: ["1/31", "2/1"],
-    genre: "food"
-  },
-  {
     name: "Sweets＆Cafebar Anthology Fukuoka",
     description: "ナンタコス/ナンドッグ/瓶ビール/瓶ラムネ/生姜湯",
     image: "",
@@ -403,7 +395,7 @@ const allStoresData = [
     name: "あげいも屋 二十二",
     description: "玄海からあげ/アルコール",
     image: "",
-    instagram: "https://www.instagram.com/ageimpya22/",
+    instagram: "https://www.instagram.com/ageimoya_22/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -432,7 +424,7 @@ const allStoresData = [
     genre: "food"
   },
   {
-    name: "おにぎり屋COMECO 上野米屋",
+    name: "おにぎり屋COMECO \n上野米屋",
     description: "おにぎり/米粉焼菓子",
     image: "",
     instagram: "https://www.instagram.com/onigiriya_comeco/",
@@ -452,22 +444,6 @@ const allStoresData = [
     description: "カレー/唐揚げ/コロッケ/あげたこ焼き/カレーパン",
     image: "",
     instagram: "https://www.instagram.com/curry_man_kumakuma_kitchen/",
-    days: ["1/31", "2/1"],
-    genre: "food"
-  },
-  {
-    name: "げんきやグループ",
-    description: "地鶏/やきそば",
-    image: "",
-    instagram: "https://www.instagram.com/ctf.co.itd/",
-    days: ["1/31", "2/1"],
-    genre: "food"
-  },
-  {
-    name: "げんきやグループやきとり寅さん",
-    description: "やきとり/焼きイカ/とうもろこし",
-    image: "",
-    instagram: "https://www.instagram.com/torasanyakitori/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -509,14 +485,6 @@ const allStoresData = [
     image: "",
     instagram: "https://www.instagram.com/torimeshiya624/",
     days: ["1/31"],
-    genre: "food"
-  },
-  {
-    name: "なご美処",
-    description: "ハンバーグ/カレー",
-    image: "",
-    instagram: "https://www.instagram.com/nagomidocoro202502/",
-    days: ["2/1"],
     genre: "food"
   },
   {
@@ -619,7 +587,7 @@ const allStoresData = [
     name: "オリーブの風",
     description: "オリーブオイル全般/オリーブ苗木/ジャム/小物／凧。コマ/ランプシード",
     image: "",
-    instagram: "https://www.instagram.com/ventodi_olivia/",
+    instagram: "https://www.instagram.com/ventodi_oliva/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -659,7 +627,7 @@ const allStoresData = [
     name: "サーティーシックス",
     description: "はしまき/チーズスティッ",
     image: "",
-    instagram: "https://www.instagram.com/thirty-six36/",
+    instagram: "https://www.instagram.com/thirty__six36/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -719,14 +687,14 @@ const allStoresData = [
     days: ["1/31", "2/1"],
     genre: "food"
   },
-  {
-    name: "フィッシャーマンズダイナー",
-    description: "牛すじ/モツ煮込み/日本酒",
-    image: "",
-    instagram: "https://www.instagram.com/fishermansdiner/",
-    days: ["2/1"],
-    genre: "food"
-  },
+  // {
+  //   name: "フィッシャーマンズダイナー",
+  //   description: "牛すじ/モツ煮込み/日本酒",
+  //   image: "",
+  //   instagram: "https://www.instagram.com/fishermansdiner/",
+  //   days: ["2/1"],
+  //   genre: "food"
+  // },
   {
     name: "フォリボーラ",
     description: "フォリボーラハンバーガー/無添加ベーコンバーガー/ブリックチーズバーガー/フォリボーラスペシャル/ベーコンチーズバーガー",
@@ -755,7 +723,7 @@ const allStoresData = [
     name: "マツオカマーケット",
     description: "ほそながチキン/秘伝のタレ唐揚げ/フライドポテト/ミニチュロス/ドリンク/ぜんざい",
     image: "",
-    instagram: "https://www.instagram.com/matsuoka＿＿market/",
+    instagram: "https://www.instagram.com/matsuoka___market/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -763,7 +731,7 @@ const allStoresData = [
     name: "ルーナ★カフェ2020",
     description: "イタリアホットサンド「パニーニ」  /ビーフシチュー/フルーツティ/自家製レモネード",
     image: "",
-    instagram: "https://www.instagram.com/luna_cafe_2029/",
+    instagram: "https://www.instagram.com/luna_cafe_2020/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -931,7 +899,7 @@ const allStoresData = [
     name: "日田焼きそば 縁",
     description: "日田焼きそば/クルクルウィンナー",
     image: "",
-    instagram: "https://www.instagram.com/hitayakisobaen/",
+    instagram: "https://www.instagram.com/hitayakisoba.en/",
     days: ["1/31", "2/1"],
     genre: "food"
   },
@@ -945,7 +913,7 @@ const allStoresData = [
   },
   {
     name: "本格炭火焼鳥  炭家108",
-    description: "【炭火焼鳥】豊作和牛はつ串/牛ステーキ串/熊本県産いのしし串/かガーリックシュリンプ串/しそ肉巻き串/豚ばら串/豚はらみ串/鶏つくね串/鶏もも串など。鶏すい/【ドリンク】KIRINラガー生ビール/沖縄県産琉球ハブボール/鹿児島県産マルスウィスキーハイボール/鹿児島県産三岳焼酎/宮崎県産飫肥杉焼酎/長崎県産壱岐スーパーゴールド焼酎/各種サワーやノンアルコールドリンクなど",
+    description: "【炭火焼鳥】豊作和牛はつ串/牛ステーキ串/熊本県産いのしし串/かガーリックシュリンプ串/しそ肉巻き串/豚ばら串/豚はらみ串/鶏つくね串/鶏もも串など。鶏すい/\n【ドリンク】KIRINラガー生ビール/沖縄県産琉球ハブボール/鹿児島県産マルスウィスキーハイボール/鹿児島県産三岳焼酎/宮崎県産飫肥杉焼酎/長崎県産壱岐スーパーゴールド焼酎/各種サワーやノンアルコールドリンクなど",
     image: "",
     instagram: "https://www.instagram.com/sumiya108_ibento/",
     days: ["1/31", "2/1"],
@@ -1546,10 +1514,10 @@ const allStoresData = [
     genre: "sweets"
   },
   {
-    name: "慶陽堂（京都利休の生わらび餅）",
+    name: "慶陽堂",
     description: "生わらび餅/わらび餅ラテ/アルコール",
     image: "",
-    instagram: "https://www.instagram.com/rikyu_warabimokyusyu/",
+    instagram: "https://www.instagram.com/rikyu_warabimochi_kyusyu/",
     days: ["2/1"],
     genre: "sweets"
   },
@@ -1594,7 +1562,7 @@ const allStoresData = [
     genre: "sweets"
   },
   {
-    name: "芋ぴっぴ。キッチンカー熊本",
+    name: "芋ぴっぴ。\nキッチンカー熊本",
     description: "ちょこっとケンピ/焼き芋ブリュレ/焼き芋ハニーバター/焼き芋アイス/1ミリ絹糸の紫芋とアイス/蜜芋プリン/蜜芋モンブラン/蜜芋バスクチーズケーキ",
     image: "",
     instagram: "https://www.instagram.com/imopippi.kitchencar.kumamoto/",
@@ -1977,7 +1945,7 @@ const allStoresData = [
     name: "桜坂スパイス",
     description: "スパイスワークショップ/スパイス加工品販売",
     image: "",
-    instagram: "https://www.instagram.com/＠sakurazakaspice/",
+    instagram: "https://www.instagram.com/sakurazakaspice/",
     days: ["1/31", "2/1"],
     genre: "workshop"
   },
@@ -2027,7 +1995,7 @@ const allStoresData = [
     name: "chise",
     description: "ビーズがま口/バネポーチ/コースター/ピアス/イヤリング/布小物/ウッドバーニング/編みぐるみ/ポチ袋/フェルト刺繍/ビー玉アート品/レジン小物",
     image: "",
-    instagram: "https://www.instagram.com/CHISEZAKKAi/",
+    instagram: "https://www.instagram.com/chisezakka/",
     days: ["1/31", "2/1"],
     genre: "festival"
   },
@@ -2186,14 +2154,6 @@ const allStoresData = [
     genre: "sales"
   },
   {
-    name: "tokimeki",
-    description: "nan",
-    image: "",
-    instagram: "https://www.instagram.com/tolomeki_2018/",
-    days: ["1/31"],
-    genre: "sales"
-  },
-  {
     name: "そらのいろ",
     description: "天然石使用アクセサリーの販売",
     image: "",
@@ -2303,7 +2263,7 @@ const allStoresData = [
     name: "粋意気【IKIIKI】",
     description: "観葉植物/珍奇植物/鉢【グルーガン鉢】",
     image: "",
-    instagram: "https://www.instagram.com/bizarreplants_noveldy　@ikiiki.pot/",
+    instagram: "https://www.instagram.com/ikiiki_plants_noveldy/",
     days: ["1/31", "2/1"],
     genre: "green"
   },

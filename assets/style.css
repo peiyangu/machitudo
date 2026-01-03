@@ -711,6 +711,7 @@ body.menu-open {
   margin-bottom: 12px;
   font-weight: 600;
   width: 100%;
+  white-space: pre-line;
 }
 
 .store-description {
@@ -1708,6 +1709,7 @@ body.menu-open {
   color: var(--color-dark);
   margin-bottom: 10px;
   font-weight: 600;
+  white-space: pre-line;
 }
 
 .slider-store-description {
