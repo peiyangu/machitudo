@@ -57,6 +57,101 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// お知らせページネーション機能
+document.addEventListener('DOMContentLoaded', function() {
+  // お知らせデータ（日付の新しい順）
+  const newsData = [
+    { date: '2025.01.20', datetime: '2025-01-20', title: 'イベント当日の入場順番のお知らせ' },
+    { date: '2025.01.18', datetime: '2025-01-18', title: 'オープニングアクトとサブステージ発表' },
+    { date: '2025.01.15', datetime: '2025-01-15', title: '会場マップを公開しました' },
+    { date: '2025.01.10', datetime: '2025-01-10', title: '出店店舗情報を更新しました' },
+    { date: '2025.01.01', datetime: '2025-01-01', title: 'Webサイトを公開しました' }
+    // 新しいお知らせはここに追加してください
+  ];
+
+  const itemsPerPage = 3; // 1ページあたりの表示件数
+  let currentPage = 1;
+
+  const newsList = document.getElementById('newsList');
+  const pagination = document.getElementById('newsPagination');
+
+  // お知らせがない場合は何も表示しない
+  if (!newsList || newsData.length === 0) return;
+
+  const totalPages = Math.ceil(newsData.length / itemsPerPage);
+
+  // お知らせリストを描画
+  function renderNews(page) {
+    newsList.innerHTML = '';
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageItems = newsData.slice(startIndex, endIndex);
+
+    pageItems.forEach(news => {
+      const li = document.createElement('li');
+      li.className = 'news-item';
+      li.innerHTML = `
+        <time class="news-date" datetime="${news.datetime}">${news.date}</time>
+        <span class="news-title">${news.title}</span>
+      `;
+      newsList.appendChild(li);
+    });
+  }
+
+  // ページネーションを描画
+  function renderPagination() {
+    if (totalPages <= 1) {
+      pagination.style.display = 'none';
+      return;
+    }
+
+    pagination.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const button = document.createElement('button');
+      button.className = 'pagination-btn';
+      button.textContent = i;
+      button.setAttribute('aria-label', `ページ${i}`);
+      
+      if (i === currentPage) {
+        button.classList.add('active');
+        button.setAttribute('aria-current', 'page');
+      }
+
+      button.addEventListener('click', function() {
+        currentPage = i;
+        renderNews(currentPage);
+        updatePaginationActive();
+        // スムーズにお知らせセクションの先頭にスクロール
+        document.querySelector('.news-section').scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      });
+
+      pagination.appendChild(button);
+    }
+  }
+
+  // アクティブなページネーションボタンを更新
+  function updatePaginationActive() {
+    const buttons = pagination.querySelectorAll('.pagination-btn');
+    buttons.forEach((btn, index) => {
+      if (index + 1 === currentPage) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-current', 'page');
+      } else {
+        btn.classList.remove('active');
+        btn.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  // 初期表示
+  renderNews(currentPage);
+  renderPagination();
+});
+
 // 注目店舗スライダー（stores.htmlページ専用）
 document.addEventListener('DOMContentLoaded', function() {
   const sliderTrack = document.getElementById('featuredSliderTrack');

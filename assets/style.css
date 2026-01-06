@@ -277,7 +277,7 @@ body.menu-open {
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: var(--color-dark);
   text-align: center;
   margin-bottom: 48px;
@@ -1048,7 +1048,7 @@ body.menu-open {
 }
 
 .news-section {
-  padding: 80px 0;
+  padding: 40px 0 50px;
   background: var(--color-white);
   position: relative;
 }
@@ -1064,79 +1064,97 @@ body.menu-open {
   background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
 
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
-  margin-top: 24px;
+.news-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
 
-.news-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FDFCFB 100%);
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 4px 16px rgba(167, 141, 109, 0.08);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(167, 141, 109, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0 0;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.news-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(167, 141, 109, 0.15);
-}
-
-.news-card-header {
+.news-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  padding: 24px 0;
+  border-bottom: 2px solid rgba(167, 141, 109, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+.news-item:hover {
+  background-color: rgba(167, 141, 109, 0.02);
+}
+
+.news-item:last-child {
+  border-bottom: none;
 }
 
 .news-date {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--color-gold);
   font-weight: 600;
   letter-spacing: 0.05em;
-}
-
-.news-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  background: linear-gradient(135deg, var(--color-gold), #B89D7D);
-  color: var(--color-white);
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: 12px;
-  letter-spacing: 0.05em;
-}
-
-.news-badge-update {
-  background: linear-gradient(135deg, #4A9EFF, #2E7DD6);
-}
-
-.news-badge-info {
-  background: linear-gradient(135deg, #6B7280, #4B5563);
+  min-width: 120px;
+  flex-shrink: 0;
 }
 
 .news-title {
-  font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
   color: var(--color-dark);
-  font-weight: 600;
-  line-height: 1.5;
-  margin: 0;
+  font-weight: 400;
+  line-height: 1.8;
+  margin-left: 32px;
 }
 
-.news-excerpt {
+.news-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.pagination-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(167, 141, 109, 0.3);
+  background: var(--color-white);
+  color: var(--color-dark);
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: rgba(42, 45, 52, 0.7);
-  line-height: 1.8;
-  margin: 0;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.pagination-btn:hover {
+  border-color: var(--color-gold);
+  background: rgba(167, 141, 109, 0.05);
+}
+
+.pagination-btn.active {
+  background: var(--color-gold);
+  color: var(--color-white);
+  border-color: var(--color-gold);
+}
+
+.pagination-btn:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 
@@ -2115,7 +2133,8 @@ body.menu-open {
 
   .news-item {
     flex-direction: column;
-    gap: 6px;
+    align-items: flex-start;
+    gap: 8px;
     padding: 16px;
   }
 
@@ -2124,11 +2143,20 @@ body.menu-open {
     font-size: 0.85rem;
   }
 
-  .news-content {
-    font-size: 1rem;
+  .news-title {
+    font-size: 0.95rem;
+    margin-left: 0;
     line-height: 1.7;
-    word-break: keep-all;
-    overflow-wrap: break-word;
+  }
+
+  .news-pagination {
+    margin-top: 24px;
+  }
+
+  .pagination-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
   }
 
   /* ページヒーロー */
