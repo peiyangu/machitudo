@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // stores-data.jsから全店舗データを取得
   const pickupStores = typeof allStoresData !== 'undefined' ? allStoresData.map(store => ({
     name: store.name,
+    boothNumber: store.boothNumber,
     genre: genreNames[store.genre] || store.genre,
     description: store.description,
     link: `${store.genre}.html`,
@@ -196,7 +197,10 @@ document.addEventListener('DOMContentLoaded', function() {
       : store.name;
     
     card.innerHTML = `
-      <div class="slider-card-genre">${store.genre}</div>
+      <div class="slider-card-header">
+        <span class="slider-card-genre">${store.genre}</span>
+        <span class="slider-booth-badge">ブース ${store.boothNumber}</span>
+      </div>
       <div class="slider-card-image">${imageContent}</div>
       <div class="slider-card-body">
         <h4 class="slider-store-name">${store.name}</h4>

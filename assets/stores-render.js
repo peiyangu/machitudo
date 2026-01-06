@@ -68,6 +68,7 @@ function renderStores(genre, containerId = 'storeContainer') {
       ${imageHtml}
       <div class="store-card-body">
         <div class="store-meta">
+          <span class="store-booth-badge">ブース ${store.boothNumber}</span>
           <span class="store-days-badge ${daysBadgeClass}">${formatDays(store.days)}</span>
         </div>
         <h3 class="store-name">${store.name}</h3>

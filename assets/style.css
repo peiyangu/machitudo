@@ -662,6 +662,16 @@ body.menu-open {
   width: 100%;
 }
 
+.store-booth-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
 .store-days-badge {
   display: inline-block;
   padding: 4px 12px;
@@ -832,7 +842,7 @@ body.menu-open {
 
 .store-section {
   max-width: 960px;
-  margin: 50px auto;
+  margin: 20px auto 50px;
   padding: 20px;
   text-align: center;
 }
@@ -1676,16 +1686,30 @@ body.menu-open {
 }
 
 .slider-card-genre {
+  background: linear-gradient(135deg, var(--color-gold), #B89D7D);
+  color: var(--color-white);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.slider-card-header {
   position: absolute;
   top: 16px;
   left: 16px;
-  background: linear-gradient(135deg, var(--color-gold), #B89D7D);
-  color: var(--color-white);
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
+  display: flex;
+  gap: 8px;
   z-index: 1;
+}
+
+.slider-booth-badge {
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
