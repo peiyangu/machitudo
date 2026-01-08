@@ -99,14 +99,57 @@
             <div class="card-icon-elegant">店舗</div>
             <h3 class="card-title">出店数</h3>
             <div class="card-content">
-              <p class="store-count">約250店舗</p>
+              <p class="store-count-event">約250店舗</p>
               <p class="store-categories">飲食・スイーツ・ドリンク<br>ハンドメイド・ワークショップ<br>縁日・体験ブース</p>
+              <a href="stores.html" class="venue-link">店舗詳細 →</a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <section class="venue-map-section-index">
+      <div class="container">
+        <h2 class="section-title">会場マップ</h2>
+        <p class="section-link-text">
+          <a href="stores.html" class="store-intro-link">店舗紹介はこちら →</a>
+        </p>
+        <div class="map-container">
+          <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-image clickable-map" onclick="openMapModal(this)">
+          <p class="map-click-hint">📷 クリックで拡大表示</p>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- マップ拡大モーダル -->
+  <div id="mapModal" class="map-modal" onclick="closeMapModal()">
+    <span class="map-modal-close">&times;</span>
+    <img class="map-modal-content" id="modalImage" alt="会場マップ拡大">
+  </div>
+
+  <script>
+    function openMapModal(img) {
+      const modal = document.getElementById('mapModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = 'flex';
+      modalImg.src = img.src;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMapModal() {
+      const modal = document.getElementById('mapModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Escキーでモーダルを閉じる
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMapModal();
+      }
+    });
+  </script>
 
   <footer class="site-footer">
     <div class="container">

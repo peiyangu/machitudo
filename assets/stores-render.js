@@ -64,6 +64,12 @@ function renderStores(genre, containerId = 'storeContainer') {
            <div class="placeholder-content">${store.name}</div>
          </div>`;
     
+    const descriptionHtml = (store.description || '')
+      // 実際の改行コード (LF / CRLF) を <br> に
+      .replace(/\r\n|\r|\n/g, '<br>')
+      // 文字列としての「\n」も <br> に
+      .replace(/\\n/g, '<br>');
+
     card.innerHTML = `
       ${imageHtml}
       <div class="store-card-body">
@@ -72,7 +78,7 @@ function renderStores(genre, containerId = 'storeContainer') {
           <span class="store-days-badge ${daysBadgeClass}">${formatDays(store.days)}</span>
         </div>
         <h3 class="store-name">${store.name}</h3>
-        <p class="store-description">${store.description}</p>
+        <p class="store-description">${descriptionHtml}</p>
         ${instagramLink}
       </div>
     `;

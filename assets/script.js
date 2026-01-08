@@ -152,6 +152,36 @@ document.addEventListener('DOMContentLoaded', function() {
   renderPagination();
 });
 
+// 店舗カードの店舗名が2行以上になる場合にフォントサイズを自動で少し縮小
+document.addEventListener('DOMContentLoaded', function() {
+  const storeNames = document.querySelectorAll('.store-name');
+
+  if (!storeNames.length) return;
+
+  storeNames.forEach(nameEl => {
+    const computed = window.getComputedStyle(nameEl);
+    let fontSize = parseFloat(computed.fontSize);
+    const originalFontSize = fontSize;
+    const minFontSize = originalFontSize * 0.8; // 縮小は元の80%まで
+
+    const isMultiLine = () => {
+      const style = window.getComputedStyle(nameEl);
+      const lineHeight = parseFloat(style.lineHeight);
+      if (!lineHeight) return false;
+      // 1行分の高さより明らかに大きければ複数行とみなす
+      return nameEl.scrollHeight > lineHeight * 1.3;
+    };
+
+    if (!isMultiLine()) return;
+
+    // 1行に収まるか、最小サイズになるまで1pxずつ縮小
+    while (isMultiLine() && fontSize > minFontSize) {
+      fontSize -= 1;
+      nameEl.style.fontSize = fontSize + 'px';
+    }
+  });
+});
+
 // 注目店舗スライダー（stores.htmlページ専用）
 document.addEventListener('DOMContentLoaded', function() {
   const sliderTrack = document.getElementById('featuredSliderTrack');
@@ -159,14 +189,31 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!sliderTrack) return; // stores.html以外では実行しない
   
   // stores-data.jsから全店舗データを取得
-  const pickupStores = typeof allStoresData !== 'undefined' ? allStoresData.map(store => ({
-    name: store.name,
-    boothNumber: store.boothNumber,
-    genre: genreNames[store.genre] || store.genre,
-    description: store.description,
-    link: `${store.genre}.html`,
-    instagram: store.instagram || ''
-  })) : [];
+  const pickupStores = typeof allStoresData !== 'undefined'
+    ? allStoresData.map(store => {
+        // ジャンルキーを逆引きしてスラッグ（food, sweets など）を取得
+        let genreKey = store.genre;
+        if (typeof genreNames !== 'undefined') {
+          const foundKey = Object.keys(genreNames).find(key => genreNames[key] === store.genre);
+          if (foundKey) {
+            genreKey = foundKey;
+          }
+        }
+
+        return {
+          name: store.name,
+          boothNumber: store.boothNumber,
+          // 表示用は日本語ジャンル名をそのまま使う
+          genre: store.genre,
+          description: store.description,
+          // 詳細リンクはスラッグを使ってジャンル別ページへ
+          link: `${genreKey}.html`,
+          instagram: store.instagram || '',
+          // 画像パスをスライダー用データにも引き継ぐ
+          image: store.image || ''
+        };
+      })
+    : [];
   
   // 全店舗をランダムに並び替え
   const shuffled = [...pickupStores].sort(() => 0.5 - Math.random());
@@ -195,6 +242,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageContent = store.image && store.image !== '' 
       ? `<img src="${store.image}" alt="${store.name}" style="width: 100%; height: 100%; object-fit: cover;">`
       : store.name;
+
+    const descriptionHtml = (store.description || '')
+      // 実際の改行コード (LF / CRLF) を <br> に
+      .replace(/\r\n|\r|\n/g, '<br>')
+      // 文字列としての「\n」も <br> に
+      .replace(/\\n/g, '<br>');
     
     card.innerHTML = `
       <div class="slider-card-header">
@@ -204,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="slider-card-image">${imageContent}</div>
       <div class="slider-card-body">
         <h4 class="slider-store-name">${store.name}</h4>
-        <p class="slider-store-description">${store.description}</p>
+        <p class="slider-store-description">${descriptionHtml}</p>
         <div class="slider-card-links">
           ${instagramLink}
           <a href="${store.link}" class="slider-detail-link">詳しく見る →</a>
