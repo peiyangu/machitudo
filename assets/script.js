@@ -36,11 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// 画像の遅延ロード
+// 画像の遅延ロード + フェードインアニメーション
 document.addEventListener('DOMContentLoaded', function() {
   const images = document.querySelectorAll('img');
+  const cards = document.querySelectorAll('.event-card, .feature-card, .genre-card');
   
-  const imageObserver = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('fade-in');
@@ -53,8 +54,53 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   images.forEach(img => {
-    imageObserver.observe(img);
+    observer.observe(img);
   });
+  
+  cards.forEach(card => {
+    observer.observe(card);
+  });
+});
+
+// 視差効果とスムーズスクロール
+document.addEventListener('DOMContentLoaded', function() {
+  // ヒーロー画像の視差効果
+  const heroImage = document.querySelector('.hero-image');
+  if (heroImage) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * 0.5;
+      heroImage.style.transform = `scale(1.05) translateY(${rate}px)`;
+    });
+  }
+  
+  // スムーズスクロール
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+  
+  // ヘッダーのスクロール時の背景変化
+  const header = document.querySelector('.site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.style.boxShadow = '0 8px 32px rgba(44, 37, 32, 0.15)';
+        header.style.background = 'rgba(255, 251, 247, 0.95)';
+      } else {
+        header.style.boxShadow = 'var(--glass-shadow)';
+        header.style.background = 'var(--glass-bg)';
+      }
+    });
+  }
 });
 
 // お知らせページネーション機能
