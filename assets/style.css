@@ -980,6 +980,28 @@ body.menu-open {
   min-width: 100px;
 }
 
+/* アクセス住所リンク（通常は本文色、ホバーでゴールド＋下線） */
+.access-address-link {
+  color: var(--color-dark);
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.access-address-link::after {
+  content: '\f3c5'; /* map-marker-alt アイコン相当 */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 0.85rem;
+  margin-left: 6px;
+  color: var(--color-gold);
+}
+
+.access-address-link:hover {
+  color: var(--color-gold);
+  text-decoration: underline;
+}
+
 .venue-map-section {
   margin-top: 48px;
   padding: 40px;
