@@ -3,31 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>出店店舗</title>
+  <title>machitudo 2025 - 店舗一覧</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&family=M+PLUS+Rounded+1c:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
   <script src="assets/stores-data.js"></script>
   <script src="assets/script.js" defer></script>
 </head>
-<body>
-  <div class="bg_pattern Paper_v2"></div>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">machitudo</h1>
-      <button class="hamburger-menu" aria-label="メニュー">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="site-nav">
-        <a href="index.html">トップ</a>
-        <a href="about.html">machitudoについて</a>
-        <a href="stores.html">店舗紹介</a>
-        <a href="access.html">アクセス</a>
-        <a href="contact.html">お問い合わせ</a>
-      </nav>
-    </div>
+<body class="festival-theme">
+  <!-- フルスクリーンメニュー -->
+  <div class="fullscreen-menu" id="fullscreenMenu">
+    <button class="menu-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <nav class="fullscreen-nav">
+      <a href="index.html">トップ</a>
+      <a href="about.html">イベントについて</a>
+      <a href="stores.html">店舗一覧</a>
+      <a href="access.html">アクセス</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+  </div>
+
+  <!-- ヘッダー -->
+  <header class="festival-header">
+    <button class="menu-trigger" aria-label="メニュー">
+      <span></span>
+      <span></span>
+      <span></span>
+      <div class="menu-trigger-text">MENU</div>
+    </button>
+    <h1>machitudo<span class="year-badge">2025</span></h1>
+    <a href="stores.html" class="header-cta">SHOP LIST</a>
   </header>
 
   <main>
@@ -161,13 +168,29 @@
     });
   </script>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-social">
-          <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
-        </div>
-        <p class="footer-text">&copy; 2025 machitudo. All rights reserved.</p>
+  <footer class="festival-footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h2>machitudo</h2>
+        <p class="footer-year">2025</p>
+      </div>
+      
+      <div class="footer-links">
+        <a href="stores.html">店舗一覧</a>
+        <a href="access.html">アクセス</a>
+        <a href="contact.html">お問い合わせ</a>
+        <a href="about.html">イベントについて</a>
+      </div>
+      
+      <div class="footer-social">
+        <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      
+      <div class="footer-info">
+        <p class="hashtag">#machitudo2025</p>
+        <p class="copyright">&copy; 2025 machitudo. All rights reserved.</p>
       </div>
     </div>
   </footer>

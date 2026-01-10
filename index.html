@@ -12,154 +12,290 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>machitudo</title>
+  <title>machitudo 2025 - 九州最大級のマルシェイベント</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&family=M+PLUS+Rounded+1c:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
   <script src="assets/script.js" defer></script>
 </head>
-<body>
-  <div class="bg_pattern Paper_v2"></div>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">machitudo</h1>
-      <button class="hamburger-menu" aria-label="メニュー">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="site-nav">
-        <a href="index.html">トップ</a>
-        <a href="about.html">machitudoについて</a>
-        <a href="stores.html">店舗紹介</a>
-        <a href="access.html">アクセス</a>
-        <a href="contact.html">お問い合わせ</a>
-      </nav>
+<body class="festival-theme">
+  <!-- フルスクリーンメニュー -->
+  <div class="fullscreen-menu" id="fullscreenMenu">
+    <button class="menu-close" id="menuClose">
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="fullscreen-nav">
+      <a href="index.html" class="menu-item">TOP</a>
+      <a href="about.html" class="menu-item">ABOUT</a>
+      <a href="stores.html" class="menu-item">SHOP</a>
+      <a href="access.html" class="menu-item">ACCESS</a>
+      <a href="contact.html" class="menu-item">CONTACT</a>
+    </nav>
+  </div>
+
+  <!-- ヘッダー -->
+  <header class="festival-header">
+    <button class="menu-trigger" id="menuTrigger">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="menu-text">MENU</span>
+    </button>
+    <div class="header-logo">
+      <h1>machitudo<span class="year-badge">2025</span></h1>
     </div>
+    <a href="stores.html" class="header-cta">SHOP LIST</a>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-image-wrapper">
-        <img src="assets/images/hero/candidate/DSC_0487-2.jpg" alt="machitudo イベント" class="hero-image">
-        <div class="hero-overlay"></div>
+    <!-- キービジュアル -->
+    <section class="key-visual">
+      <div class="kv-background">
+        <img src="assets/images/hero/candidate/DSC_0487-2.jpg" alt="machitudo 2025" class="kv-image">
       </div>
-      <div class="hero-content">
-        <div class="container">
-          <h2 class="hero-title">九州の魅力が集まる<br>味と出会う週末</h2>
-          <p class="hero-description">九州各地から多彩な出店者が集まるイベント。<br>美味しい食、こだわりの雑貨<br>楽しい体験が待っています。</p>
-          <div class="hero-cta">
-            <a href="stores.html" class="btn-primary">店舗を見る</a>
-            <a href="access.html" class="btn-secondary">アクセス</a>
+      <div class="kv-content">
+        <div class="kv-date-badge">
+          <span class="badge-month">JAN</span>
+          <span class="badge-days">31<small>Sat</small> - 1<small>Sun</small></span>
+          <span class="badge-year">2025</span>
+        </div>
+        <h2 class="kv-title">
+          <span class="title-line">九州最大級の</span>
+          <span class="title-line main">マルシェイベント</span>
+        </h2>
+        <p class="kv-location">📍 久留米中央公園</p>
+        <div class="kv-stats">
+          <div class="stat-item">
+            <span class="stat-number">250+</span>
+            <span class="stat-label">SHOPS</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">2</span>
+            <span class="stat-label">DAYS</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">FREE</span>
+            <span class="stat-label">ENTRY</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="news-section">
-      <div class="container">
-        <h2 class="section-title">お知らせ</h2>
-        <ul class="news-list" id="newsList">
-          <!-- JavaScriptで動的に生成 -->
-        </ul>
-        <div class="news-pagination" id="newsPagination">
-          <!-- JavaScriptで動的に生成 -->
+        <div class="kv-actions">
+          <a href="stores.html" class="kv-btn primary">店舗一覧を見る</a>
+          <a href="access.html" class="kv-btn secondary">アクセス情報</a>
         </div>
       </div>
+      <div class="scroll-indicator">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
     </section>
 
-    <section class="event-info-section">
-      <div class="container">
-        <h2 class="section-title">イベント概要</h2>
-        <div class="event-cards">
-          <div class="event-card">
-            <div class="card-icon-elegant">日時</div>
-            <h3 class="card-title">開催日時</h3>
-            <div class="card-content">
-              <p class="event-date">2025年</p>
-              <p class="event-date-large">1月31日（土）・2月1日（日）</p>
-              <div class="event-times">
-                <p>1月31日 10:00〜19:00</p>
-                <p>2月1日 10:00〜17:00</p>
+    <!-- イベント情報 -->
+    <section class="event-details">
+      <div class="container-wide">
+        <h2 class="section-heading">
+          <span class="heading-en">EVENT DETAILS</span>
+          <span class="heading-ja">イベント詳細</span>
+        </h2>
+        
+        <div class="details-grid">
+          <div class="detail-card date-card">
+            <div class="card-icon">📅</div>
+            <h3>開催日時</h3>
+            <div class="card-body">
+              <p class="date-main">1月31日(土) - 2月1日(日)</p>
+              <div class="time-info">
+                <p><strong>1月31日</strong> 10:00〜19:00</p>
+                <p><strong>2月1日</strong> 10:00〜17:00</p>
               </div>
             </div>
           </div>
           
-          <div class="event-card">
-            <div class="card-icon-elegant">会場</div>
-            <h3 class="card-title">会場</h3>
-            <div class="card-content">
-              <p class="venue-name">久留米中央公園</p>
-              <p class="venue-address">〒830-0003<br>福岡県久留米市東櫛原町1713</p>
-              <a href="access.html" class="venue-link">アクセス詳細 →</a>
+          <div class="detail-card location-card">
+            <div class="card-icon">📍</div>
+            <h3>開催場所</h3>
+            <div class="card-body">
+              <p class="location-name">久留米中央公園</p>
+              <p class="location-address">福岡県久留米市東櫛原町1713</p>
+              <a href="access.html" class="detail-link">アクセス詳細 →</a>
             </div>
           </div>
           
-          <div class="event-card">
-            <div class="card-icon-elegant">店舗</div>
-            <h3 class="card-title">出店数</h3>
-            <div class="card-content">
-              <p class="store-count-event">約250店舗</p>
-              <p class="store-categories">飲食・スイーツ・ドリンク<br>ハンドメイド・ワークショップ<br>縁日・体験ブース</p>
-              <a href="stores.html" class="venue-link">店舗詳細 →</a>
+          <div class="detail-card shops-card">
+            <div class="card-icon">🏪</div>
+            <h3>出店数</h3>
+            <div class="card-body">
+              <p class="shops-number">約250店舗</p>
+              <p class="shops-category">飲食・スイーツ・ドリンク<br>ハンドメイド・ワークショップ<br>縁日・体験ブース</p>
+              <a href="stores.html" class="detail-link">店舗一覧 →</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="venue-map-section-index">
-      <div class="container">
-        <h2 class="section-title">会場マップ</h2>
-        <p class="section-link-text">
-          <a href="stores.html" class="store-intro-link">店舗紹介はこちら →</a>
-        </p>
-        <div class="map-container">
-          <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-image clickable-map" onclick="openMapModal(this)">
-          <p class="map-click-hint">📷 クリックで拡大表示</p>
+    <!-- カテゴリー紹介 -->
+    <section class="categories-showcase">
+      <div class="container-wide">
+        <h2 class="section-heading light">
+          <span class="heading-en">CATEGORIES</span>
+          <span class="heading-ja">カテゴリー</span>
+        </h2>
+        
+        <div class="categories-grid">
+          <a href="sweets.html" class="category-item" style="background-image: url('assets/images/stores/sweets-bg.jpg')">
+            <div class="category-overlay"></div>
+            <div class="category-content">
+              <span class="category-icon">🍰</span>
+              <h3>SWEETS</h3>
+              <p>スイーツ</p>
+            </div>
+          </a>
+          
+          <a href="drink.html" class="category-item" style="background-image: url('assets/images/stores/drink-bg.jpg')">
+            <div class="category-overlay"></div>
+            <div class="category-content">
+              <span class="category-icon">☕</span>
+              <h3>DRINK</h3>
+              <p>ドリンク</p>
+            </div>
+          </a>
+          
+          <a href="food.html" class="category-item" style="background-image: url('assets/images/stores/food-bg.jpg')">
+            <div class="category-overlay"></div>
+            <div class="category-content">
+              <span class="category-icon">🍜</span>
+              <h3>FOOD</h3>
+              <p>フード</p>
+            </div>
+          </a>
+          
+          <a href="workshop.html" class="category-item" style="background-image: url('assets/images/stores/workshop-bg.jpg')">
+            <div class="category-overlay"></div>
+            <div class="category-content">
+              <span class="category-icon">🎨</span>
+              <h3>WORKSHOP</h3>
+              <p>ワークショップ</p>
+            </div>
+          </a>
+          
+          <a href="green.html" class="category-item" style="background-image: url('assets/images/stores/green-bg.jpg')">
+            <div class="category-overlay"></div>
+            <div class="category-content">
+              <span class="category-icon">🌿</span>
+              <h3>GREEN</h3>
+              <p>植物・グリーン</p>
+            </div>
+          </a>
+          
+          <a href="other.html" class="category-item" style="background-image: url('assets/images/stores/other-bg.jpg')">
+            <div class="category-overlay"></div>
+            <div class="category-content">
+              <span class="category-icon">✨</span>
+              <h3>OTHER</h3>
+              <p>その他</p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- お知らせ -->
+    <section class="news-ticker-section">
+      <div class="container-wide">
+        <h2 class="section-heading">
+          <span class="heading-en">INFORMATION</span>
+          <span class="heading-ja">お知らせ</span>
+        </h2>
+        
+        <div class="news-ticker">
+          <div class="ticker-track" id="newsTicker">
+            <div class="ticker-item">
+              <span class="ticker-date">2025.01.20</span>
+              <span class="ticker-text">イベント当日の入場順番のお知らせ</span>
+            </div>
+            <div class="ticker-item">
+              <span class="ticker-date">2025.01.18</span>
+              <span class="ticker-text">会場マップを公開しました</span>
+            </div>
+            <div class="ticker-item">
+              <span class="ticker-date">2025.01.15</span>
+              <span class="ticker-text">出店店舗情報を更新しました</span>
+            </div>
+            <div class="ticker-item">
+              <span class="ticker-date">2025.01.10</span>
+              <span class="ticker-text">Webサイトを公開しました</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 会場マップ -->
+    <section class="venue-map-section">
+      <div class="container-wide">
+        <h2 class="section-heading">
+          <span class="heading-en">VENUE MAP</span>
+          <span class="heading-ja">会場マップ</span>
+        </h2>
+        
+        <div class="map-wrapper">
+          <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-img" id="venueMap">
+          <button class="map-expand-btn" onclick="expandMap()">
+            <i class="fas fa-expand"></i> 拡大表示
+          </button>
+        </div>
+        
+        <div class="map-note">
+          <p>📍 クリックで拡大表示できます</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- マップ拡大モーダル -->
-  <div id="mapModal" class="map-modal" onclick="closeMapModal()">
-    <span class="map-modal-close">&times;</span>
-    <img class="map-modal-content" id="modalImage" alt="会場マップ拡大">
-  </div>
-
-  <script>
-    function openMapModal(img) {
-      const modal = document.getElementById('mapModal');
-      const modalImg = document.getElementById('modalImage');
-      modal.style.display = 'flex';
-      modalImg.src = img.src;
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMapModal() {
-      const modal = document.getElementById('mapModal');
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-
-    // Escキーでモーダルを閉じる
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeMapModal();
-      }
-    });
-  </script>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-social">
-          <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
-        </div>
-        <p class="footer-text">&copy; 2025 machitudo. All rights reserved.</p>
+  <!-- フッター -->
+  <footer class="festival-footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h2>machitudo</h2>
+        <p class="footer-year">2025</p>
+      </div>
+      
+      <div class="footer-links">
+        <a href="stores.html">店舗一覧</a>
+        <a href="access.html">アクセス</a>
+        <a href="contact.html">お問い合わせ</a>
+        <a href="about.html">machitudoについて</a>
+      </div>
+      
+      <div class="footer-social">
+        <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      
+      <div class="footer-info">
+        <p class="hashtag">#machitudo2025</p>
+        <p class="copyright">&copy; 2025 machitudo. All rights reserved.</p>
       </div>
     </div>
   </footer>
+
+  <!-- マップ拡大モーダル -->
+  <div class="modal-overlay" id="mapModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeMapModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <img src="" alt="会場マップ拡大" id="modalMapImage">
+    </div>
+  </div>
+
 </body>
 </html>
