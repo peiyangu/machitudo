@@ -26,14 +26,28 @@
 
   <!-- ヘッダー -->
   <header class="festival-header">
-    <button class="menu-trigger" aria-label="メニュー">
-      <span></span>
-      <span></span>
-      <span></span>
-      <div class="menu-trigger-text">MENU</div>
-    </button>
-    <h1>machitudo<span class="year-badge">2025</span></h1>
-    <a href="stores.html" class="header-cta">SHOP LIST</a>
+    <div class="header-container">
+      <div class="header-top">
+        <button class="menu-trigger" id="menuTrigger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="menu-trigger-text">MENU</span>
+        </button>
+        <h1>machitudo<span class="year-badge">2025</span></h1>
+        <a href="stores.html" class="header-cta">SHOP LIST</a>
+      </div>
+      <!-- PC版ナビゲーション -->
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="stores.html">SHOP</a></li>
+          <li><a href="access.html" class="active">ACCESS</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -51,46 +65,85 @@
       <div class="container">
         
         <div class="access-wrapper">
-          <div class="info-box">
+          <div class="access-highlight-box">
+            <div class="highlight-icon">📍</div>
             <h3 class="access-venue-title">会場情報</h3>
-            <ul class="info-list">
-              <li><strong>会場名</strong> 久留米中央公園</li>
-              <li><strong>住所</strong> 
-                <a href="https://www.google.com/maps?q=〒839-0852+福岡県久留米市東櫛原町1713" 
-                   class="access-address-link"
-                   target="_blank" rel="noopener noreferrer">
-                  〒839-0852 福岡県久留米市東櫛原町1713
-                </a>
-              </li>
-              <li><strong>開催日</strong> 2025年1月31日（土）・2月1日（日）</li>
-              <li><strong>時間</strong> 1/31 10:00〜19:00 / 2/1 10:00〜17:00</li>
-            </ul>
-          </div>
-
-          <div class="access-transport">
-            <h3 class="access-section-title">公共交通機関</h3>
-            <div class="content-text">
-              <p><strong>電車でお越しの方</strong></p>
-              <ul class="access-list">
-                <li>JR久留米駅から徒歩約10分</li>
-                <li>西鉄久留米駅から徒歩約15分</li>
-              </ul>
-              
-              <p><strong>バスでお越しの方</strong></p>
-              <ul class="access-list">
-                <li>西鉄バス「中央公園」バス停下車すぐ</li>
-              </ul>
-              
-              <p><strong>お車でお越しの方</strong></p>
-              <ul class="access-list">
-                <li>九州自動車道「久留米IC」から車で約10分</li>
-                <li>付近の有料駐車場をご利用ください</li>
-                <li>公園内には駐車場がございません</li>
-              </ul>
+            <div class="info-content">
+              <div class="info-item">
+                <div class="info-icon">🏛️</div>
+                <div class="info-detail">
+                  <strong>会場名</strong>
+                  <p>久留米中央公園</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">📮</div>
+                <div class="info-detail">
+                  <strong>住所</strong>
+                  <p>
+                    <a href="https://www.google.com/maps?q=〒839-0852+福岡県久留米市東櫛原町1713" 
+                       class="access-address-link"
+                       target="_blank" rel="noopener noreferrer">
+                      〒839-0852 福岡県久留米市東櫛原町1713
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">📅</div>
+                <div class="info-detail">
+                  <strong>開催日</strong>
+                  <p>2025年1月31日（土）・2月1日（日）</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">⏰</div>
+                <div class="info-detail">
+                  <strong>時間</strong>
+                  <p>1/31 10:00〜19:00 / 2/1 10:00〜17:00</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="venue-map-section" id="venue-map">
+          <div class="access-transport">
+            <h3 class="access-section-title">🚉 公共交通機関</h3>
+            
+            <div class="transport-card">
+              <div class="transport-icon">🚃</div>
+              <div class="transport-content">
+                <h4 class="transport-title">電車でお越しの方</h4>
+                <ul class="access-list">
+                  <li>JR久留米駅から徒歩約10分</li>
+                  <li>西鉄久留米駅から徒歩約15分</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="transport-card">
+              <div class="transport-icon">🚌</div>
+              <div class="transport-content">
+                <h4 class="transport-title">バスでお越しの方</h4>
+                <ul class="access-list">
+                  <li>西鉄バス「中央公園」バス停下車すぐ</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="transport-card">
+              <div class="transport-icon">🚗</div>
+              <div class="transport-content">
+                <h4 class="transport-title">お車でお越しの方</h4>
+                <ul class="access-list">
+                  <li>九州自動車道「久留米IC」から車で約10分</li>
+                  <li>付近の有料駐車場をご利用ください</li>
+                  <li>公園内には駐車場がございません</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="venue-map-section">
             <h3 class="venue-map-title">会場マップ</h3>
             <div class="map-container">
               <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-image clickable-map" onclick="openMapModal(this)">

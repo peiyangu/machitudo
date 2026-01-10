@@ -213,16 +213,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!sliderTrack || !dotsContainer) return;
   
-  let currentIndex = 0;
-  let storesData = [];
-  let cardsPerView = getCardsPerView();
-  
-  // 画面サイズに応じて表示カード数を決定
-  function getCardsPerView() {
-    if (window.innerWidth <= 768) return 1;
-    if (window.innerWidth <= 1024) return 2;
-    return 3;
-  }
+  let currentSlide = 0;
+  let isTransitioning = false;
   
   // ストアデータをシャッフル
   function shuffleArray(array) {
@@ -236,146 +228,210 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // スライダーを初期化
   function initSlider() {
-    if (typeof window.storesData === 'undefined') return;
+    if (typeof window.allStoresData === 'undefined' || !Array.isArray(window.allStoresData)) {
+      console.error('店舗データが読み込まれていません');
+      return;
+    }
     
-    // 全ジャンルからランダムに15店舗を選択
-    const allStores = [];
-    Object.values(window.storesData).forEach(genreStores => {
-      allStores.push(...genreStores);
-    });
+    // 全店舗からランダムに15店舗を選択
+    const storesData = shuffleArray(window.allStoresData).slice(0, 15);
+    const totalSlides = storesData.length;
     
-    storesData = shuffleArray(allStores).slice(0, 15);
+    // 無限ループ用に前後にカードを追加
+    // 最後のカードを前に追加
+    sliderTrack.appendChild(createStoreCard(storesData[storesData.length - 1]));
+    // 全てのカードを追加
+    storesData.forEach(store => sliderTrack.appendChild(createStoreCard(store)));
+    // 最初のカードを後に追加
+    sliderTrack.appendChild(createStoreCard(storesData[0]));
     
-    // カードを生成
-    sliderTrack.innerHTML = '';
-    storesData.forEach((store, index) => {
-      const card = createStoreCard(store);
-      sliderTrack.appendChild(card);
-    });
+    // 初期位置を設定（追加された最初のカードの位置）
+    currentSlide = 1;
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    sliderTrack.style.transition = 'none';
     
-    // ドットインジケーターを生成
-    const totalSlides = Math.ceil(storesData.length / cardsPerView);
+    // ドットインジケーターを生成（最大20個まで）
+    const maxDots = Math.min(totalSlides, 20);
     dotsContainer.innerHTML = '';
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => goToSlide(i));
+    for (let i = 0; i < maxDots; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot';
+      if (i === 0) dot.classList.add('active');
+      dot.setAttribute('aria-label', `スライド${i + 1}に移動`);
+      dot.addEventListener('click', () => goToSlide(i + 1, true));
       dotsContainer.appendChild(dot);
     }
     
-    updateSlider();
+    // 自動再生を開始
+    startAutoplay();
+    
+    return { storesData, totalSlides, maxDots };
   }
+  
+  const sliderData = initSlider();
+  if (!sliderData) return;
+  
+  const { storesData, totalSlides, maxDots } = sliderData;
   
   // 店舗カードを作成
   function createStoreCard(store) {
     const card = document.createElement('div');
-    card.className = 'store-card';
-    card.style.minWidth = `calc((100% - ${(cardsPerView - 1) * 25}px) / ${cardsPerView})`;
+    card.className = 'slider-store-card';
+    card.style.minWidth = '100%';
+    card.style.flexShrink = '0';
     
-    const imagePath = store.image ? `assets/images/stores/${store.image}` : 'assets/images/stores/placeholder.jpg';
-    const instagramUrl = store.instagram || '#';
-    const genreLabel = getGenreLabel(store.genre);
+    // 画像パスの処理
+    const imagePath = store.image || 'assets/images/stores/placeholder.jpg';
+    const instagramUrl = store.instagram || '';
+    const genreLabel = store.genre || 'その他';
+    
+    // Instagram リンクの確認
+    const hasInstagram = instagramUrl && 
+                        instagramUrl !== '' && 
+                        !instagramUrl.includes('利用なし') &&
+                        instagramUrl !== 'https://www.instagram.com/';
+    
+    const instagramLink = hasInstagram 
+      ? `<a href="${instagramUrl}" class="slider-instagram-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>`
+      : `<span class="slider-instagram-link disabled" title="Instagramアカウントなし"><i class="fas fa-ban"></i> Instagram</span>`;
+    
+    // 画像があるかチェック
+    const imageContent = imagePath && imagePath !== 'assets/images/stores/placeholder.jpg'
+      ? `<img src="${imagePath}" alt="${store.name}" style="width: 100%; height: 100%; object-fit: cover;">`
+      : store.name;
+    
+    const descriptionHtml = (store.description || '')
+      .replace(/\r\n|\r|\n/g, '<br>')
+      .replace(/\\n/g, '<br>');
+    
+    // ジャンル別ページへのリンクを作成
+    const genreLinks = {
+      'スイーツ': 'sweets.html',
+      'ドリンク': 'drink.html',
+      'フード': 'food.html',
+      'ワークショップ': 'workshop.html',
+      '縁日': 'festival.html',
+      '物販': 'sales.html',
+      'グリーン': 'green.html',
+      'その他': 'other.html'
+    };
+    const genreLink = genreLinks[genreLabel] || 'stores.html';
     
     card.innerHTML = `
-      <img src="${imagePath}" alt="${store.name}" class="store-card-image" onerror="this.src='assets/images/stores/placeholder.jpg'">
-      <div class="store-card-body">
-        <span class="store-genre-tag">${genreLabel}</span>
-        <h3 class="store-name">${store.name}</h3>
-        <p class="store-description">${store.description || ''}</p>
-        ${instagramUrl !== '#' ? `
-          <a href="${instagramUrl}" class="instagram-link" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-instagram"></i> Instagram
-          </a>
-        ` : ''}
+      <div class="slider-card-header">
+        <span class="slider-card-genre">${genreLabel}</span>
+        <span class="slider-booth-badge">ブース ${store.boothNumber || '-'}</span>
+      </div>
+      <div class="slider-card-image">${imageContent}</div>
+      <div class="slider-card-body">
+        <h4 class="slider-store-name">${store.name}</h4>
+        <p class="slider-store-description">${descriptionHtml}</p>
+        <div class="slider-card-links">
+          ${instagramLink}
+          <a href="${genreLink}" class="slider-detail-link">詳しく見る →</a>
+        </div>
       </div>
     `;
-    
     return card;
   }
   
-  // ジャンル名を取得
-  function getGenreLabel(genre) {
-    const genreMap = {
-      'sweets': 'スイーツ',
-      'drink': 'ドリンク',
-      'food': 'フード',
-      'workshop': 'ワークショップ',
-      'festival': '縁日',
-      'sales': '物販',
-      'green': 'グリーン',
-      'other': 'その他'
-    };
-    return genreMap[genre] || 'その他';
-  }
-  
-  // スライダーを更新
-  function updateSlider() {
-    const cardWidth = sliderTrack.querySelector('.store-card')?.offsetWidth || 0;
-    const gap = 25;
-    const offset = -(currentIndex * (cardWidth + gap) * cardsPerView);
-    sliderTrack.style.transform = `translateX(${offset}px)`;
+  // スライド移動関数
+  function goToSlide(index, withAnimation = true) {
+    if (isTransitioning) return;
     
-    // ドットを更新
-    document.querySelectorAll('.slider-dot').forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentIndex);
+    currentSlide = index;
+    
+    if (withAnimation) {
+      sliderTrack.style.transition = 'transform 0.5s ease';
+      isTransitioning = true;
+    } else {
+      sliderTrack.style.transition = 'none';
+    }
+    
+    const offset = -(currentSlide * 100);
+    sliderTrack.style.transform = `translateX(${offset}%)`;
+    
+    // ドットを更新（1番目のカードは追加なのでindex-1）
+    const dotIndex = (currentSlide - 1) % totalSlides;
+    document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === dotIndex % maxDots);
     });
-  }
-  
-  // スライドを移動
-  function goToSlide(index) {
-    const totalSlides = Math.ceil(storesData.length / cardsPerView);
-    currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-    updateSlider();
+    
+    if (withAnimation) {
+      setTimeout(() => {
+        // 最後の追加カードに到達したら、最初の実カードにジャンプ
+        if (currentSlide === totalSlides + 1) {
+          goToSlide(1, false);
+        }
+        // 最初の追加カードに到達したら、最後の実カードにジャンプ
+        if (currentSlide === 0) {
+          goToSlide(totalSlides, false);
+        }
+        isTransitioning = false;
+      }, 500);
+    }
   }
   
   // 前へボタン
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
-      goToSlide(currentIndex - 1);
+      if (!isTransitioning) {
+        goToSlide(currentSlide - 1, true);
+      }
     });
   }
   
   // 次へボタン
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-      goToSlide(currentIndex + 1);
+      if (!isTransitioning) {
+        goToSlide(currentSlide + 1, true);
+      }
     });
   }
   
-  // 画面サイズ変更時に再計算
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      const newCardsPerView = getCardsPerView();
-      if (newCardsPerView !== cardsPerView) {
-        cardsPerView = newCardsPerView;
-        currentIndex = 0;
-        initSlider();
-      }
-    }, 250);
+  // スワイプ操作のサポート
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  sliderTrack.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
   });
   
-  // 初期化
-  setTimeout(initSlider, 100);
+  sliderTrack.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
   
-  // 自動スライド（オプション）
-  setInterval(() => {
-    const totalSlides = Math.ceil(storesData.length / cardsPerView);
-    if (currentIndex < totalSlides - 1) {
-      goToSlide(currentIndex + 1);
-    } else {
-      goToSlide(0);
+  function handleSwipe() {
+    if (touchEndX < touchStartX - 50) {
+      // 左スワイプ：次へ
+      goToSlide(currentSlide + 1, true);
     }
-  }, 5000);
-});
-    threshold: 0.1,
-    rootMargin: '50px'
-  });
-
-  images.forEach(img => {
-    imageObserver.observe(img);
-  });
+    if (touchEndX > touchStartX + 50) {
+      // 右スワイプ：前へ
+      goToSlide(currentSlide - 1, true);
+    }
+  }
+  
+  // 自動再生（オプション）
+  let autoplayInterval;
+  function startAutoplay() {
+    autoplayInterval = setInterval(() => {
+      goToSlide(currentSlide + 1, true);
+    }, 5000); // 5秒ごと
+  }
+  
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+  
+  // マウスホバーで自動再生を停止
+  const sliderContainer = document.querySelector('.featured-slider');
+  if (sliderContainer) {
+    sliderContainer.addEventListener('mouseenter', stopAutoplay);
+    sliderContainer.addEventListener('mouseleave', startAutoplay);
+  }
 });
 
 // お知らせページネーション機能

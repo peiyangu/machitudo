@@ -27,14 +27,28 @@
 
   <!-- ヘッダー -->
   <header class="festival-header">
-    <button class="menu-trigger" aria-label="メニュー">
-      <span></span>
-      <span></span>
-      <span></span>
-      <div class="menu-trigger-text">MENU</div>
-    </button>
-    <h1>machitudo<span class="year-badge">2025</span></h1>
-    <a href="stores.html" class="header-cta">SHOP LIST</a>
+    <div class="header-container">
+      <div class="header-top">
+        <button class="menu-trigger" id="menuTrigger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="menu-trigger-text">MENU</span>
+        </button>
+        <h1>machitudo<span class="year-badge">2025</span></h1>
+        <a href="stores.html" class="header-cta">SHOP LIST</a>
+      </div>
+      <!-- PC版ナビゲーション -->
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="stores.html" class="active">SHOP</a></li>
+          <li><a href="access.html">ACCESS</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -54,7 +68,7 @@
         <div class="venue-info-note">
           <p class="info-note-text">
             📍 各店舗の会場内の位置は、当日配布のパンフレットでご確認いただけます。<br>
-            会場の全体図は<a href="access.html#venue-map" class="info-link">会場マップ</a>をご覧ください。
+            会場の全体図は<a href="index.html#venue-map" class="info-link">会場マップ</a>をご覧ください。
           </p>
         </div>
         

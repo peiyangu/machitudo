@@ -26,14 +26,28 @@
 
   <!-- ヘッダー -->
   <header class="festival-header">
-    <button class="menu-trigger" aria-label="メニュー">
-      <span></span>
-      <span></span>
-      <span></span>
-      <div class="menu-trigger-text">MENU</div>
-    </button>
-    <h1>machitudo<span class="year-badge">2025</span></h1>
-    <a href="stores.html" class="header-cta">SHOP LIST</a>
+    <div class="header-container">
+      <div class="header-top">
+        <button class="menu-trigger" id="menuTrigger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="menu-trigger-text">MENU</span>
+        </button>
+        <h1>machitudo<span class="year-badge">2025</span></h1>
+        <a href="stores.html" class="header-cta">SHOP LIST</a>
+      </div>
+      <!-- PC版ナビゲーション -->
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="stores.html">SHOP</a></li>
+          <li><a href="access.html">ACCESS</a></li>
+          <li><a href="contact.html" class="active">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -51,47 +65,54 @@
       <div class="container">
         
         <div class="contact-wrapper">
-          <div class="contact-intro">
-            <p>machitudoに関するお問い合わせは、<br>以下の方法で承っております。</p>
+          <div class="contact-intro-box">
+            <div class="intro-icon">💬</div>
+            <h3 class="intro-title">お気軽にお問い合わせください</h3>
+            <p class="intro-text">machitudoに関するお問い合わせは、以下の方法で承っております。</p>
           </div>
 
           <div class="contact-methods">
 
-            <div class="info-box">
-              <h3 class="contact-method-title"><i class="fab fa-instagram"></i> Instagram DM</h3>
-              <div class="contact-method-content">
-                <p class="contact-method-text">公式Instagramのダイレクトメッセージでもお問い合わせいただけます。</p>
-                <p class="contact-method-button">
-                  <a href="https://www.instagram.com/machitudo/" class="btn-primary" target="_blank" rel="noopener noreferrer">
-                    Instagramで問い合わせる
-                  </a>
-                </p>
+            <div class="contact-card instagram-card">
+              <div class="contact-card-icon">
+                <i class="fab fa-instagram"></i>
+              </div>
+              <h3 class="contact-card-title">Instagram DM</h3>
+              <p class="contact-card-text">公式Instagramのダイレクトメッセージでもお問い合わせいただけます。</p>
+              <div class="contact-card-action">
+                <a href="https://www.instagram.com/machitudo/" class="contact-btn instagram-btn" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-instagram"></i> DMで問い合わせる
+                </a>
               </div>
             </div>
 
-            <div class="info-box">
-              <h3 class="contact-method-title">📧 メール</h3>
-              <div class="contact-method-content">
-                <p class="contact-method-text">メールでのお問い合わせはこちら</p>
-                <p class="contact-method-button">
-                  <a href="mailto:baobabcoffee.001@gmail.com" class="contact-link">
-                    baobabcoffee.001@gmail.com
-                  </a>
-                </p>
+            <div class="contact-card email-card">
+              <div class="contact-card-icon">
+                📧
+              </div>
+              <h3 class="contact-card-title">メール</h3>
+              <p class="contact-card-text">メールでのお問い合わせはこちら</p>
+              <div class="contact-card-action">
+                <a href="mailto:baobabcoffee.001@gmail.com" class="contact-btn email-btn">
+                  baobabcoffee.001@gmail.com
+                </a>
               </div>
             </div>
 
-            <div class="info-box">
-              <h3 class="contact-method-title">📞 電話</h3>
-              <div class="contact-method-content">
-                <p class="contact-method-text">お急ぎの場合はお電話でお問い合わせください</p>
-                <p class="contact-method-button">
-                  <a href="tel:0942-91-0698" class="contact-phone">
-                    0942-91-0698
-                  </a>
-                </p>
-                <p class="contact-info">バオバブコーヒー</p>
-                <p class="contact-info">営業時間: 11:00-21:00</p>
+            <div class="contact-card phone-card">
+              <div class="contact-card-icon">
+                📞
+              </div>
+              <h3 class="contact-card-title">電話</h3>
+              <p class="contact-card-text">お急ぎの場合はお電話でお問い合わせください</p>
+              <div class="contact-card-action">
+                <a href="tel:0942-91-0698" class="contact-btn phone-btn">
+                  0942-91-0698
+                </a>
+              </div>
+              <div class="contact-card-info">
+                <p>バオバブコーヒー</p>
+                <p class="hours">営業時間: 11:00-21:00</p>
               </div>
             </div>
           </div>

@@ -3,33 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ワークショップ</title>
+  <title>ワークショップ | machitudo 2025</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&family=M+PLUS+Rounded+1c:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">  <script src="assets/stores-data.js" defer></script>
   <script src="assets/stores-render.js" defer></script>  <script src="assets/script.js" defer></script>
 </head>
-<body>
-  <div class="bg_pattern Paper_v2"></div>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">machitudo</h1>
-      <button class="hamburger-menu" aria-label="メニュー">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="site-nav">
-        <a href="index.html">トップ</a>
-        <a href="about.html">machitudoについて</a>
-        <a href="stores.html">店舗紹介</a>
-        <a href="access.html">アクセス</a>
-        <a href="contact.html">お問い合わせ</a>
+<body class="festival-theme">
+  <!-- フルスクリーンメニュー -->
+  <div class="fullscreen-menu" id="fullscreenMenu">
+    <button class="menu-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <nav class="fullscreen-nav">
+      <a href="index.html">トップ</a>
+      <a href="about.html">イベントについて</a>
+      <a href="stores.html">店舗一覧</a>
+      <a href="access.html">アクセス</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+  </div>
+
+  <!-- ヘッダー -->
+  <header class="festival-header">
+    <div class="header-container">
+      <div class="header-top">
+        <button class="menu-trigger" aria-label="メニュー">
+          <span></span>
+          <span></span>
+          <span></span>
+          <div class="menu-trigger-text">MENU</div>
+        </button>
+        <h1>machitudo<span class="year-badge">2025</span></h1>
+        <a href="stores.html" class="header-cta">SHOP LIST</a>
+      </div>
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="stores.html" class="active">SHOP</a></li>
+          <li><a href="access.html">ACCESS</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- タブナビゲーション -->
+    <div class="genre-tabs">
+      <div class="container">
+        <div class="tabs-wrapper">
+          <a href="stores.html" class="tab-link tab-home">
+            <i class="fas fa-home"></i> TOP
+          </a>
+          <a href="food.html" class="tab-link">フード</a>
+          <a href="sweets.html" class="tab-link">スイーツ</a>
+          <a href="drink.html" class="tab-link">ドリンク</a>
+          <a href="workshop.html" class="tab-link active">ワークショップ</a>
+          <a href="festival.html" class="tab-link">縁日</a>
+          <a href="sales.html" class="tab-link">物販</a>
+          <a href="green.html" class="tab-link">グリーン</a>
+          <a href="other.html" class="tab-link">その他</a>
+        </div>
+      </div>
+    </div>
+
     <section class="page-hero">
       <div class="page-hero-overlay"></div>
       <div class="page-hero-content">
