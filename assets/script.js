@@ -61,11 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   // お知らせデータ（日付の新しい順）
   const newsData = [
-    { date: '2025.01.20', datetime: '2025-01-20', title: 'イベント当日の入場順番のお知らせ' },
-    { date: '2025.01.18', datetime: '2025-01-18', title: 'オープニングアクトとサブステージ発表' },
-    { date: '2025.01.15', datetime: '2025-01-15', title: '会場マップを公開しました' },
-    { date: '2025.01.10', datetime: '2025-01-10', title: '出店店舗情報を更新しました' },
-    { date: '2025.01.01', datetime: '2025-01-01', title: 'Webサイトを公開しました' }
+    { date: '2025.01.25', datetime: '2025-01-25', title: '当日の駐車場・シャトルバス情報を公開しました', category: '重要', categoryClass: 'news-important' },
+    { date: '2025.01.20', datetime: '2025-01-20', title: '全250店舗の出店情報を更新しました', category: 'お知らせ', categoryClass: 'news-info' },
+    { date: '2025.01.15', datetime: '2025-01-15', title: 'ワークショップの予約受付を開始しました', category: 'イベント', categoryClass: 'news-event' },
+    { date: '2025.01.10', datetime: '2025-01-10', title: 'machitudo 2025 公式サイトをオープンしました', category: 'お知らせ', categoryClass: 'news-info' }
     // 新しいお知らせはここに追加してください
   ];
 
@@ -92,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
       li.className = 'news-item';
       li.innerHTML = `
         <time class="news-date" datetime="${news.datetime}">${news.date}</time>
+        <span class="news-category ${news.categoryClass}">${news.category}</span>
         <span class="news-title">${news.title}</span>
       `;
       newsList.appendChild(li);
@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     pagination.innerHTML = '';
+    pagination.className = 'pagination';
 
     for (let i = 1; i <= totalPages; i++) {
       const button = document.createElement('button');

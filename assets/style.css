@@ -1172,6 +1172,14 @@ body.menu-open {
   margin-top: 32px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
 .pagination-btn {
   width: 32px;
   height: 32px;
@@ -2046,7 +2054,7 @@ body.menu-open {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .footer-links {
@@ -2250,8 +2258,8 @@ body.menu-open {
    ============================== */
 .section-title-wrapper {
   text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid rgba(167, 141, 109, 0.2);
   position: relative;
 }
@@ -3126,4 +3134,83 @@ body.menu-open {
    ======================================== */
 
 @media (max-width: 768px) {
+  /* セクションタイトル */
+  .section-title-wrapper {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .section-title-wrapper::after {
+    width: 40px;
+    bottom: -6px;
+  }
+
+  /* フッター */
+  .site-footer {
+    padding: 2rem 0 1rem;
+    margin-top: 3rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* スマホではイベント情報とカテゴリーセクションを非表示 */
+  .footer-section:nth-child(2),
+  .footer-section:nth-child(3) {
+    display: none;
+  }
+
+  .footer-section {
+    text-align: center;
+    padding: 0;
+  }
+
+  .footer-title {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-heading {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links {
+    display: none;
+  }
+
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .footer-info {
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+
+  .footer-info p {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+  }
 }
