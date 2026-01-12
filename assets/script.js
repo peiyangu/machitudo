@@ -8,11 +8,16 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
     
     if (!loadingScreen) return;
     
-    // ローディング画像の配列
-    const images = [
-      'assets/images/hero/candidate/DSC_0487-2.jpg',
-      'assets/images/hero/candidate/DSC_1103.jpg',
-      'assets/images/hero/candidate/DSC_1248.JPG'
+    // デバイスに応じた画像を選択
+    const isMobile = window.innerWidth <= 768;
+    const images = isMobile ? [
+      'assets/images/hero/スマホ1.jpg',
+      'assets/images/hero/スマホ2.jpg',
+      'assets/images/hero/スマホ3.jpg'
+    ] : [
+      'assets/images/hero/pc1.jpg',
+      'assets/images/hero/pc2.jpg',
+      'assets/images/hero/pc3.jpg'
     ];
     
     let currentIndex = 0;
@@ -139,14 +144,45 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// バナースライダー（TOPページのみ）
+document.addEventListener('DOMContentLoaded', function() {
+  const sliderTrack = document.getElementById('bannerSliderTrack');
+  
+  if (!sliderTrack) return;
+  
+  // バナー画像データ（2枚のみ）
+  const bannerImages = [
+    { src: 'assets/images/banner/fuwafuwa.jpg', alt: 'ふわふわ遊具' },
+    { src: 'assets/images/banner/fuwafuwa.jpg', alt: 'ふわふわ遊具2' }
+  ];
+  
+  // スライド生成
+  bannerImages.forEach((banner, index) => {
+    const slide = document.createElement('div');
+    slide.className = 'banner-slide';
+    slide.innerHTML = `<img src="${banner.src}" alt="${banner.alt}">`;
+    sliderTrack.appendChild(slide);
+  });
+  
+  // スマホのみ自動スライド
+  if (window.innerWidth <= 768) {
+    let currentSlide = 0;
+    
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % bannerImages.length;
+      const offset = -(currentSlide * 100);
+      sliderTrack.style.transform = `translateX(${offset}%)`;
+    }, 5000);
+  }
+});
+
 // お知らせページネーション機能
 document.addEventListener('DOMContentLoaded', function() {
   // お知らせデータ（日付の新しい順）
   const newsData = [
     { date: '2025.01.25', datetime: '2025-01-25', title: '当日の駐車場・シャトルバス情報を公開しました', category: '重要', categoryClass: 'news-important' },
     { date: '2025.01.20', datetime: '2025-01-20', title: '全250店舗の出店情報を更新しました', category: 'お知らせ', categoryClass: 'news-info' },
-    { date: '2025.01.15', datetime: '2025-01-15', title: 'ワークショップの予約受付を開始しました', category: 'イベント', categoryClass: 'news-event' },
-    { date: '2025.01.10', datetime: '2025-01-10', title: 'machitudo 2025 公式サイトをオープンしました', category: 'お知らせ', categoryClass: 'news-info' }
+    { date: '2025.01.10', datetime: '2025-01-10', title: 'machitudo 2026 公式サイトをオープンしました', category: 'お知らせ', categoryClass: 'news-info' }
     // 新しいお知らせはここに追加してください
   ];
 
