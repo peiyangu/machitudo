@@ -1,3 +1,85 @@
+// ローディングアニメーション（TOPページのみ）
+if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html')) {
+  window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadingImage1 = document.getElementById('loadingImage1');
+    const loadingImage2 = document.getElementById('loadingImage2');
+    const loadingTitle = document.getElementById('loadingTitle');
+    
+    if (!loadingScreen) return;
+    
+    // ローディング画像の配列
+    const images = [
+      'assets/images/hero/candidate/DSC_0487-2.jpg',
+      'assets/images/hero/candidate/DSC_1103.jpg',
+      'assets/images/hero/candidate/DSC_1248.JPG'
+    ];
+    
+    let currentIndex = 0;
+    let isFirstImageActive = true;
+    let imageChangeInterval;
+    let changeCount = 0; // 切り替え回数をカウント
+    
+    // 画像をプリロード
+    const preloadImages = images.map(src => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
+    
+    // 画像切り替え関数（クロスフェード）
+    function changeImage() {
+      changeCount++;
+      
+      // 3枚目まで表示したら切り替えを停止
+      if (changeCount >= 2) {
+        clearInterval(imageChangeInterval);
+      }
+      
+      currentIndex = (currentIndex + 1) % images.length;
+      
+      if (isFirstImageActive) {
+        // 2番目の画像に次の画像を設定してフェードイン
+        loadingImage2.src = images[currentIndex];
+        loadingImage2.classList.add('active');
+        loadingImage1.classList.remove('active');
+      } else {
+        // 1番目の画像に次の画像を設定してフェードイン
+        loadingImage1.src = images[currentIndex];
+        loadingImage1.classList.add('active');
+        loadingImage2.classList.remove('active');
+      }
+      
+      isFirstImageActive = !isFirstImageActive;
+    }
+    
+    // 初期画像を表示（少し遅延させてフェードイン＋ズームイン効果を発動）
+    loadingImage1.src = images[0];
+    setTimeout(() => {
+      loadingImage1.classList.add('active');
+    }, 100);
+    
+    // 2秒ごとに画像を切り替え
+    imageChangeInterval = setInterval(changeImage, 2000);
+    
+    // 6秒後にタイトルを表示（全3枚の画像がしっかり表示された後）
+    setTimeout(() => {
+      loadingTitle.classList.add('show');
+    }, 6000);
+    
+    // 8秒後にローディング画面を非表示
+    setTimeout(() => {
+      loadingScreen.classList.add('fade-out');
+      
+      // フェードアウト完了後に完全に削除
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }, 800);
+    }, 8000);
+  });
+}
+
 // ハンバーガーメニューの開閉
 document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.querySelector('.hamburger-menu');
