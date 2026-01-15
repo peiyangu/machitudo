@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://machitudo.jp/access.html">
   <meta property="og:image" content="https://machitudo.jp/assets/images/hero/candidate/DSC_0487-2.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
@@ -65,35 +65,72 @@
                 </a>
               </li>
               <li><strong>開催日</strong> 2026年1月31日（土）・2月1日（日）</li>
-              <li><strong>時間</strong> 1/31 10:00〜19:00 / 2/1 10:00〜17:00</li>
+              <li><strong>時間</strong><br>
+                1/31（土） 10:00〜19:00<br>
+                2/1（日） 10:00〜17:00
+              </li>
             </ul>
           </div>
 
           <div class="access-transport">
             <h3 class="access-section-title">公共交通機関</h3>
-            <div class="content-text">
-              <p><strong>電車でお越しの方</strong></p>
-              <ul class="access-list">
-                <li>JR久留米駅から徒歩約10分</li>
-                <li>西鉄久留米駅から徒歩約15分</li>
-              </ul>
+            <div class="transport-grid">
               
-              <p><strong>バスでお越しの方</strong></p>
-              <ul class="access-list">
-                <li>西鉄バス「中央公園」バス停下車すぐ</li>
-              </ul>
-              
-              <p><strong>お車でお越しの方</strong></p>
-              <ul class="access-list">
-                <li>九州自動車道「久留米IC」から車で約10分</li>
-                <li>付近の有料駐車場をご利用ください</li>
-                <li>公園内には駐車場がございません</li>
-              </ul>
+              <div class="transport-card">
+                <div class="transport-icon train-icon">
+                  <i class="fas fa-train"></i>
+                </div>
+                <div class="transport-content">
+                  <h4 class="transport-title">電車</h4>
+                  <ul class="transport-list">
+                    <li>JR久留米駅から徒歩約10分</li>
+                    <li>西鉄久留米駅から徒歩約15分</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="transport-card">
+                <div class="transport-icon bus-icon">
+                  <i class="fas fa-bus"></i>
+                </div>
+                <div class="transport-content">
+                  <h4 class="transport-title">バス・シャトルバス</h4>
+                  <ul class="transport-list">
+                    <li>西鉄バス「中央公園」バス停下車すぐ</li>
+                    <li class="shuttle-info">
+                      <span class="shuttle-badge">当日運行</span>
+                      無料シャトルバスあり
+                      <a href="#shuttle-schedule" class="shuttle-link">運行表を見る ↓</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="transport-card">
+                <div class="transport-icon car-icon">
+                  <i class="fas fa-car"></i>
+                </div>
+                <div class="transport-content">
+                  <h4 class="transport-title">お車</h4>
+                  <ul class="transport-list">
+                    <li>九州自動車道「久留米IC」から車で約10分</li>
+                    <li>公園内駐車場、または付近の有料駐車場をご利用ください</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="shuttle-schedule-section" id="shuttle-schedule">
+            <h3 class="access-section-title">シャトルバス運行表</h3>
+            <div class="shuttle-notice">
+              <p>運行表は近日公開予定です。しばらくお待ちください。</p>
             </div>
           </div>
 
           <div class="venue-map-section" id="venue-map">
-            <h3 class="venue-map-title">会場マップ</h3>
+            <h3 class="access-section-title">会場マップ</h3>
             <div class="map-container">
               <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-image clickable-map" onclick="openMapModal(this)">
               <p class="map-click-hint">📷 クリックで拡大表示</p>
@@ -133,13 +170,46 @@
     });
   </script>
 
+  <!-- フッター -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-social">
-          <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">MACHITUDO 2025</h3>
+          <p class="footer-description">九州の味と出会う、特別な週末</p>
         </div>
-        <p class="footer-text">&copy; 2026 machitudo. All rights reserved.</p>
+        <div class="footer-section">
+          <h4 class="footer-heading">イベント情報</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">machitudoについて</a></li>
+            <li><a href="stores.html">店舗紹介</a></li>
+            <li><a href="access.html">アクセス</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-heading">カテゴリー</h4>
+          <ul class="footer-links">
+            <li><a href="sweets.html">スイーツ</a></li>
+            <li><a href="drink.html">ドリンク</a></li>
+            <li><a href="food.html">フード</a></li>
+            <li><a href="workshop.html">ワークショップ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-heading">SNS</h4>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer" class="social-link">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+          </div>
+          <div class="footer-info">
+            <p><strong>開催日</strong><br>2026年1月31日（土）・2月1日（日）</p>
+            <p><strong>会場</strong><br>久留米中央公園</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2025 machitudo. All rights reserved.</p>
       </div>
     </div>
   </footer>
