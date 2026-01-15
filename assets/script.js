@@ -1,5 +1,5 @@
 // ローディングアニメーション（TOPページのみ）
-if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html')) {
+if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/machitudo/') || window.location.pathname.endsWith('/machitudo')) {
   window.addEventListener('load', function() {
     const loadingScreen = document.getElementById('loadingScreen');
     const loadingImage1 = document.getElementById('loadingImage1');
