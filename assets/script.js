@@ -14,6 +14,15 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
       return;
     }
     
+    // 安全装置：10秒後に強制終了
+    const safetyTimeout = setTimeout(() => {
+      console.warn('Loading animation forced to end due to timeout');
+      if (loadingScreen) {
+        loadingScreen.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }, 10000);
+    
     // デバイスに応じた画像を選択
     const isMobile = window.innerWidth <= 768;
     const images = isMobile ? [
@@ -31,10 +40,23 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
     let imageChangeInterval;
     let changeCount = 0; // 切り替え回数をカウント
     
+    // 画像読み込みエラー処理
+    function handleImageError(img) {
+      console.warn('Failed to load image:', img.src);
+      // エラーが発生した場合、アニメーションをスキップ
+      clearInterval(imageChangeInterval);
+      clearTimeout(safetyTimeout);
+      if (loadingScreen) {
+        loadingScreen.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+    
     // 画像をプリロード
     const preloadImages = images.map(src => {
       const img = new Image();
       img.src = src;
+      img.onerror = () => handleImageError(img);
       return img;
     });
     
@@ -52,11 +74,13 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
       if (isFirstImageActive) {
         // 2番目の画像に次の画像を設定してフェードイン
         loadingImage2.src = images[currentIndex];
+        loadingImage2.onerror = () => handleImageError(loadingImage2);
         loadingImage2.classList.add('active');
         loadingImage1.classList.remove('active');
       } else {
         // 1番目の画像に次の画像を設定してフェードイン
         loadingImage1.src = images[currentIndex];
+        loadingImage1.onerror = () => handleImageError(loadingImage1);
         loadingImage1.classList.add('active');
         loadingImage2.classList.remove('active');
       }
@@ -66,6 +90,7 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
     
     // 初期画像を表示（少し遅延させてフェードイン＋ズームイン効果を発動）
     loadingImage1.src = images[0];
+    loadingImage1.onerror = () => handleImageError(loadingImage1);
     setTimeout(() => {
       loadingImage1.classList.add('active');
     }, 100);
@@ -75,18 +100,23 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
     
     // 6秒後にタイトルを表示（全3枚の画像がしっかり表示された後）
     setTimeout(() => {
-      loadingTitle.classList.add('show');
+      if (loadingTitle) {
+        loadingTitle.classList.add('show');
+      }
     }, 6000);
     
     // 8秒後にローディング画面を非表示
     setTimeout(() => {
-      loadingScreen.classList.add('fade-out');
-      
-      // フェードアウト完了後に完全に削除
-      setTimeout(() => {
-        loadingScreen.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }, 800);
+      clearTimeout(safetyTimeout);
+      if (loadingScreen) {
+        loadingScreen.classList.add('fade-out');
+        
+        // フェードアウト完了後に完全に削除
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }, 800);
+      }
     }, 8000);
   });
 }
