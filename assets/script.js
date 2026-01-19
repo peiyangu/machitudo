@@ -1,4 +1,4 @@
-// ローディングアニメーション（TOPページのみ）
+// ローディングアニメーション（TOPページのみ、セッション中の初回のみ）
 if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/machitudo/') || window.location.pathname.endsWith('/machitudo')) {
   window.addEventListener('load', function() {
     const loadingScreen = document.getElementById('loadingScreen');
@@ -7,6 +7,12 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
     const loadingTitle = document.getElementById('loadingTitle');
     
     if (!loadingScreen) return;
+    
+    // ローディング画面が非表示の場合（訪問済み）は何もしない
+    if (loadingScreen.style.display === 'none') {
+      document.body.style.overflow = 'auto';
+      return;
+    }
     
     // デバイスに応じた画像を選択
     const isMobile = window.innerWidth <= 768;
@@ -180,9 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   // お知らせデータ（日付の新しい順）
   const newsData = [
-    { date: '2025.01.25', datetime: '2025-01-25', title: '当日の駐車場・シャトルバス情報を公開しました', category: '重要', categoryClass: 'news-important' },
-    { date: '2025.01.20', datetime: '2025-01-20', title: '全250店舗の出店情報を更新しました', category: 'お知らせ', categoryClass: 'news-info' },
-    { date: '2025.01.10', datetime: '2025-01-10', title: 'machitudo 2026 公式サイトをオープンしました', category: 'お知らせ', categoryClass: 'news-info' }
+    { date: '2026.01.20', datetime: '2026-01-20', title: '全250店舗の出店情報を更新しました', category: 'お知らせ', categoryClass: 'news-info' },
+    { date: '2026.01.19', datetime: '2026-01-19', title: 'machitudo 2026 公式サイトをオープンしました', category: 'お知らせ', categoryClass: 'news-info' }
     // 新しいお知らせはここに追加してください
   ];
 
@@ -371,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
     card.innerHTML = `
       <div class="slider-card-header">
         <span class="slider-card-genre">${store.genre}</span>
-        <span class="slider-booth-badge">ブース ${store.boothNumber}</span>
+        <a href="index.html#venue-map" class="slider-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>
       </div>
       <div class="slider-card-image">${imageContent}</div>
       <div class="slider-card-body">

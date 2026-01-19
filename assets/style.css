@@ -11,6 +11,11 @@
   --transition: all 0.3s ease;
 }
 
+/* スムーズスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
 /* ========================================
    ローディングアニメーション
    ======================================== */
@@ -842,6 +847,15 @@ body.menu-open {
   font-weight: 600;
   background: rgba(42, 45, 52, 0.7);
   color: var(--color-white);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.store-booth-badge:hover {
+  background: #1a1d24;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 29, 36, 0.4);
 }
 
 .store-days-badge {
@@ -1983,6 +1997,31 @@ body.menu-open {
   box-shadow: none;
 }
 
+.dual-map-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 32px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.map-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-area-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
 .map-click-hint {
   text-align: center;
   margin-top: 12px;
@@ -2320,6 +2359,16 @@ body.menu-open {
   font-size: 0.85rem;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.slider-booth-badge:hover {
+  background: #1a1d24;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 29, 36, 0.4);
 }
 
 .slider-card-image {
@@ -3752,6 +3801,16 @@ body.menu-open {
 
   .map-container {
     padding: 24px 0 8px;
+  }
+
+  .dual-map-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .map-area-title {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
   }
 }
 

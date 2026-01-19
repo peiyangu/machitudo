@@ -28,11 +28,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
+  <script>
+    // 訪問チェック（ローディング画面表示前に実行）
+    (function() {
+      const hasVisited = sessionStorage.getItem('machitudo_visited');
+      if (hasVisited) {
+        // 既に訪問済みの場合、CSSでローディング画面を非表示
+        document.documentElement.style.setProperty('--loading-display', 'none');
+      } else {
+        // 初回訪問をマーク
+        sessionStorage.setItem('machitudo_visited', 'true');
+      }
+    })();
+  </script>
   <script src="assets/script.js" defer></script>
 </head>
 <body>
   <!-- ローディング画面 -->
-  <div id="loadingScreen" class="loading-screen">
+  <div id="loadingScreen" class="loading-screen" style="display: var(--loading-display, flex);">
     <div class="loading-content">
       <img id="loadingImage1" src="" alt="Loading" class="loading-image">
       <img id="loadingImage2" src="" alt="Loading" class="loading-image">
@@ -219,14 +232,26 @@
     </section>
 
     <!-- 会場マップセクション -->
-    <section class="venue-map-section-index">
+    <section class="venue-map-section-index" id="venue-map">
       <div class="container">
         <div class="section-title-wrapper">
           <h2 class="section-title">会場マップ</h2>
         </div>
-        <div class="map-container">
-          <img src="assets/images/access/venue-map.jpg" alt="会場マップ" class="venue-map-image clickable-map" onclick="openMapModal(this)">
-          <p class="map-click-hint">📷 クリックで拡大表示</p>
+        <div class="dual-map-container">
+          <div class="map-item">
+            <h4 class="map-area-title">北側エリア</h4>
+            <div class="map-container">
+              <img src="assets/images/access/North_Area_Map.jpg" alt="会場マップ（北側エリア）" class="venue-map-image clickable-map" onclick="openMapModal(this)">
+              <p class="map-click-hint">📷 クリックで拡大表示</p>
+            </div>
+          </div>
+          <div class="map-item">
+            <h4 class="map-area-title">南側エリア</h4>
+            <div class="map-container">
+              <img src="assets/images/access/South_Area_Map.jpg" alt="会場マップ（南側エリア）" class="venue-map-image clickable-map" onclick="openMapModal(this)">
+              <p class="map-click-hint">📷 クリックで拡大表示</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
