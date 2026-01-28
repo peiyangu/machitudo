@@ -8,7 +8,7 @@
 const allStoresData = [
   {
     name: "百薬chiffon",
-    boothNumber: "96",
+    boothNumber: "95",
     description: "米粉のシフォンケーキ",
     image: "assets/images/stores/百薬chiffon.jpg",
     instagram: "https://www.instagram.com/hyakuyaku_chiffon/",
@@ -134,7 +134,7 @@ const allStoresData = [
   },
   {
     name: "FUKUHAKU  BREWERY",
-    boothNumber: "122",
+    boothNumber: "79",
     description: "クラフトビール",
     image: "assets/images/stores/FUKUHAKU--BREWERY.jpg",
     instagram: "https://www.instagram.com/fukuhakubrewery/",
@@ -242,7 +242,7 @@ const allStoresData = [
   },
   {
     name: "フィッシャーマンズダイナー",
-    boothNumber: "28",
+    boothNumber: "124",
     description: "牛すじモツ煮込み/日本酒",
     image: "assets/images/stores/フィッシャーマンズダイナー.jpg",
     instagram: "https://www.instagram.com/fishermans_diner/",
@@ -251,7 +251,7 @@ const allStoresData = [
   },
   {
     name: "kuebaissyo",
-    boothNumber: "137",
+    boothNumber: "236",
     description: "カレー",
     image: "assets/images/stores/kuebaissyo.jpg",
     instagram: "https://www.instagram.com/kuebaissyo/",
@@ -260,7 +260,7 @@ const allStoresData = [
   },
   {
     name: "焼とり・ちゃんこ どすこい",
-    boothNumber: "129",
+    boothNumber: "216",
     description: "ちゃんこ鍋/焼きそば/とりの唐揚げ/コロッケ/ポテトフライ/揚げたこ焼き",
     image: "assets/images/stores/焼とり・ちゃんこどすこい.jpg",
     instagram: "https://www.instagram.com/kurume.dosukoi/",
@@ -305,7 +305,7 @@ const allStoresData = [
   },
   {
     name: "Curry SAKABA Nuke",
-    boothNumber: "224",
+    boothNumber: "129",
     description: "カレー",
     image: "assets/images/stores/Curry-SAKABA-Nuke.jpg",
     instagram: "https://www.instagram.com/curry.sakaba.nuke/",
@@ -320,15 +320,6 @@ const allStoresData = [
     instagram: "https://www.instagram.com/sueyasufarm/",
     days: ["2/1"],
     genre: "その他",
-  },
-  {
-    name: "chill and coffee",
-    boothNumber: "123",
-    description: "ドリップコーヒー/COLDBREW/レモネード/季節限定ドリンク/ドリップバッグコーヒー/オリジナルグッズ",
-    image: "assets/images/stores/chill-and-coffee.jpg",
-    instagram: "https://www.instagram.com/chill_and_coffee_/",
-    days: ["2/1"],
-    genre: "ドリンク",
   },
   {
     name: "AND YOU＋ ",
@@ -359,7 +350,7 @@ const allStoresData = [
   },
   {
     name: "フォリボーラ",
-    boothNumber: "143",
+    boothNumber: "93",
     description: "フォリボーラハンバーガー/無添加ベーコンバーガー/ブリックチーズバーガー/フォリボーラスペシャル/ベーコンチーズバーガー",
     image: "assets/images/stores/フォリボーラ.jpg",
     instagram: "https://www.instagram.com/folivora56/",
@@ -377,6 +368,15 @@ const allStoresData = [
   },
   {
     name: "ふくろうの隠れ家 ワイズ",
+    boothNumber: "247",
+    description: "ふれあい移動動物園",
+    image: "assets/images/stores/ふくろうの隠れ家.jpg",
+    instagram: "https://www.instagram.com/wise.0222/",
+    days: ["1/31", "2/1"],
+    genre: "その他",
+  },
+  {
+    name: "ふくろうの隠れ家 ワイズ",
     boothNumber: "248",
     description: "ふれあい移動動物園",
     image: "assets/images/stores/ふくろうの隠れ家.jpg",
@@ -386,12 +386,30 @@ const allStoresData = [
   },
   {
     name: "Pirats",
+    boothNumber: "229",
+    description: "カーニバルアトラクション",
+    image: "assets/images/stores/PIRATS.jpg",
+    instagram: "https://www.instagram.com/pirates_funnymarche/",
+    days: ["1/31", "2/1"],
+    genre: "縁日",
+  },
+  {
+    name: "Pirats",
     boothNumber: "230",
     description: "カーニバルアトラクション",
     image: "assets/images/stores/PIRATS.jpg",
     instagram: "https://www.instagram.com/pirates_funnymarche/",
     days: ["1/31", "2/1"],
     genre: "縁日",
+  },
+  {
+    name: "スワンクスストアー",
+    boothNumber: "225",
+    description: "古着",
+    image: "",
+    instagram: "https://www.instagram.com/yuki07_27_/",
+    days: ["1/31", "2/1"],
+    genre: "物販",
   },
   {
     name: "スワンクスストアー",
@@ -484,8 +502,8 @@ const allStoresData = [
     genre: "スイーツ",
   },
   {
-    name: "GOTZEL",
-    boothNumber: "23",
+    name: "團いのサーターアンダギー",
+    boothNumber: "30",
     description: "サーターアンダギー",
     image: "assets/images/stores/GOTZEL.jpg",
     instagram: "https://www.instagram.com/marui_saataa/",
@@ -719,7 +737,7 @@ const allStoresData = [
   },
   {
     name: "まぐねっと",
-    boothNumber: "124",
+    boothNumber: "28",
     description: "ロングポテト/チュロス",
     image: "",
     instagram: "https://www.instagram.com/kitchen_magnet/",
@@ -782,7 +800,7 @@ const allStoresData = [
   },
   {
     name: "りんご飴専門店「AppleDice」",
-    boothNumber: "125",
+    boothNumber: "231",
     description: "りんご飴/林檎のホットワイン/林檎のホットカクテル/アップルティー/アップルジンジャー/ホットアップル",
     image: "",
     instagram: "https://www.instagram.com/appledice_ringoame/",
@@ -1322,7 +1340,7 @@ const allStoresData = [
   },
   {
     name: "タルタル卵サンド専門店 黄白舎",
-    boothNumber: "224,216",
+    boothNumber: "224",
     description: "タルタル卵サンドイッチ",
     image: "assets/images/stores/タルタル卵サンド専門店黄白舎.jpg",
     instagram: "https://www.instagram.com/kijiroya/",
@@ -1456,15 +1474,6 @@ const allStoresData = [
     genre: "物販",
   },
   {
-    name: "since2019",
-    boothNumber: "79",
-    description: "コーヒー/ホットブルーベリー/キャラメルソイラテ/ほうじ茶ソイラテ/抹茶ソイラテ/ホットレモネード/ホットワイン/白玉ぜんざい/チーズ",
-    image: "assets/images/stores/since2019.jpg",
-    instagram: "https://www.instagram.com/cafesince2019/",
-    days: ["1/31", "2/1"],
-    genre: "ドリンク",
-  },
-  {
     name: "やまうえ農園",
     boothNumber: "215",
     description: "アップルパイ/あんもちパイ/マロンパイ/ソーセージパイ/アップルティー",
@@ -1538,7 +1547,7 @@ const allStoresData = [
   },
   {
     name: "patisserie BIJOURIE",
-    boothNumber: "231",
+    boothNumber: "125",
     description: "サングリア/カクテル/コーヒー/紅茶/カップパフェ/スティックケーキ/シフォンサンド/チャンククッキー/琥珀糖/チョコバナナ",
     image: "assets/images/stores/patisserie-BIJOURIE.jpg",
     instagram: "https://www.instagram.com/bijourie.befu/",
@@ -1646,7 +1655,7 @@ const allStoresData = [
   },
   {
     name: "Archival STAND",
-    boothNumber: "255",
+    boothNumber: "258",
     description: "アパレル",
     image: "",
     instagram: "https://www.instagram.com/archival_stand/",
@@ -1673,7 +1682,7 @@ const allStoresData = [
   },
   {
     name: "キヨタキストア",
-    boothNumber: "249",
+    boothNumber: "204",
     description: "古道具/アンティーク/雑貨",
     image: "assets/images/stores/キヨタキストア.jpg",
     instagram: "https://www.instagram.com/kiyotaki_store.mojiko/",
@@ -1754,7 +1763,7 @@ const allStoresData = [
   },
   {
     name: "縁craft",
-    boothNumber: "204",
+    boothNumber: "249",
     description: "ハンドメイド雑貨/インテリア/植物関連用品/アウトドア用品",
     image: "assets/images/stores/縁craft.jpg",
     instagram: "https://www.instagram.com/enisi_craft/",
@@ -2087,7 +2096,7 @@ const allStoresData = [
   },
   {
     name: "CHAMP CAFE",
-    boothNumber: "258",
+    boothNumber: "137",
     description: "圧力釜で焼く焼き栗と焼き栗ぜんざい",
     image: "assets/images/stores/CHAMP-CAFE.jpg",
     instagram: "https://www.instagram.com/champcafe.itoshima/",
@@ -2114,7 +2123,7 @@ const allStoresData = [
   },
   {
     name: "Popolusfoodshop ",
-    boothNumber: "95",
+    boothNumber: "96",
     description: "ジャークチキン/ローストポーク/フランクフルト",
     image: "assets/images/stores/Popolusfoodshop.jpg",
     instagram: "https://www.instagram.com/popolus_fs/",
@@ -2159,7 +2168,7 @@ const allStoresData = [
   },
   {
     name: "お絵描き本舗",
-    boothNumber: "92",
+    boothNumber: "5",
     description: "ボディペイント/お名前ポエム",
     image: "assets/images/stores/お絵描き本舗.jpg",
     instagram: "https://www.instagram.com/reika.k.o.m/",
@@ -2190,15 +2199,6 @@ const allStoresData = [
     description: "カレー/ドリンク",
     image: "assets/images/stores/咖喱屋-納曽利.jpg",
     instagram: "https://www.instagram.com/curry_nasori/",
-    days: ["1/31", "2/1"],
-    genre: "フード",
-  },
-  {
-    name: "にくたま工房Loin",
-    boothNumber: "93",
-    description: "肉巻きおにぎり棒",
-    image: "assets/images/stores/にくたま工房Loin.jpg",
-    instagram: "https://www.instagram.com/nikutamakoubou.loin/",
     days: ["1/31", "2/1"],
     genre: "フード",
   },
@@ -2267,7 +2267,7 @@ const allStoresData = [
   },
   {
     name: "KinoA",
-    boothNumber: "236",
+    boothNumber: "255",
     description: "たい焼き/揚げたい焼き/揚げパン/ポテト/チュロス/焼き芋",
     image: "assets/images/stores/KinoA.jpg",
     instagram: "https://www.instagram.com/kinoa.9/",

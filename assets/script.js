@@ -402,11 +402,16 @@ document.addEventListener('DOMContentLoaded', function() {
       .replace(/\r\n|\r|\n/g, '<br>')
       // 文字列としての「\n」も <br> に
       .replace(/\\n/g, '<br>');
+
+    const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
+    const boothLink = primaryBooth
+      ? `venue-map.html?booth=${encodeURIComponent(primaryBooth)}`
+      : 'venue-map.html';
     
     card.innerHTML = `
       <div class="slider-card-header">
         <span class="slider-card-genre">${store.genre}</span>
-        <a href="index.html#venue-map" class="slider-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>
+        <a href="${boothLink}" class="slider-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>
       </div>
       <div class="slider-card-image">${imageContent}</div>
       <div class="slider-card-body">

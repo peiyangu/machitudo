@@ -4031,3 +4031,249 @@ body.menu-open {
     font-size: 0.8rem;
   }
 }
+
+/* =========================
+   Venue Map Page
+========================= */
+
+.venue-map-page-section {
+  padding: 70px 0;
+}
+
+.venue-map-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.venue-map-image-area {
+  min-width: 0;
+}
+
+.map-container {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(167, 141, 109, 0.25);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 12px 26px rgba(42, 45, 52, 0.08);
+}
+
+.venue-map-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.venue-map-hint {
+  margin: 12px 0 0;
+  font-size: 0.95rem;
+  color: rgba(42, 45, 52, 0.75);
+  line-height: 1.7;
+}
+
+.map-highlight {
+  position: absolute;
+  display: none;
+  border: 4px solid #d64545;
+  border-radius: 4px;
+  background: rgba(214, 69, 69, 0.25);
+  box-shadow: 0 0 0 6px rgba(214, 69, 69, 0.3), 0 0 20px rgba(214, 69, 69, 0.4);
+  pointer-events: none;
+  animation: mapHighlightPulse 1.2s ease-in-out infinite;
+  z-index: 10;
+}
+
+@keyframes mapHighlightPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(214, 69, 69, 0.3), 0 0 20px rgba(214, 69, 69, 0.4);
+    border-color: #d64545;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 12px rgba(214, 69, 69, 0.4), 0 0 30px rgba(214, 69, 69, 0.6);
+    border-color: #ff5555;
+  }
+}
+
+.venue-map-panel {
+  position: sticky;
+  top: 96px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(167, 141, 109, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 12px 26px rgba(42, 45, 52, 0.08);
+}
+
+.venue-map-empty {
+  grid-column: 1 / -1;
+  padding: 18px;
+  border: 1px dashed rgba(167, 141, 109, 0.55);
+  border-radius: 12px;
+  color: rgba(42, 45, 52, 0.8);
+  background: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+}
+
+@media (max-width: 1023px) {
+  .venue-map-layout {
+    grid-template-columns: 1fr;
+  }
+  .venue-map-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 767px) {
+  .venue-map-page-section {
+    padding: 54px 0;
+  }
+  .map-container,
+  .venue-map-panel {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  /* スマホではサイドパネルを非表示（モーダルで表示） */
+  .venue-map-panel {
+    display: none;
+  }
+}
+
+/* ===========================
+   会場マップ：モーダル（スマホ用）
+   =========================== */
+.venue-map-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.venue-map-modal[aria-hidden="false"] {
+  display: flex;
+}
+
+.venue-map-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(42, 45, 52, 0.75);
+  backdrop-filter: blur(4px);
+  animation: venueModalFadeIn 0.25s ease-out;
+}
+
+.venue-map-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 65vh;
+  background: var(--color-white);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 32px rgba(42, 45, 52, 0.25);
+  display: flex;
+  flex-direction: column;
+  animation: venueModalSlideUp 0.3s ease-out;
+  overflow: hidden;
+}
+
+@keyframes venueModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes venueModalSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.venue-map-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(167, 141, 109, 0.2);
+  flex-shrink: 0;
+}
+
+.venue-map-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin: 0;
+}
+
+.venue-map-modal-close {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(167, 141, 109, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.venue-map-modal-close:hover {
+  background: rgba(167, 141, 109, 0.2);
+  transform: scale(1.05);
+}
+
+.venue-map-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.venue-map-modal-body .stores-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.venue-map-modal-body .store-card {
+  margin: 0;
+}
+
+.venue-map-modal-body .store-card-image {
+  max-height: 180px;
+  object-fit: cover;
+}
+
+.venue-map-modal-body .store-count-list {
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: rgba(42, 45, 52, 0.8);
+}
+
+/* PC/タブレットではモーダルを非表示 */
+@media (min-width: 768px) {
+  .venue-map-modal {
+    display: none !important;
+  }
+}
