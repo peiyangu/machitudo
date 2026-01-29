@@ -188,15 +188,21 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // バナー画像データ（2枚のみ）
   const bannerImages = [
-    { src: 'assets/images/banner/fuwafuwa.jpg', alt: 'ふわふわ遊具' },
-    { src: 'assets/images/banner/fuwafuwa.jpg', alt: 'ふわふわ遊具2' }
+    { src: 'assets/images/banner/fuwafuwabanner.jpg', alt: 'ふわふわ遊具', href: '#fuwafuwa' },
+    { src: 'assets/images/banner/fuwafuwabanner.jpg', alt: 'ふわふわ遊具2' }
   ];
   
   // スライド生成
   bannerImages.forEach((banner, index) => {
     const slide = document.createElement('div');
     slide.className = 'banner-slide';
-    slide.innerHTML = `<img src="${banner.src}" alt="${banner.alt}">`;
+
+    if (banner.href) {
+      slide.innerHTML = `<a href="${banner.href}" aria-label="${banner.alt}のセクションへ移動"><img src="${banner.src}" alt="${banner.alt}"></a>`;
+    } else {
+      slide.innerHTML = `<img src="${banner.src}" alt="${banner.alt}">`;
+    }
+
     sliderTrack.appendChild(slide);
   });
   

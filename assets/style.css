@@ -2029,6 +2029,15 @@ body.menu-open {
   font-size: 0.9rem;
 }
 
+.map-click-hint a {
+  color: var(--color-gold);
+  text-decoration: underline;
+}
+
+.map-click-hint a:hover {
+  opacity: 0.85;
+}
+
 /* aboutページ */
 .about-wrapper {
   max-width: 900px;
@@ -2511,7 +2520,7 @@ body.menu-open {
    ============================== */
 .info-banner-section {
   background: var(--color-white);
-  padding: 20px 0;
+  padding: 16px 0;
   overflow: hidden;
   position: relative;
 }
@@ -2520,7 +2529,7 @@ body.menu-open {
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 .banner-slider-container {
@@ -2535,21 +2544,31 @@ body.menu-open {
 .banner-slide {
   width: calc(50% - 0.625rem);
   flex-shrink: 0;
+  aspect-ratio: var(--banner-aspect, 2 / 1);
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.banner-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .banner-slide img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 2.5 / 1;
+  height: 100%;
   object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  border-radius: 0;
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
   .info-banner-section {
-    padding: 15px 0;
+    padding: 12px 0;
   }
   
   .banner-slider-wrapper {
@@ -2568,11 +2587,11 @@ body.menu-open {
   
   .banner-slide {
     width: 100%;
+    aspect-ratio: var(--banner-aspect, 2 / 1);
   }
   
   .banner-slide img {
-    max-height: 140px;
-    aspect-ratio: 2.5 / 1;
+    height: 100%;
     object-fit: contain;
   }
 }
@@ -2872,6 +2891,15 @@ body.menu-open {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  .fuwafuwa-section {
+    padding: 2.5rem 0;
+  }
+
+  .fuwafuwa-media {
+    max-width: 92%;
+    padding: 14px;
+  }
 }
 
 /* ==============================
@@ -2900,6 +2928,29 @@ body.menu-open {
 .venue-map-section-index {
   background: var(--color-white);
   padding: 3rem 0;
+}
+
+.fuwafuwa-section {
+  background: var(--color-white);
+  padding: 3rem 0;
+}
+
+.fuwafuwa-media {
+  max-width: 900px;
+  margin: 24px auto 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(167, 141, 109, 0.25);
+  box-shadow: 0 8px 20px rgba(42, 45, 52, 0.08);
+}
+
+.fuwafuwa-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(42, 45, 52, 0.1);
 }
 
 .slider-dot {

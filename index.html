@@ -183,11 +183,7 @@
             <h3 class="card-title">開催日時</h3>
             <div class="card-content">
               <p class="event-date">2026年</p>
-              <p class="event-date-large">1月31日（土）・2月1日（日）</p>
-              <div class="event-times">
-                <p>1月31日 10:00〜19:00</p>
-                <p>2月1日 10:00〜17:00</p>
-              </div>
+              <p class="event-date-large">1月31日（土）・2月1日（日）<br>10:00～17:00</p>
             </div>
           </div>
           
@@ -276,6 +272,20 @@
       </div>
     </section>
 
+    <!-- ふわふわ遊具セクション -->
+    <section class="fuwafuwa-section" id="fuwafuwa">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">ふわふわ遊具</h2>
+          <p class="section-subtitle">お子さまも楽しめるふわふわ遊具が登場</p>
+        </div>
+        <div class="fuwafuwa-media">
+          <img src="assets/images/top/fuwafuwa.jpg" alt="ふわふわ遊具" class="fuwafuwa-image clickable-map" onclick="openMapModal(this)">
+          <p class="map-click-hint">📷 クリックで拡大表示</p>
+        </div>
+      </div>
+    </section>
+
     <!-- 会場マップセクション -->
     <section class="venue-map-section-index" id="venue-map">
       <div class="container">
@@ -286,17 +296,33 @@
           <div class="map-item">
             <h4 class="map-area-title">北側エリア</h4>
             <div class="map-container">
-              <img src="assets/images/access/North_Area_Map.jpg" alt="会場マップ（北側エリア）" class="venue-map-image clickable-map" onclick="openMapModal(this)">
-              <p class="map-click-hint">📷 クリックで拡大表示</p>
+              <a class="map-to-venue-link" href="venue-map.html#north-area" aria-label="会場マップページ（北側エリア）を開く">
+                <img src="assets/images/access/North_Area_Map.jpg" alt="会場マップ（北側エリア）" class="venue-map-image clickable-map">
+              </a>
+              <p class="map-click-hint">
+                <span>タップでブース検索へ</span>
+                <span aria-hidden="true"> / </span>
+                <a href="#" onclick="openMapModal(this.closest('.map-container').querySelector('img')); return false;">📷 画像を拡大表示</a>
+              </p>
             </div>
           </div>
           <div class="map-item">
             <h4 class="map-area-title">南側エリア</h4>
             <div class="map-container">
-              <img src="assets/images/access/South_Area_Map.jpg" alt="会場マップ（南側エリア）" class="venue-map-image clickable-map" onclick="openMapModal(this)">
-              <p class="map-click-hint">📷 クリックで拡大表示</p>
+              <a class="map-to-venue-link" href="venue-map.html#south-area" aria-label="会場マップページ（南側エリア）を開く">
+                <img src="assets/images/access/South_Area_Map.jpg" alt="会場マップ（南側エリア）" class="venue-map-image clickable-map">
+              </a>
+              <p class="map-click-hint">
+                <span>タップでブース検索へ</span>
+                <span aria-hidden="true"> / </span>
+                <a href="#" onclick="openMapModal(this.closest('.map-container').querySelector('img')); return false;">📷 画像を拡大表示</a>
+              </p>
             </div>
           </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2.5rem;">
+          <a href="venue-map.html" class="btn-primary">会場マップ（ブース検索）を開く</a>
         </div>
       </div>
     </section>

@@ -317,6 +317,7 @@
 		areas.forEach((area) => {
 			area.addEventListener('click', (e) => {
 				e.preventDefault();
+				window.__machitudoSuppressOutsideClear?.();
 				const booth = area.dataset.booth || area.getAttribute('title') || area.getAttribute('alt');
 				lastSelectedArea = area;
 				updateHighlight(area);
@@ -402,12 +403,32 @@
 			document.body.style.overflow = ''; // スクロール復元
 		}
 
+		function clearSelection() {
+			// モーダルが開いていれば閉じる
+			if (modal && modal.getAttribute('aria-hidden') === 'false') {
+				closeModal();
+			}
+
+			// ハイライト解除
+			northApi?.clearHighlight?.();
+			southApi?.clearHighlight?.();
+			currentHighlightApi = null;
+
+			// パネル表示を初期状態へ
+			if (storeCount) storeCount.textContent = 'ブース番号をクリックしてください';
+			if (storeContainer) storeContainer.innerHTML = '';
+
+			// URLクエリをクリア
+			setQueryBooth('');
+		}
+
 		// モーダルイベントリスナー
 		if (modalClose) {
 			modalClose.addEventListener('click', closeModal);
 		}
 		if (modalOverlay) {
-			modalOverlay.addEventListener('click', closeModal);
+			// 画面外タップで「選択解除」
+			modalOverlay.addEventListener('click', clearSelection);
 		}
 
 		// Escキーでモーダルを閉じる
@@ -418,6 +439,7 @@
 		});
 
 		function selectBooth(booth) {
+			window.__machitudoSuppressOutsideClear?.();
 			const b = normalizeBooth(booth);
 			const stores = findStoresByBooth(b);
 			
@@ -436,6 +458,13 @@
 		// 他関数から呼べるように（image map click -> selectBooth）
 		window.__machitudoSelectBooth = selectBooth;
 
+		// 「外側タップで解除」：ブース選択直後のクリック伝播で解除されないよう抑止
+		let suppressOutsideClear = false;
+		window.__machitudoSuppressOutsideClear = () => {
+			suppressOutsideClear = true;
+			setTimeout(() => { suppressOutsideClear = false; }, 0);
+		};
+
 		// <area> を外部ファイルから読み込み（image-map.net の出力をそのまま管理できるようにする）
 		await loadAreasIntoMap(northMapEl, 'assets/venue-map-areas-north.html');
 		if (southImg && southMapEl) {
@@ -449,6 +478,30 @@
 
 		// グローバルにハイライトAPIを設定（相互に解除できるようにする）
 		let currentHighlightApi = null;
+
+		// マップ画像の「空白タップ」で選択解除（areaタップ時は抑止される）
+		northImg.addEventListener('click', () => {
+			if (suppressOutsideClear) return;
+			clearSelection();
+		});
+		if (southImg) {
+			southImg.addEventListener('click', () => {
+				if (suppressOutsideClear) return;
+				clearSelection();
+			});
+		}
+
+		// マップ/パネル/モーダル以外のタップで選択解除（"画面外" の扱い）
+		document.addEventListener('click', (e) => {
+			if (suppressOutsideClear) return;
+			const target = e.target;
+			if (!(target instanceof Element)) return;
+			if (target.tagName === 'AREA') return;
+			if (target.closest('.venue-map-modal-content')) return;
+			if (target.closest('.venue-map-panel')) return;
+			if (target.closest('.map-container')) return;
+			clearSelection();
+		}, true);
 
 		// ハイライト表示を一元管理する関数
 		function highlightBoothGlobal(booth, targetApi, otherApi) {
