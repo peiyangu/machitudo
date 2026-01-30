@@ -220,8 +220,19 @@
 
 		let lastSelectedArea = null;
 		let pendingBoothToHighlight = null;
+		let pendingShouldScroll = false;
 
-		function updateHighlight(area) {
+		function normalizeScrollOption(optionsOrShouldScroll) {
+			if (typeof optionsOrShouldScroll === 'boolean') {
+				return optionsOrShouldScroll;
+			}
+			if (optionsOrShouldScroll && typeof optionsOrShouldScroll === 'object') {
+				return !!optionsOrShouldScroll.shouldScroll;
+			}
+			return false;
+		}
+
+		function updateHighlight(area, shouldScroll = false) {
 			if (!highlightEl) return;
 			if (!area) {
 				highlightEl.style.display = 'none';
@@ -255,17 +266,19 @@
 			highlightEl.style.width = `${expandedBox.width}px`;
 			highlightEl.style.height = `${expandedBox.height}px`;
 
-			// ハイライト表示時、該当位置まで自動スクロール（スムーズに）
-			setTimeout(() => {
-				const rect = highlightEl.getBoundingClientRect();
-				const offset = window.innerHeight / 2 - rect.height / 2;
-				const scrollTop = window.pageYOffset + rect.top - offset;
-				
-				window.scrollTo({
-					top: Math.max(0, scrollTop),
-					behavior: 'smooth'
-				});
-			}, 100);
+			// 選択直後のみ、該当位置まで自動スクロール（リサイズ等で繰り返し発火しないよう制御）
+			if (shouldScroll) {
+				setTimeout(() => {
+					const rect = highlightEl.getBoundingClientRect();
+					const offset = window.innerHeight / 2 - rect.height / 2;
+					const scrollTop = window.pageYOffset + rect.top - offset;
+					
+					window.scrollTo({
+						top: Math.max(0, scrollTop),
+						behavior: 'smooth'
+					});
+				}, 100);
+			}
 		}
 
 		function rescaleAreas() {
@@ -280,37 +293,40 @@
 				area.setAttribute('coords', scaled.map((n) => Math.round(n)).join(','));
 			});
 
-			// リサイズ後にハイライト位置も更新
-			updateHighlight(lastSelectedArea);
+			// リサイズ後にハイライト位置も更新（ここでは自動スクロールしない）
+			updateHighlight(lastSelectedArea, false);
 
 			if (pendingBoothToHighlight) {
-				highlightBooth(pendingBoothToHighlight);
+				highlightBooth(pendingBoothToHighlight, { shouldScroll: pendingShouldScroll });
 				pendingBoothToHighlight = null;
+				pendingShouldScroll = false;
 			}
 		}
 
-		function highlightBooth(booth) {
+		function highlightBooth(booth, optionsOrShouldScroll) {
+			const shouldScroll = normalizeScrollOption(optionsOrShouldScroll);
 			const b = normalizeBooth(booth);
 			if (!b) {
 				lastSelectedArea = null;
-				updateHighlight(null);
+				updateHighlight(null, false);
 				return;
 			}
 
 			// 画像のnaturalサイズが未確定だとcoordsスケールができず位置が合わないため、保留
 			if (!img.naturalWidth || !img.naturalHeight) {
 				pendingBoothToHighlight = b;
+				pendingShouldScroll = shouldScroll;
 				return;
 			}
 
 			const area = areas.find((a) => (a.dataset.booth || a.getAttribute('title') || a.getAttribute('alt')) === b);
 			if (!area) {
 				lastSelectedArea = null;
-				updateHighlight(null);
+				updateHighlight(null, false);
 				return;
 			}
 			lastSelectedArea = area;
-			updateHighlight(area);
+			updateHighlight(area, shouldScroll);
 		}
 
 		// areaクリック
@@ -320,7 +336,7 @@
 				window.__machitudoSuppressOutsideClear?.();
 				const booth = area.dataset.booth || area.getAttribute('title') || area.getAttribute('alt');
 				lastSelectedArea = area;
-				updateHighlight(area);
+				updateHighlight(area, true);
 				window.__machitudoSelectBooth?.(booth);
 			});
 		});
@@ -337,7 +353,12 @@
 
 		return {
 			highlightBooth,
-			clearHighlight: () => updateHighlight(null),
+			clearHighlight: () => {
+				lastSelectedArea = null;
+				pendingBoothToHighlight = null;
+				pendingShouldScroll = false;
+				updateHighlight(null, false);
+			},
 		};
 	}
 
@@ -504,14 +525,14 @@
 		}, true);
 
 		// ハイライト表示を一元管理する関数
-		function highlightBoothGlobal(booth, targetApi, otherApi) {
+		function highlightBoothGlobal(booth, targetApi, otherApi, options) {
 			// 他方のハイライトを解除
 			if (otherApi && otherApi !== targetApi) {
 				otherApi.clearHighlight?.();
 			}
 			// 対象のハイライトを表示
 			if (targetApi) {
-				targetApi.highlightBooth?.(booth);
+				targetApi.highlightBooth?.(booth, options);
 				currentHighlightApi = targetApi;
 			}
 		}
@@ -554,12 +575,13 @@
 				(a.dataset.booth || a.getAttribute('title') || a.getAttribute('alt')) === b
 			);
 			
+			const highlightOptions = { shouldScroll: true };
 			if (foundInNorth) {
 				// 北側にある場合
-				highlightBoothGlobal(initialBooth, northApi, southApi);
+				highlightBoothGlobal(initialBooth, northApi, southApi, highlightOptions);
 			} else {
 				// 南側にある場合
-				highlightBoothGlobal(initialBooth, southApi, northApi);
+				highlightBoothGlobal(initialBooth, southApi, northApi, highlightOptions);
 			}
 			
 			// クエリ文字列は設定しておく（ブラウザバック時の状態保持用）
