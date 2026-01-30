@@ -505,7 +505,7 @@ const allStoresData = [
     name: "團いのサーターアンダギー",
     boothNumber: "30",
     description: "サーターアンダギー",
-    image: "assets/images/stores/GOTZEL.jpg",
+    image: "assets/images/stores/まるいのサーターアンダギー.jpg",
     instagram: "https://www.instagram.com/marui_saataa/",
     days: ["1/31", "2/1"],
     genre: "スイーツ",
