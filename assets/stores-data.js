@@ -1312,13 +1312,13 @@ const allStoresData = [
     genre: "フード",
   },
   {
-    name: "炙り屋フリースタイル",
+    name: "味工房菅原屋",
     boothNumber: "190",
-    description: "串焼き",
+    description: "フルーツ飴",
     image: "",
     instagram: "https://www.instagram.com/hita.freestyle/",
     days: ["1/31", "2/1"],
-    genre: "フード",
+    genre: "スイーツ",
   },
   {
     name: "さとこうファーム",
