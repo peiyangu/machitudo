@@ -7,6 +7,24 @@
 
 const allStoresData = [
   {
+    name: "Baobab coffee",
+    boothNumber: "2",
+    description: "コーヒー、お酒",
+    image: "assets/images/stores/baobabCoffee.jpg",
+    instagram: "https://www.instagram.com/baobabcoffee_kurume/",
+    days: ["1/31", "2/1"],
+    genre: "ドリンク",
+  },
+  {
+    name: "Batis curry",
+    boothNumber: "3",
+    description: "カレー",
+    image: "assets/images/stores/batiscarry.jpg",
+    instagram: "https://www.instagram.com/batis_curry/",
+    days: ["1/31", "2/1"],
+    genre: "フード",
+  },
+  {
     name: "百薬chiffon",
     boothNumber: "95",
     description: "米粉のシフォンケーキ",
