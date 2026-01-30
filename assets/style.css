@@ -1,3 +1,52 @@
+.shuttle-banner {
+  margin: 24px 0 8px;
+}
+
+.shuttle-banner-link {
+  display: block;
+}
+
+.shuttle-banner-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(167, 141, 109, 0.18);
+  border: 1px solid rgba(167, 141, 109, 0.15);
+}
+
+.shuttle-schedule-image-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 0;
+}
+
+.shuttle-schedule-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(167, 141, 109, 0.12);
+  border: 1px solid rgba(167, 141, 109, 0.12);
+}
+
+@media (max-width: 767px) {
+  .shuttle-banner {
+    margin: 16px 0 4px;
+  }
+  .shuttle-schedule-image {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+}
+.route-link {
+  color: var(--color-dark);
+  text-decoration: none;
+}
+
+.route-link:hover {
+  color: var(--color-gold);
+  text-decoration: underline;
+}
 :root {
   --color-dark: #2A2D34;
   --color-white: #FFFFFF;
@@ -1807,8 +1856,9 @@ body.menu-open {
   box-shadow: none;
   transition: all 0.3s ease;
   display: flex;
-  align-items: center;
-  gap: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
   border-bottom: 1px solid rgba(167, 141, 109, 0.15);
 }
 
@@ -1823,6 +1873,13 @@ body.menu-open {
   padding-right: 16px;
   margin-left: -16px;
   margin-right: -16px;
+}
+
+.transport-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
 }
 
 .transport-icon {
@@ -1860,11 +1917,16 @@ body.menu-open {
   flex: 1;
 }
 
+.transport-body {
+  width: 100%;
+  padding-left: 16px;
+}
+
 .transport-title {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   color: var(--color-dark);
-  margin-bottom: 16px;
+  margin-bottom: 0;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
@@ -1893,13 +1955,67 @@ body.menu-open {
 }
 
 .shuttle-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background: rgba(167, 141, 109, 0.08);
-  padding: 12px;
-  border-radius: 8px;
+  display: block; /* 他のliと同じ表示に揃える */
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   margin-top: 8px;
+}
+
+/* シャトル案内の項目は先頭アイコンを消して左詰め */
+/* シャトル項目も他と同様に箇条書き（先頭アイコン・左余白）を適用 */
+
+.shuttle-route {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.map-pin-links {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.map-pin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(167, 141, 109, 0.35);
+  background: rgba(167, 141, 109, 0.08);
+  color: var(--color-gold);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.map-pin-link:hover {
+  background: rgba(167, 141, 109, 0.14);
+}
+
+.route-label {
+  font-weight: 600;
+  color: rgba(42, 45, 52, 0.85);
+}
+
+.inline-pin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.inline-pin-link:hover {
+  opacity: 0.75;
+}
+
+.shuttle-note {
+  color: rgba(42, 45, 52, 0.85);
 }
 
 .shuttle-badge {
@@ -3817,9 +3933,20 @@ body.menu-open {
     margin-bottom: 12px;
   }
 
+  /* スマホで本文の左余白を詰める（折り返し改善） */
+  .transport-body {
+    padding-left: 0;
+  }
+
+  .map-pin-link {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+  }
+
   .transport-list li {
     font-size: 0.9rem;
     padding: 10px 0;
+    padding-left: 28px; /* 疑似要素のアイコン分の余白を確保 */
   }
 
   .shuttle-schedule-section {

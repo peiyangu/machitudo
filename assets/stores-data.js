@@ -134,7 +134,7 @@ const allStoresData = [
   },
   {
     name: "FUKUHAKU  BREWERY",
-    boothNumber: "79",
+    boothNumber: "93",
     description: "クラフトビール",
     image: "assets/images/stores/FUKUHAKU--BREWERY.jpg",
     instagram: "https://www.instagram.com/fukuhakubrewery/",
@@ -2168,7 +2168,7 @@ const allStoresData = [
   },
   {
     name: "お絵描き本舗",
-    boothNumber: "5",
+    boothNumber: "92",
     description: "ボディペイント/お名前ポエム",
     image: "assets/images/stores/お絵描き本舗.jpg",
     instagram: "https://www.instagram.com/reika.k.o.m/",

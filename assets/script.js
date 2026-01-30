@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // バナー画像データ（2枚のみ）
   const bannerImages = [
     { src: 'assets/images/banner/fuwafuwabanner.jpg', alt: 'ふわふわ遊具', href: '#fuwafuwa' },
-    { src: 'assets/images/banner/fuwafuwabanner.jpg', alt: 'ふわふわ遊具2' }
+    { src: 'assets/images/banner/ShuttleBussBanner.jpg', alt: 'シャトルバス案内', href: 'access.html#bus-shuttle-section' }
   ];
   
   // スライド生成
@@ -222,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   // お知らせデータ（日付の新しい順）
   const newsData = [
+    { date: '2026.01.31', datetime: '2026-01-31', title: 'シャトルバスの運行表を追加しました', category: 'お知らせ', categoryClass: 'news-info', href: 'access.html#shuttle-schedule' },
     { date: '2026.01.20', datetime: '2026-01-20', title: '全250店舗の出店情報を更新しました', category: 'お知らせ', categoryClass: 'news-info' },
     { date: '2026.01.19', datetime: '2026-01-19', title: 'machitudo 2026 公式サイトをオープンしました', category: 'お知らせ', categoryClass: 'news-info' }
     // 新しいお知らせはここに追加してください
@@ -248,10 +249,13 @@ document.addEventListener('DOMContentLoaded', function() {
     pageItems.forEach(news => {
       const li = document.createElement('li');
       li.className = 'news-item';
+      const titleHtml = news.href
+        ? `<a class="news-title" href="${news.href}">${news.title}</a>`
+        : `<span class="news-title">${news.title}</span>`;
       li.innerHTML = `
         <time class="news-date" datetime="${news.datetime}">${news.date}</time>
         <span class="news-category ${news.categoryClass}">${news.category}</span>
-        <span class="news-title">${news.title}</span>
+        ${titleHtml}
       `;
       newsList.appendChild(li);
     });
