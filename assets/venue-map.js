@@ -329,16 +329,65 @@
 			updateHighlight(area, shouldScroll);
 		}
 
-		// areaクリック
+		// areaタップ/クリック（ピンチズーム時の誤選択を防ぎ、実タップのみ選択）
 		areas.forEach((area) => {
-			area.addEventListener('click', (e) => {
-				e.preventDefault();
+			const handleSelect = (e) => {
+				if (e && typeof e.preventDefault === 'function') e.preventDefault();
 				window.__machitudoSuppressOutsideClear?.();
 				const booth = area.dataset.booth || area.getAttribute('title') || area.getAttribute('alt');
 				lastSelectedArea = area;
 				updateHighlight(area, true);
 				window.__machitudoSelectBooth?.(booth);
+			};
+
+			// デスクトップ/通常クリック
+			area.addEventListener('click', handleSelect);
+
+			// モバイル：ピンチ（multi-touch）やパン（移動量大）は選択しない
+			let touchData = null;
+			area.addEventListener('touchstart', (e) => {
+				if (e.touches && e.touches.length > 1) {
+					// ピンチ開始：選択処理を行わない
+					touchData = null;
+					return; // preventDefaultしないことでズームを妨げない
+				}
+				const t = e.touches && e.touches[0];
+				touchData = {
+					startX: t ? t.clientX : 0,
+					startY: t ? t.clientY : 0,
+					startTime: Date.now(),
+					canceled: false,
+				};
+			}, { passive: true });
+
+			area.addEventListener('touchmove', (e) => {
+				if (!touchData) return;
+				if (e.touches && e.touches.length > 1) {
+					// マルチタッチに移行したらキャンセル
+					touchData.canceled = true;
+					return;
+				}
+				const t = e.touches && e.touches[0];
+				if (!t) return;
+				const dx = Math.abs(t.clientX - touchData.startX);
+				const dy = Math.abs(t.clientY - touchData.startY);
+				// パン（ドラッグ）とみなす閾値（合計12px程度）
+				if (dx + dy > 12) {
+					touchData.canceled = true;
+				}
+			}, { passive: true });
+
+			area.addEventListener('touchend', (e) => {
+				if (!touchData) return;
+				const duration = Date.now() - touchData.startTime;
+				const isTap = !touchData.canceled && duration < 500; // 短時間で移動少：タップ
+				touchData = null;
+				if (!isTap) return; // ピンチ/パンは選択しない
+				// 実タップのみ選択処理
+				handleSelect(e);
 			});
+
+			area.addEventListener('touchcancel', () => { touchData = null; });
 		});
 
 		const onResize = () => rescaleAreas();

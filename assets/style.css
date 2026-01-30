@@ -4236,6 +4236,7 @@ body.menu-open {
   border-radius: 14px;
   padding: 16px;
   box-shadow: 0 12px 26px rgba(42, 45, 52, 0.08);
+  touch-action: manipulation; /* モバイルでのタップ応答性を改善 */
 }
 
 .venue-map-image {
