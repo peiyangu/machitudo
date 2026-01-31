@@ -67,17 +67,25 @@
           </p>
         </div>
 
-        <section class="store-alpha-index" aria-label="店舗一覧" style="margin: 1.5rem 0;">
+        <section class="store-alpha-index" aria-label="店舗一覧">
           <h3 class="genre-section-title" id="storeIndexHeading">
             店舗一覧
             <span id="storeIndexMode" class="store-index-mode">（あいうえお順）</span>
           </h3>
-          <div class="index-sort-controls" role="group" aria-label="並び替え" style="display:flex; gap:8px; margin:0.6rem 0 1rem;">
+          <div class="index-sort-controls" role="group" aria-label="並び替え">
             <button id="sortByNameBtn" class="btn-secondary" aria-pressed="true">あいうえお順</button>
             <button id="sortByBoothBtn" class="btn-secondary" aria-pressed="false">ブース番号順</button>
           </div>
-          <p class="info-note-text" style="margin-bottom: 0.6rem;">各店舗に紐づくブース番号へ移動できます。</p>
-          <ul class="store-name-index" id="storeNameIndex" style="list-style: none; padding: 0; margin: 0;"></ul>
+          <p class="info-note-text">各店舗に紐づくブース番号へ移動できます。</p>
+          <table class="store-index-table" aria-label="店舗一覧表（2列）">
+            <thead>
+              <tr>
+                <th scope="col">店舗名</th>
+                <th scope="col">ブース番号</th>
+              </tr>
+            </thead>
+            <tbody id="storeIndexBody"></tbody>
+          </table>
         </section>
       </div>
     </section>
