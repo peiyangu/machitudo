@@ -1,3 +1,54 @@
+/* --- モバイル：ヘッダー固定（スクロール追随） --- */
+@media (max-width: 767px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--color-white);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+}
+
+/* --- モバイル下部固定バー --- */
+.mobile-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  background: var(--color-white);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+  padding: 8px 12px;
+}
+
+.mobile-action-bar .mobile-action {
+  flex: 1 1 33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  color: var(--color-dark);
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  padding: 8px 10px;
+}
+
+.mobile-action-bar .mobile-action i {
+  font-size: 1.1rem;
+  color: var(--color-gold);
+}
+
+.mobile-action-bar .mobile-action span {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 767px) {
+  .mobile-action-bar { display: flex; }
+  body { padding-bottom: 60px; }
+}
 .shuttle-banner {
   margin: 24px 0 8px;
 }

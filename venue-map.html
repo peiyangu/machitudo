@@ -56,13 +56,29 @@
 			<div class="page-hero-content">
 				<div class="container">
 					<h2 class="page-hero-title">会場マップ</h2>
-					<p class="page-hero-subtitle">番号をクリックすると店舗情報が表示されます</p>
+					<p class="page-hero-subtitle">番号をクリックすると<br>店舗情報が表示されます</p>
+					<div class="venue-map-search-top" style="margin-top: 1rem;">
+						<label for="storeSearchInputTop" class="venue-map-search-label" style="display:block; margin-bottom: 0.4rem;">
+							🔍 店舗名で検索する
+						</label>
+						<input
+							id="storeSearchInputTop"
+							type="text"
+							list="storeNameList"
+							class="venue-map-search-input"
+							placeholder="例: baobab coffee"
+							style="width:100%; max-width:520px; padding:0.6rem; border:1px solid #ccc; border-radius:6px;"
+						>
+                        <datalist id="storeNameList"></datalist>
+					</div>
 				</div>
 			</div>
 		</section>
 
 		<section class="venue-map-page-section">
 			<div class="container">
+				<!-- 検索フォームはヒーローセクションの入力のみ表示（datalistも上部に移動） -->
+
 				<div class="section-title-wrapper" id="north-area">
 					<h2 class="section-title">北側エリア</h2>
 				</div>
@@ -129,6 +145,24 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- フッター付近の検索CTAは削除（ヒーロー＋モバイル固定バーの2箇所のみ） -->
+
+		<!-- モバイル下部固定バー -->
+		<nav class="mobile-action-bar" aria-label="操作バー">
+			<button class="mobile-action" id="mobileSearchBtn" aria-label="店舗検索">
+				<i class="fas fa-search"></i>
+				<span>検索</span>
+			</button>
+			<a class="mobile-action" href="#north-area" aria-label="マップへ移動">
+				<i class="fas fa-map"></i>
+				<span>マップ</span>
+			</a>
+			<a class="mobile-action" href="stores.html" aria-label="店舗一覧">
+				<i class="fas fa-list"></i>
+				<span>一覧</span>
+			</a>
+		</nav>
 	</main>
 
 	<footer class="site-footer">

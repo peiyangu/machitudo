@@ -35,6 +35,80 @@
 		});
 	}
 
+	function findStoreByName(name) {
+		const n = normalizeBooth(name).toLowerCase();
+		if (!n) return null;
+
+		const data = (typeof allStoresData !== 'undefined' && Array.isArray(allStoresData))
+			? allStoresData
+			: (Array.isArray(window.allStoresData) ? window.allStoresData : null);
+
+		if (!Array.isArray(data)) return null;
+		return data.find((store) => String(store.name || '').trim().toLowerCase() === n) || null;
+	}
+
+	// --- 曖昧検索用ユーティリティ ---
+	function katakanaToHiragana(str) {
+		let out = '';
+		for (const ch of str) {
+			const code = ch.codePointAt(0);
+			// カタカナ基本ブロックをひらがなへ（濁点等はNFKCで吸収済みを想定）
+			if (code >= 0x30A1 && code <= 0x30F6) {
+				out += String.fromCodePoint(code - 0x60);
+			} else {
+				out += ch;
+			}
+		}
+		return out;
+	}
+
+	function normalizeForSearch(str) {
+		return katakanaToHiragana(String(str || '')
+			.normalize('NFKC')
+			.toLowerCase()
+			.trim()
+		)
+			.replace(/[\s\u3000・ー\-_\.]/g, '');
+	}
+
+	function isSubsequence(needle, haystack) {
+		let i = 0;
+		for (const c of haystack) {
+			if (c === needle[i]) i++;
+			if (i >= needle.length) return true;
+		}
+		return false;
+	}
+
+	function scoreMatch(q, name) {
+		if (!q || !name) return 0;
+		if (q === name) return 100;
+		if (name.startsWith(q)) return 90;
+		if (name.includes(q)) return 80;
+		if (isSubsequence(q, name)) return 70;
+		return 0;
+	}
+
+	function findBestStoreByNameFuzzy(query) {
+		const q = normalizeForSearch(query);
+		if (!q) return null;
+		const data = (typeof allStoresData !== 'undefined' && Array.isArray(allStoresData))
+			? allStoresData
+			: (Array.isArray(window.allStoresData) ? window.allStoresData : null);
+		if (!Array.isArray(data)) return null;
+		let best = null;
+		let bestScore = 0;
+		for (const store of data) {
+			const nameNorm = normalizeForSearch(store.name || '');
+			const s = scoreMatch(q, nameNorm);
+			if (s > bestScore) {
+				bestScore = s;
+				best = store;
+			}
+		}
+		return bestScore >= 70 ? best : null; // 最低スコア閾値
+	}
+
 	function el(tag, className, text) {
 		const node = document.createElement(tag);
 		if (className) node.className = className;
@@ -414,6 +488,8 @@
 	async function init() {
 		const storeCount = document.getElementById('mapStoreCount');
 		const storeContainer = document.getElementById('mapStoreContainer');
+		const storeSearchInput = document.getElementById('storeSearchInput');
+		const storeNameList = document.getElementById('storeNameList');
 		const northImg = document.getElementById('northMapImage');
 		const northHighlight = document.getElementById('northMapHighlight');
 		const northMapEl = document.getElementById('northImageMap');
@@ -608,6 +684,98 @@
 					// 北側のハイライトを解除してから南側を表示
 					northApi?.clearHighlight?.();
 				});
+			});
+		}
+
+		// 店舗検索候補の生成（datalist）
+		(function buildStoreNameCandidates() {
+			if (!storeNameList) return;
+			// allStoresData から店名の候補を作成（重複除去）
+			const data = (typeof allStoresData !== 'undefined' && Array.isArray(allStoresData))
+				? allStoresData
+				: (Array.isArray(window.allStoresData) ? window.allStoresData : []);
+			const seen = new Set();
+			const names = [];
+			for (const s of data) {
+				const name = String(s.name || '').trim();
+				if (!name) continue;
+				if (seen.has(name)) continue;
+				seen.add(name);
+				names.push(name);
+			}
+			// アルファベット・五十音ざっくりソート（localeCompare）
+			names.sort((a, b) => a.localeCompare(b, 'ja'));
+			storeNameList.innerHTML = names.map((n) => `<option value="${n}"></option>`).join('');
+		})();
+
+		function areaExistsIn(mapEl, booth) {
+			const b = normalizeBooth(booth);
+			if (!mapEl || !b) return false;
+			const areas = Array.from(mapEl.querySelectorAll('area'));
+			return areas.some(a => (a.dataset.booth || a.getAttribute('title') || a.getAttribute('alt')) === b);
+		}
+
+		function triggerSearchRaw(rawInput) {
+			const raw = String(rawInput || '').trim();
+			if (!raw) return;
+			let store = findStoreByName(raw);
+			if (!store) {
+				// 曖昧検索（部分一致・かな正規化）
+				store = findBestStoreByNameFuzzy(raw);
+				if (!store) {
+					if (storeCount) storeCount.textContent = `「${raw}」に一致する店舗が見つかりませんでした`;
+					return;
+				}
+			}
+			const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
+			if (!primaryBooth) {
+				if (storeCount) storeCount.textContent = `店舗「${store.name}」はブース番号が未設定です`;
+				return;
+			}
+			// 店舗情報の表示（パネル/モーダル）
+			selectBooth(primaryBooth);
+			// 曖昧一致の場合は案内文を補足
+			if (storeCount && findStoreByName(raw) == null) {
+				storeCount.textContent = `曖昧検索：入力「${raw}」に最も近い店舗「${store.name}」を表示しています`;
+			}
+			// ハイライトの表示（該当エリアにスクロール）
+			const options = { shouldScroll: true };
+			if (areaExistsIn(northMapEl, primaryBooth)) {
+				northApi?.highlightBooth?.(primaryBooth, options);
+				southApi?.clearHighlight?.();
+			} else {
+				southApi?.highlightBooth?.(primaryBooth, options);
+				northApi?.clearHighlight?.();
+			}
+			// クエリ維持（共有・ブラウザバック用）
+			setQueryBooth(primaryBooth);
+		}
+
+		// 店舗検索（店名入力）: 候補選択やEnterでブースをハイライト＆店舗表示
+		if (storeSearchInput) {
+			storeSearchInput.addEventListener('change', () => triggerSearchRaw(storeSearchInput.value));
+			storeSearchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') triggerSearchRaw(storeSearchInput.value); });
+		}
+
+		const storeSearchInputTop = document.getElementById('storeSearchInputTop');
+		if (storeSearchInputTop) {
+			storeSearchInputTop.addEventListener('change', () => triggerSearchRaw(storeSearchInputTop.value));
+			storeSearchInputTop.addEventListener('keydown', (e) => { if (e.key === 'Enter') triggerSearchRaw(storeSearchInputTop.value); });
+		}
+
+		const storeSearchInputFooter = document.getElementById('storeSearchInputFooter');
+		if (storeSearchInputFooter) {
+			storeSearchInputFooter.addEventListener('change', () => triggerSearchRaw(storeSearchInputFooter.value));
+			storeSearchInputFooter.addEventListener('keydown', (e) => { if (e.key === 'Enter') triggerSearchRaw(storeSearchInputFooter.value); });
+		}
+
+		const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+		if (mobileSearchBtn) {
+			mobileSearchBtn.addEventListener('click', () => {
+				const target = storeSearchInput || storeSearchInputTop || storeSearchInputFooter;
+				if (!target) return;
+				target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				setTimeout(() => { target.focus(); }, 300);
 			});
 		}
 
