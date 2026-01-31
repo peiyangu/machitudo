@@ -490,6 +490,7 @@
 		const storeContainer = document.getElementById('mapStoreContainer');
 		const storeSearchInput = document.getElementById('storeSearchInput');
 		const storeNameList = document.getElementById('storeNameList');
+		let storeNameIndex = [];
 		const northImg = document.getElementById('northMapImage');
 		const northHighlight = document.getElementById('northMapHighlight');
 		const northMapEl = document.getElementById('northImageMap');
@@ -706,6 +707,8 @@
 			// アルファベット・五十音ざっくりソート（localeCompare）
 			names.sort((a, b) => a.localeCompare(b, 'ja'));
 			storeNameList.innerHTML = names.map((n) => `<option value="${n}"></option>`).join('');
+			// オートコンプリート用インデックス（正規化名付き）
+			storeNameIndex = names.map((n) => ({ name: n, norm: normalizeForSearch(n) }));
 		})();
 
 		function areaExistsIn(mapEl, booth) {
@@ -751,23 +754,69 @@
 			setQueryBooth(primaryBooth);
 		}
 
-		// 店舗検索（店名入力）: 候補選択やEnterでブースをハイライト＆店舗表示
-		if (storeSearchInput) {
-			storeSearchInput.addEventListener('change', () => triggerSearchRaw(storeSearchInput.value));
-			storeSearchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') triggerSearchRaw(storeSearchInput.value); });
+		// 店舗検索（店名入力）: IME変換中はEnter確定を検索として扱わない
+		function attachSearchHandlers(input) {
+			if (!input) return;
+			let composing = false;
+			// オートコンプリートDOM
+			const dropdown = document.createElement('div');
+			dropdown.className = 'store-autocomplete';
+			dropdown.style.display = 'none';
+			// 入力の直後に挿入（親要素が検索ボックスのラッパー）
+			input.parentElement && input.parentElement.appendChild(dropdown);
+
+			input.addEventListener('compositionstart', () => { composing = true; });
+			input.addEventListener('compositionend', () => { composing = false; });
+			input.addEventListener('change', () => triggerSearchRaw(input.value));
+			input.addEventListener('keydown', (e) => {
+				// 日本語IMEなどの変換中はEnterを無視（229は一部端末のIMEコード）
+				if (e.isComposing || composing || e.keyCode === 229) return;
+				if (e.key === 'Enter') {
+					triggerSearchRaw(input.value);
+					dropdown.style.display = 'none';
+				}
+			});
+
+			function renderSuggestions(q) {
+				const query = String(q || '').trim();
+				if (!query) { dropdown.style.display = 'none'; dropdown.innerHTML = ''; return; }
+				const qn = normalizeForSearch(query);
+				if (!qn) { dropdown.style.display = 'none'; dropdown.innerHTML = ''; return; }
+				// スコアでソートし上位のみ表示
+				const items = storeNameIndex
+					.map(({ name, norm }) => ({ name, score: scoreMatch(qn, norm) }))
+					.filter((x) => x.score >= 70)
+					.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'ja'))
+					.slice(0, 8);
+				if (!items.length) { dropdown.style.display = 'none'; dropdown.innerHTML = ''; return; }
+				dropdown.innerHTML = items.map(({ name }) => (
+					`<button type="button" class="store-autocomplete-item">${name.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</button>`
+				)).join('');
+				dropdown.style.display = 'block';
+			}
+
+			input.addEventListener('input', () => {
+				if (composing) return; // 変換中は確定後に更新
+				renderSuggestions(input.value);
+			});
+			input.addEventListener('focus', () => { if (!composing) renderSuggestions(input.value); });
+			input.addEventListener('blur', () => { setTimeout(() => { dropdown.style.display = 'none'; }, 120); });
+			dropdown.addEventListener('mousedown', (e) => { e.preventDefault(); }); // blur抑制
+			dropdown.addEventListener('click', (e) => {
+				const btn = e.target.closest('.store-autocomplete-item');
+				if (!btn) return;
+				input.value = btn.textContent || '';
+				dropdown.style.display = 'none';
+				triggerSearchRaw(input.value);
+			});
 		}
 
+		// 各入力欄にハンドラ付与
+		attachSearchHandlers(storeSearchInput);
 		const storeSearchInputTop = document.getElementById('storeSearchInputTop');
-		if (storeSearchInputTop) {
-			storeSearchInputTop.addEventListener('change', () => triggerSearchRaw(storeSearchInputTop.value));
-			storeSearchInputTop.addEventListener('keydown', (e) => { if (e.key === 'Enter') triggerSearchRaw(storeSearchInputTop.value); });
-		}
-
+		attachSearchHandlers(storeSearchInputTop);
 		const storeSearchInputFooter = document.getElementById('storeSearchInputFooter');
-		if (storeSearchInputFooter) {
-			storeSearchInputFooter.addEventListener('change', () => triggerSearchRaw(storeSearchInputFooter.value));
-			storeSearchInputFooter.addEventListener('keydown', (e) => { if (e.key === 'Enter') triggerSearchRaw(storeSearchInputFooter.value); });
-		}
+		attachSearchHandlers(storeSearchInputFooter);
 
 		const mobileSearchBtn = document.getElementById('mobileSearchBtn');
 		if (mobileSearchBtn) {

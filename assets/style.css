@@ -4421,6 +4421,47 @@ body.menu-open {
   line-height: 1.7;
 }
 
+/* 検索オートコンプリート（会場マップ上部検索） */
+.venue-map-search-top { position: relative; }
+.store-autocomplete {
+  display: none;
+  width: 100%;
+  max-width: 520px;
+  margin: 6px auto 0;
+  background: var(--color-white);
+  border: 1px solid rgba(167, 141, 109, 0.35);
+  border-radius: 8px;
+  box-shadow: 0 10px 22px rgba(42, 45, 52, 0.12);
+  overflow: hidden;
+  z-index: 10;
+}
+.store-autocomplete-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 10px 12px;
+  font-size: 16px;
+  font-family: var(--font-body);
+  color: var(--color-dark);
+  cursor: pointer;
+}
+.store-autocomplete-item:hover,
+.store-autocomplete-item:focus {
+  background: rgba(167, 141, 109, 0.08);
+}
+@media (max-width: 767px) {
+  .store-autocomplete { max-height: 260px; overflow-y: auto; }
+}
+
+/* モバイル端末での入力フォーカス時の自動ズーム防止（iOS Safari対策） */
+@media (max-width: 767px) {
+  .venue-map-search-input {
+    font-size: 16px; /* 16px以上でズーム抑制 */
+  }
+}
+
 .map-highlight {
   position: absolute;
   display: none;
