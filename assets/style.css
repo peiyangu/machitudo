@@ -665,6 +665,40 @@ body.menu-open {
   transform: translateY(-2px);
 }
 
+/* 店舗一覧の並び替えボタン（白背景に合わせて可視性を調整） */
+.index-sort-controls .btn-secondary {
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  border-color: rgba(167, 141, 109, 0.5);
+  backdrop-filter: none;
+}
+
+.index-sort-controls .btn-secondary:hover {
+  background-color: #f7f5f2;
+  border-color: rgba(167, 141, 109, 0.8);
+}
+
+.index-sort-controls {
+  display: flex;
+  gap: 8px;
+  margin: 0.6rem 0 1rem;
+  justify-content: center;
+}
+
+.index-sort-controls .btn-secondary[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--color-gold), #B89D7D);
+  color: var(--color-white);
+  border-color: transparent;
+}
+
+.store-index-mode {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--color-secondary);
+  margin-top: 0.2rem;
+}
+
 /* イベント情報セクション */
 .event-info-section {
   padding: 3rem 0;
