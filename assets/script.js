@@ -180,6 +180,48 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// スクロールでふわっと表示（汎用：TOPのギャラリー等）
+document.addEventListener('DOMContentLoaded', function() {
+  const targets = document.querySelectorAll('.fade-in-on-scroll');
+
+  if (!targets.length) return;
+
+  // コラージュやカードが同時に出たときに、少しだけ段階的に見えるようにする
+  targets.forEach((el, index) => {
+    const delay = Math.min(index * 60, 240);
+    el.style.setProperty('--reveal-delay', `${delay}ms`);
+  });
+
+  // IntersectionObserverが使えない環境では、最初から表示
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  targets.forEach(el => observer.observe(el));
+
+  // 安全策：何らかの理由で監視が動かなかった場合、最終的に表示して「消える」状態を防ぐ
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.fade-in-on-scroll:not(.is-visible)').forEach(el => {
+        el.classList.add('is-visible');
+      });
+    }, 1200);
+  });
+});
+
 // バナースライダー（TOPページのみ）
 document.addEventListener('DOMContentLoaded', function() {
   const sliderTrack = document.getElementById('bannerSliderTrack');
