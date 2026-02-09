@@ -489,6 +489,58 @@ body.menu-open {
 
 .hero-title-main {
   display: inline-block;
+  white-space: nowrap;
+  font-size: 1.25em;
+}
+
+/* 出店者募集バナー */
+.hero-recruitment {
+  display: inline-block;
+  background: transparent;
+  color: var(--color-white);
+  padding: 8px 24px;
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 32px;
+  letter-spacing: 0.2em;
+  text-shadow: 
+    0 0 20px rgba(167, 141, 109, 1),
+    0 0 40px rgba(167, 141, 109, 0.8),
+    0 0 60px rgba(167, 141, 109, 0.6),
+    3px 3px 8px rgba(0, 0, 0, 0.9),
+    -1px -1px 0 rgba(167, 141, 109, 0.9),
+    1px -1px 0 rgba(167, 141, 109, 0.9),
+    -1px 1px 0 rgba(167, 141, 109, 0.9),
+    1px 1px 0 rgba(167, 141, 109, 0.9);
+  animation: text-glow 2s ease-in-out infinite;
+  text-transform: uppercase;
+}
+
+@keyframes text-glow {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: 
+      0 0 20px rgba(167, 141, 109, 1),
+      0 0 40px rgba(167, 141, 109, 0.8),
+      0 0 60px rgba(167, 141, 109, 0.6),
+      3px 3px 8px rgba(0, 0, 0, 0.9),
+      -1px -1px 0 rgba(167, 141, 109, 0.9),
+      1px -1px 0 rgba(167, 141, 109, 0.9),
+      -1px 1px 0 rgba(167, 141, 109, 0.9),
+      1px 1px 0 rgba(167, 141, 109, 0.9);
+  }
+  50% {
+    transform: scale(1.08);
+    text-shadow: 
+      0 0 30px rgba(167, 141, 109, 1),
+      0 0 60px rgba(167, 141, 109, 1),
+      0 0 90px rgba(167, 141, 109, 0.8),
+      4px 4px 12px rgba(0, 0, 0, 1),
+      -2px -2px 0 rgba(167, 141, 109, 1),
+      2px -2px 0 rgba(167, 141, 109, 1),
+      -2px 2px 0 rgba(167, 141, 109, 1),
+      2px 2px 0 rgba(167, 141, 109, 1);
+  }
 }
 
 .hero-description {
@@ -3426,8 +3478,15 @@ body.menu-open {
 
   .hero-title-main {
     white-space: nowrap;
-    font-size: 0.88em;
+    font-size: 1.1em;
     letter-spacing: 0.02em;
+  }
+
+  .hero-recruitment {
+    font-size: 1.6rem;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+    letter-spacing: 0.15em;
   }
 
   .hero-description {
@@ -4192,7 +4251,15 @@ body.menu-open {
   }
 
   .hero-title-main {
-    font-size: 0.9em;
+    font-size: 1.15em;
+    white-space: nowrap;
+  }
+
+  .hero-recruitment {
+    font-size: 1.2rem;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+    letter-spacing: 0.12em;
   }
 
   .hero-description {
@@ -4313,7 +4380,7 @@ body.menu-open {
    ======================================== */
 
 .report-section {
-  padding: 84px 0;
+  padding: 50px 0;
 }
 
 .report-body {
@@ -4417,7 +4484,7 @@ body.menu-open {
 
 /* 次回予告 */
 .next-event-section {
-  padding: 96px 0;
+  padding: 60px 0;
   background: linear-gradient(
     135deg,
     rgba(167, 141, 109, 0.06) 0%,
