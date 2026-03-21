@@ -2579,6 +2579,58 @@ body.menu-open {
   margin-top: 32px;
 }
 
+/* 過去のイベントリスト */
+.past-events-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.past-event-item {
+  border-bottom: 1px solid rgba(167, 141, 109, 0.2);
+}
+
+.past-event-item:first-child {
+  border-top: 1px solid rgba(167, 141, 109, 0.2);
+}
+
+.past-event-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 12px;
+  color: var(--color-dark);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 4px;
+}
+
+.past-event-link:hover {
+  background: rgba(167, 141, 109, 0.08);
+  color: var(--color-gold);
+}
+
+.past-event-date {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+
+.past-event-name {
+  flex: 1;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+}
+
+.past-event-arrow {
+  color: var(--color-gold);
+  font-size: 0.85rem;
+}
+
 /* 店E紹介Eージ */
 .venue-info-note {
   margin: 24px auto 40px;
@@ -3270,9 +3322,46 @@ body.menu-open {
   padding: 3rem 0;
 }
 
-.fuwafuwa-section {
-  background: var(--color-white);
-  padding: 3rem 0;
+/* 近日公開ボックス */
+.coming-soon-box {
+  max-width: 560px;
+  margin: 32px auto 0;
+  padding: 48px 32px;
+  text-align: center;
+  background: linear-gradient(135deg, #FDFCFB 0%, #FFFFFF 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(167, 141, 109, 0.25);
+  box-shadow: 0 8px 24px rgba(42, 45, 52, 0.06);
+}
+
+.coming-soon-icon {
+  font-size: 3rem;
+  color: var(--color-gold);
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.coming-soon-text {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-dark);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.coming-soon-sub {
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  opacity: 0.65;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.coming-soon-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .fuwafuwa-media {
@@ -5009,6 +5098,10 @@ body.menu-open {
   border-bottom: none;
   font-size: 1.6rem;
   margin-bottom: 24px;
+}
+
+.report-next-link {
+  margin-top: 40px;
 }
 
 /* PCではテキストと画像を横並び（空の様子など） */

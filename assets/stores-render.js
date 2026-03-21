@@ -75,11 +75,15 @@ function renderStores(genre, containerId = 'storeContainer') {
       ? `venue-map.html?booth=${encodeURIComponent(primaryBooth)}`
       : 'venue-map.html';
 
+    const boothBadgeHtml = primaryBooth
+      ? `<a href="${boothLink}" class="store-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>`
+      : '';
+
     card.innerHTML = `
       ${imageHtml}
       <div class="store-card-body">
         <div class="store-meta">
-          <a href="${boothLink}" class="store-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>
+          ${boothBadgeHtml}
           <span class="store-days-badge ${daysBadgeClass}">${formatDays(store.days)}</span>
         </div>
         <h3 class="store-name">${store.name}</h3>
