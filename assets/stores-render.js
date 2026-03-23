@@ -70,20 +70,20 @@ function renderStores(genre, containerId = 'storeContainer') {
       // 文字列としての「\n」も <br> に
       .replace(/\\n/g, '<br>');
 
-    const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
-    const boothLink = primaryBooth
-      ? `venue-map.html?booth=${encodeURIComponent(primaryBooth)}`
-      : 'venue-map.html';
-
-    const boothBadgeHtml = primaryBooth
-      ? `<a href="${boothLink}" class="store-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>`
-      : '';
+    // 会場マップ公開時にコメントを外す
+    // const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
+    // const boothLink = primaryBooth
+    //   ? `venue-map.html?booth=${encodeURIComponent(primaryBooth)}`
+    //   : 'venue-map.html';
+    // const boothBadgeHtml = primaryBooth
+    //   ? `<a href="${boothLink}" class="store-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>`
+    //   : '';
 
     card.innerHTML = `
       ${imageHtml}
       <div class="store-card-body">
         <div class="store-meta">
-          ${boothBadgeHtml}
+          <!-- 会場マップ公開時にコメントを外す: ${/* boothBadgeHtml */''} -->
           <span class="store-days-badge ${daysBadgeClass}">${formatDays(store.days)}</span>
         </div>
         <h3 class="store-name">${store.name}</h3>
