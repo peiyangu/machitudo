@@ -455,18 +455,15 @@ document.addEventListener('DOMContentLoaded', function() {
       // 文字列としての「\n」も <br> に
       .replace(/\\n/g, '<br>');
 
-    // 会場マップ公開時にコメントを外す
-    // const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
-    // const boothLink = primaryBooth
-    //   ? `venue-map.html?booth=${encodeURIComponent(primaryBooth)}`
-    //   : 'venue-map.html';
+    const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
+    const boothLink = primaryBooth
+      ? `venue-map.html?booth=${encodeURIComponent(primaryBooth)}`
+      : 'venue-map.html';
 
     card.innerHTML = `
       <div class="slider-card-header">
         <span class="slider-card-genre">${store.genre}</span>
-        <!-- 会場マップ公開時にコメントを外す
-        <a href="${/* boothLink */''/* boothLink */}" class="slider-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>
-        -->
+        <a href="${boothLink}" class="slider-booth-badge" title="会場マップを見る" onclick="sessionStorage.setItem('machitudo_visited', 'true');">ブース ${store.boothNumber}</a>
       </div>
       <div class="slider-card-image">${imageContent}</div>
       <div class="slider-card-body">
@@ -497,13 +494,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // ドットインジケーターを生成（最大20個まで）
   const dotsContainer = document.getElementById('sliderDots');
   const maxDots = Math.min(totalSlides, 20);
-  for (let i = 0; i < maxDots; i++) {
-    const dot = document.createElement('button');
-    dot.className = 'slider-dot';
-    if (i === 0) dot.classList.add('active');
-    dot.setAttribute('aria-label', `スライド ${i + 1} に移動`);
-    dot.addEventListener('click', () => goToSlide(i + 1, true));
-    dotsContainer.appendChild(dot);
+  if (dotsContainer) {
+    for (let i = 0; i < maxDots; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot';
+      if (i === 0) dot.classList.add('active');
+      dot.setAttribute('aria-label', `スライド ${i + 1} に移動`);
+      dot.addEventListener('click', () => goToSlide(i + 1, true));
+      dotsContainer.appendChild(dot);
+    }
   }
   
   let isTransitioning = false;
@@ -525,10 +524,12 @@ document.addEventListener('DOMContentLoaded', function() {
     sliderTrack.style.transform = `translateX(${offset}%)`;
     
     // ドットの更新（0番目のカードは表示されない複製なのでindex-1）
-    const dotIndex = (currentSlide - 1) % totalSlides;
-    document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === dotIndex % maxDots);
-    });
+    if (dotsContainer) {
+      const dotIndex = (currentSlide - 1) % totalSlides;
+      document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === dotIndex % maxDots);
+      });
+    }
     
     if (withAnimation) {
       setTimeout(() => {
@@ -546,17 +547,22 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // ボタンイベント
-  document.querySelector('.slider-btn-prev').addEventListener('click', () => {
-    if (!isTransitioning) {
-      goToSlide(currentSlide - 1, true);
-    }
-  });
-  
-  document.querySelector('.slider-btn-next').addEventListener('click', () => {
-    if (!isTransitioning) {
-      goToSlide(currentSlide + 1, true);
-    }
-  });
+  const prevBtn = document.querySelector('.slider-btn-prev');
+  const nextBtn = document.querySelector('.slider-btn-next');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (!isTransitioning) {
+        goToSlide(currentSlide - 1, true);
+      }
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      if (!isTransitioning) {
+        goToSlide(currentSlide + 1, true);
+      }
+    });
+  }
   
   // スワイプ操作のサポート
   let touchStartX = 0;
@@ -604,4 +610,59 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 初期化
   goToSlide(0);
+});
+
+// ライトボックス
+document.addEventListener('DOMContentLoaded', function () {
+  // オーバーレイ生成
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', '画像を拡大表示中');
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'lightbox-close';
+  closeBtn.innerHTML = '&times;';
+  closeBtn.setAttribute('aria-label', '閉じる');
+
+  const modalImg = document.createElement('img');
+  modalImg.alt = '';
+
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(modalImg);
+  document.body.appendChild(overlay);
+
+  function openLightbox(src, alt) {
+    modalImg.src = src;
+    modalImg.alt = alt || '';
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    modalImg.src = '';
+  }
+
+  // data-lightbox 属性を持つ画像にズームカーソルとクリックイベントを付与
+  document.querySelectorAll('img[data-lightbox]').forEach(function (img) {
+    img.classList.add('lightbox-zoomable');
+    img.addEventListener('click', function () {
+      openLightbox(img.src, img.alt);
+    });
+  });
+
+  // 画像以外のオーバーレイ部分 or 閉じるボタンで閉じる
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  // Escキーで閉じる
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
 });

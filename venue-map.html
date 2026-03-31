@@ -75,48 +75,25 @@
 			</div>
 		</section>
 
-		<section class="venue-map-page-section">
+		<section class="venue-map-page-section" id="venue-map-area">
 			<div class="container">
 				<!-- 検索フォームはヒーローセクションの入力のみ表示（datalistも上部に移動） -->
-
-				<div class="section-title-wrapper" id="north-area">
-					<h2 class="section-title">北側エリア</h2>
-				</div>
 
 				<div class="venue-map-layout">
 					<div class="venue-map-image-area">
 						<div class="map-container">
 							<img
-								src="assets/images/access/North_Area_Map.jpg"
-								alt="会場マップ（北側エリア）"
+								src="assets/images/access/Area_Map.jpg"
+								alt="会場マップ"
 								class="venue-map-image"
-								usemap="#north-image-map"
-								id="northMapImage"
+								usemap="#main-image-map"
+								id="mainMapImage"
 							>
-							<div class="map-highlight" id="northMapHighlight" aria-hidden="true"></div>
-							<map name="north-image-map" id="northImageMap">
-								<!-- <area> は assets/venue-map-areas-north.html から読み込みます -->
+							<div class="map-highlight" id="mainMapHighlight" aria-hidden="true"></div>
+							<map name="main-image-map" id="mainImageMap">
+								<!-- <area> は assets/venue-map-areas.html から読み込みます -->
 							</map>
 							<p class="venue-map-hint">ヒント：スマホでは画像を拡大してから番号をタップできます。店舗情報はポップアップで表示されます。</p>
-						</div>
-
-						<div class="map-container" style="margin-top: 18px;">
-							<div class="section-title-wrapper" id="south-area" style="margin-bottom: 1rem; padding-bottom: 0.5rem;">
-								<h2 class="section-title" style="font-size: 1.6rem;">南側エリア</h2>
-							</div>
-
-							<img
-								src="assets/images/access/South_Area_Map.jpg"
-								alt="会場マップ（南側エリア）"
-								class="venue-map-image"
-								usemap="#south-image-map"
-								id="southMapImage"
-							>
-							<div class="map-highlight" id="southMapHighlight" aria-hidden="true"></div>
-							<map name="south-image-map" id="southImageMap">
-								<!-- <area> は assets/venue-map-areas-south.html から読み込みます -->
-							</map>
-							<p class="venue-map-hint">南側エリアも同様に番号をタップできます。</p>
 						</div>
 					</div>
 
@@ -154,7 +131,7 @@
 				<i class="fas fa-search"></i>
 				<span>検索</span>
 			</button>
-			<a class="mobile-action" href="#north-area" aria-label="マップへ移動">
+			<a class="mobile-action" href="#venue-map-area" aria-label="マップへ移動">
 				<i class="fas fa-map"></i>
 				<span>マップ</span>
 			</a>

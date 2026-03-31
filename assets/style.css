@@ -1121,14 +1121,10 @@ body.menu-open {
   background: rgba(42, 45, 52, 0.7);
   color: var(--color-white);
   text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
 }
 
 .store-booth-badge:hover {
   background: #1a1d24;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(26, 29, 36, 0.4);
 }
 
 .store-days-badge {
@@ -2936,7 +2932,7 @@ body.menu-open {
 .banner-slide {
   width: calc(50% - 0.625rem);
   flex-shrink: 0;
-  aspect-ratio: var(--banner-aspect, 2 / 1);
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   border-radius: 0;
   box-shadow: none;
@@ -2979,7 +2975,7 @@ body.menu-open {
   
   .banner-slide {
     width: 100%;
-    aspect-ratio: var(--banner-aspect, 2 / 1);
+    aspect-ratio: 2 / 1;
   }
   
   .banner-slide img {
@@ -3364,10 +3360,112 @@ body.menu-open {
   gap: 8px;
 }
 
-.fuwafuwa-media {
+/* 会場マッププレビュー（トップページ） */
+.venue-map-index-preview {
   max-width: 900px;
+  margin: 32px auto 0;
+  text-align: center;
+}
+
+.venue-map-index-link {
+  display: block;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(42, 45, 52, 0.12);
+  border: 1px solid rgba(167, 141, 109, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.venue-map-index-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(42, 45, 52, 0.2);
+}
+
+.venue-map-index-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.venue-map-index-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 45, 52, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.venue-map-index-link:hover .venue-map-index-overlay {
+  background: rgba(42, 45, 52, 0.4);
+}
+
+.venue-map-index-cta {
+  background: var(--color-gold);
+  color: var(--color-white);
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.venue-map-index-link:hover .venue-map-index-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.venue-map-index-btn-wrap {
+  margin-top: 20px;
+}
+
+/* 会場マップバナー（店舗紹介ページ） */
+.venue-map-banner {
+  margin: 32px 0 0;
+  text-align: center;
+}
+
+.venue-map-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #FDFCFB 0%, #FFFFFF 100%);
+  border: 1px solid rgba(167, 141, 109, 0.4);
+  border-radius: 8px;
+  color: var(--color-dark);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(42, 45, 52, 0.08);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.venue-map-banner-link:hover {
+  background: linear-gradient(135deg, #FBF8F4 0%, #F7F2EB 100%);
+  box-shadow: 0 6px 18px rgba(42, 45, 52, 0.14);
+  transform: translateY(-2px);
+}
+
+.venue-map-banner-link .fa-map-marked-alt {
+  color: var(--color-gold);
+  font-size: 1.3rem;
+}
+
+.venue-map-banner-link .fa-arrow-right {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+}
+
+.fuwafuwa-media {
+  max-width: 480px;
   margin: 24px auto 0;
-  padding: 20px;
+  padding: 16px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   border: 1px solid rgba(167, 141, 109, 0.25);
@@ -5203,4 +5301,55 @@ body.menu-open {
   .report-block--closing {
     margin-top: 32px;
   }
+}
+
+/* ==============================
+   ライトボックス
+   ============================== */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.is-open {
+  display: flex;
+}
+
+.lightbox-overlay img {
+  max-width: 92vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  z-index: 9001;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+.lightbox-zoomable {
+  cursor: zoom-in;
 }

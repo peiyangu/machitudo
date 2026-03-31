@@ -71,9 +71,9 @@
           <p class="featured-section-subtitle">ランダムにピックアップした魅力的な店舗をご紹介</p>
           
           <div class="featured-slider">
-            <!-- <button class="slider-btn slider-btn-prev" aria-label="前の店舗">
+            <button class="slider-btn slider-btn-prev" aria-label="前の店舗">
               <span>‹</span>
-            </button> -->
+            </button>
             
             <div class="slider-container">
               <div class="slider-track" id="featuredSliderTrack">
@@ -81,14 +81,14 @@
               </div>
             </div>
             
-            <!-- <button class="slider-btn slider-btn-next" aria-label="次の店舗">
+            <button class="slider-btn slider-btn-next" aria-label="次の店舗">
               <span>›</span>
-            </button> -->
+            </button>
           </div>
           
-          <!-- <div class="slider-dots" id="sliderDots"> -->
+          <div class="slider-dots" id="sliderDots">
             <!-- JavaScriptでドットインジケーターが動的に追加されます -->
-          <!-- </div> -->
+          </div>
         </div>
         
         <h3 class="genre-section-title">ジャンル別に探す</h3>
@@ -147,39 +147,20 @@
             <p class="genre-description">企業のPRブース</p>
           </a>
         </div>
+
+        <!-- 会場マップへのリンク -->
+        <div class="venue-map-banner">
+          <a href="venue-map.html" class="venue-map-banner-link">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>会場マップで出店位置を確認する</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
         </ul>
       </div>
     </section>
   </main>
-
-  <!-- マップ拡大モーダル -->
-  <div id="mapModal" class="map-modal" onclick="closeMapModal()">
-    <span class="map-modal-close">&times;</span>
-    <img class="map-modal-content" id="modalImage" alt="会場マップ拡大">
-  </div>
-
-  <script>
-    function openMapModal(img) {
-      const modal = document.getElementById('mapModal');
-      const modalImg = document.getElementById('modalImage');
-      modal.style.display = 'flex';
-      modalImg.src = img.src;
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMapModal() {
-      const modal = document.getElementById('mapModal');
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-
-    // Escキーでモーダルを閉じる
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeMapModal();
-      }
-    });
-  </script>
 
   <!-- フッター -->
   <footer class="site-footer">

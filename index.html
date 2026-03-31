@@ -143,6 +143,18 @@
       </div>
     </section>
 
+    <!-- バナーセクション（画像差し替えのため一時非表示） -->
+    <!--
+    <section class="info-banner-section">
+      <div class="banner-slider-wrapper">
+        <div class="banner-slider-container">
+          <div class="banner-slider-track" id="bannerSliderTrack">
+          </div>
+        </div>
+      </div>
+    </section>
+    -->
+
     <!-- お知らせセクション -->
     <section class="news-section">
       <div class="container">
@@ -194,6 +206,38 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ふわふわ遊具セクション -->
+    <section class="section" id="fuwafuwa" style="background: linear-gradient(135deg, #faf8f6 0%, #f5f0eb 100%); padding: 3rem 0;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">ふわふわ遊具</h2>
+          <p class="section-subtitle">お子様も大喜び！大きなふわふわ遊具を設置します</p>
+        </div>
+        <div class="fuwafuwa-media">
+          <img src="assets/images/top/fuwafuwa.jpg" alt="ふわふわ遊具" class="fuwafuwa-image" loading="lazy" data-lightbox>
+        </div>
+        <p style="text-align: center; margin-top: 1.5rem; color: var(--color-dark); opacity: 0.8; line-height: 1.8;">
+          会場内に大型のふわふわ遊具を設置！<br>お子様連れのご家族も安心してお楽しみいただけます。
+        </p>
+      </div>
+    </section>
+
+    <!-- ステージパフォーマンスセクション -->
+    <section class="section" id="stage" style="background: var(--color-white); padding: 3rem 0;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">ステージパフォーマンス</h2>
+          <p class="section-subtitle">会場を盛り上げる多彩なパフォーマンスをお楽しみください</p>
+        </div>
+        <div class="fuwafuwa-media">
+          <img src="assets/images/top/stagePaformance.jpg" alt="ステージパフォーマンス" class="fuwafuwa-image" loading="lazy" data-lightbox>
+        </div>
+        <p style="text-align: center; margin-top: 1.5rem; color: var(--color-dark); opacity: 0.8; line-height: 1.8;">
+          メインステージでは両日にわたりさまざまなパフォーマンスを開催。<br>詳細は当日のプログラムをご確認ください。
+        </p>
       </div>
     </section>
 
@@ -264,15 +308,22 @@
       <div class="container">
         <div class="section-title-wrapper">
           <h2 class="section-title">会場マップ</h2>
-          <p class="section-subtitle">近日公開予定</p>
+          <p class="section-subtitle">ブース番号をクリックすると店舗情報が表示されます</p>
         </div>
-        <div class="coming-soon-box">
-          <i class="fas fa-map-marked-alt coming-soon-icon"></i>
-          <p class="coming-soon-text">宗像ユリックスの会場マップは<br>近日公開予定です。</p>
-          <p class="coming-soon-sub">公開次第、こちらに掲載します。<br>最新情報は公式Instagramでもお知らせします。</p>
-          <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer" class="btn-secondary coming-soon-instagram">
-            <i class="fab fa-instagram"></i> 公式Instagramをフォロー
+        <div class="venue-map-index-preview">
+          <a href="venue-map.html" class="venue-map-index-link">
+            <img src="assets/images/access/Area_Map.jpg" alt="会場マップ" class="venue-map-index-img" loading="lazy">
+            <div class="venue-map-index-overlay">
+              <span class="venue-map-index-cta">
+                <i class="fas fa-map-marked-alt"></i> 会場マップを開く
+              </span>
+            </div>
           </a>
+          <div class="venue-map-index-btn-wrap">
+            <a href="venue-map.html" class="btn-primary">
+              <i class="fas fa-map-marked-alt"></i> インタラクティブ会場マップへ
+            </a>
+          </div>
         </div>
       </div>
     </section>

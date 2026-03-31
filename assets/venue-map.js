@@ -11,7 +11,7 @@
 	function getBoothList(boothNumber) {
 		if (!boothNumber) return [];
 		return String(boothNumber)
-			.split(/[\s,、\/]+/)
+			.split(/[\s,、\/・]+/)
 			.map((s) => s.trim())
 			.filter(Boolean);
 	}
@@ -168,9 +168,10 @@
 			.replace(/\r\n|\r|\n/g, '<br>')
 			.replace(/\\n/g, '<br>');
 
-		const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
+		const fullBoothNumber = String(store.boothNumber || '');
+		const primaryBooth = getBoothList(fullBoothNumber)[0] || '';
 		const boothLink = primaryBooth
-			? `venue-map.html?booth=${encodeURIComponent(primaryBooth)}`
+			? `venue-map.html?booth=${encodeURIComponent(fullBoothNumber || primaryBooth)}`
 			: 'venue-map.html';
 
 		const daysText = (typeof formatDays === 'function') ? formatDays(days) : '';
@@ -292,9 +293,31 @@
 			}
 		});
 
-		let lastSelectedArea = null;
+		let lastSelectedAreas = [];
 		let pendingBoothToHighlight = null;
 		let pendingShouldScroll = false;
+
+		// 複数ハイライト要素を動的に管理するプール
+		const highlightContainer = highlightEl ? highlightEl.parentElement : null;
+		const highlightPool = [];
+
+		function getOrCreateHighlightEl(index) {
+			if (index === 0) return highlightEl;
+			if (highlightPool[index - 1]) return highlightPool[index - 1];
+			if (!highlightContainer) return null;
+			const extra = document.createElement('div');
+			extra.className = 'map-highlight';
+			extra.setAttribute('aria-hidden', 'true');
+			highlightContainer.appendChild(extra);
+			highlightPool[index - 1] = extra;
+			return extra;
+		}
+
+		function hideExtraHighlights(fromIndex) {
+			for (let i = fromIndex - 1; i < highlightPool.length; i++) {
+				if (highlightPool[i]) highlightPool[i].style.display = 'none';
+			}
+		}
 
 		function normalizeScrollOption(optionsOrShouldScroll) {
 			if (typeof optionsOrShouldScroll === 'boolean') {
@@ -306,47 +329,51 @@
 			return false;
 		}
 
-		function updateHighlight(area, shouldScroll = false) {
+		function updateHighlights(areaList, shouldScroll = false) {
 			if (!highlightEl) return;
-			if (!area) {
+			const validAreas = Array.isArray(areaList) ? areaList.filter(Boolean) : [];
+			if (!validAreas.length) {
 				highlightEl.style.display = 'none';
+				hideExtraHighlights(1);
 				return;
 			}
 
-			const shape = (area.getAttribute('shape') || 'rect').toLowerCase();
-			const coords = parseCoords(area.getAttribute('coords') || '');
-			const box = coordsToRectBox(shape, coords);
-			if (!box) {
-				highlightEl.style.display = 'none';
-				return;
-			}
-
-			// 画像がコンテナ内でどこに描画されているか（paddingやレイアウト差分を吸収）
 			const imgOffsetLeft = img.offsetLeft || 0;
 			const imgOffsetTop = img.offsetTop || 0;
+			const expandBy = 3;
 
-			// 枠を広げて番号が見えるようにする（各辺に8px追加）
-			const expandBy = 8;
-			const expandedBox = {
-				left: box.left - expandBy,
-				top: box.top - expandBy,
-				width: box.width + (expandBy * 2),
-				height: box.height + (expandBy * 2)
-			};
+			validAreas.forEach((area, index) => {
+				const el = getOrCreateHighlightEl(index);
+				if (!el) return;
+				const shape = (area.getAttribute('shape') || 'rect').toLowerCase();
+				const coords = parseCoords(area.getAttribute('coords') || '');
+				const box = coordsToRectBox(shape, coords);
+				if (!box) {
+					el.style.display = 'none';
+					return;
+				}
+				const expandedBox = {
+					left: box.left - expandBy,
+					top: box.top - expandBy,
+					width: box.width + (expandBy * 2),
+					height: box.height + (expandBy * 2)
+				};
+				el.style.display = 'block';
+				el.style.left = `${expandedBox.left + imgOffsetLeft}px`;
+				el.style.top = `${expandedBox.top + imgOffsetTop}px`;
+				el.style.width = `${expandedBox.width}px`;
+				el.style.height = `${expandedBox.height}px`;
+			});
+			hideExtraHighlights(validAreas.length);
 
-			highlightEl.style.display = 'block';
-			highlightEl.style.left = `${expandedBox.left + imgOffsetLeft}px`;
-			highlightEl.style.top = `${expandedBox.top + imgOffsetTop}px`;
-			highlightEl.style.width = `${expandedBox.width}px`;
-			highlightEl.style.height = `${expandedBox.height}px`;
-
-			// 選択直後のみ、該当位置まで自動スクロール（リサイズ等で繰り返し発火しないよう制御）
+			// 選択直後のみ、最初のエリアへ自動スクロール（リサイズ等で繰り返し発火しないよう制御）
 			if (shouldScroll) {
 				setTimeout(() => {
-					const rect = highlightEl.getBoundingClientRect();
+					const firstEl = getOrCreateHighlightEl(0);
+					if (!firstEl) return;
+					const rect = firstEl.getBoundingClientRect();
 					const offset = window.innerHeight / 2 - rect.height / 2;
 					const scrollTop = window.pageYOffset + rect.top - offset;
-					
 					window.scrollTo({
 						top: Math.max(0, scrollTop),
 						behavior: 'smooth'
@@ -368,7 +395,7 @@
 			});
 
 			// リサイズ後にハイライト位置も更新（ここでは自動スクロールしない）
-			updateHighlight(lastSelectedArea, false);
+			updateHighlights(lastSelectedAreas, false);
 
 			if (pendingBoothToHighlight) {
 				highlightBooth(pendingBoothToHighlight, { shouldScroll: pendingShouldScroll });
@@ -379,28 +406,25 @@
 
 		function highlightBooth(booth, optionsOrShouldScroll) {
 			const shouldScroll = normalizeScrollOption(optionsOrShouldScroll);
-			const b = normalizeBooth(booth);
-			if (!b) {
-				lastSelectedArea = null;
-				updateHighlight(null, false);
+			const boothNums = getBoothList(normalizeBooth(booth));
+			if (!boothNums.length) {
+				lastSelectedAreas = [];
+				updateHighlights([], false);
 				return;
 			}
 
 			// 画像のnaturalサイズが未確定だとcoordsスケールができず位置が合わないため、保留
 			if (!img.naturalWidth || !img.naturalHeight) {
-				pendingBoothToHighlight = b;
+				pendingBoothToHighlight = booth;
 				pendingShouldScroll = shouldScroll;
 				return;
 			}
 
-			const area = areas.find((a) => (a.dataset.booth || a.getAttribute('title') || a.getAttribute('alt')) === b);
-			if (!area) {
-				lastSelectedArea = null;
-				updateHighlight(null, false);
-				return;
-			}
-			lastSelectedArea = area;
-			updateHighlight(area, shouldScroll);
+			const foundAreas = boothNums
+				.map((b) => areas.find((a) => (a.dataset.booth || a.getAttribute('title') || a.getAttribute('alt')) === b) || null)
+				.filter(Boolean);
+			lastSelectedAreas = foundAreas;
+			updateHighlights(foundAreas, shouldScroll);
 		}
 
 		// areaタップ/クリック（ピンチズーム時の誤選択を防ぎ、実タップのみ選択）
@@ -409,8 +433,8 @@
 				if (e && typeof e.preventDefault === 'function') e.preventDefault();
 				window.__machitudoSuppressOutsideClear?.();
 				const booth = area.dataset.booth || area.getAttribute('title') || area.getAttribute('alt');
-				lastSelectedArea = area;
-				updateHighlight(area, true);
+				lastSelectedAreas = [area];
+				updateHighlights([area], true);
 				window.__machitudoSelectBooth?.(booth);
 			};
 
@@ -477,10 +501,10 @@
 		return {
 			highlightBooth,
 			clearHighlight: () => {
-				lastSelectedArea = null;
+				lastSelectedAreas = [];
 				pendingBoothToHighlight = null;
 				pendingShouldScroll = false;
-				updateHighlight(null, false);
+				updateHighlights([], false);
 			},
 		};
 	}
@@ -491,12 +515,9 @@
 		const storeSearchInput = document.getElementById('storeSearchInput');
 		const storeNameList = document.getElementById('storeNameList');
 		let storeNameIndex = [];
-		const northImg = document.getElementById('northMapImage');
-		const northHighlight = document.getElementById('northMapHighlight');
-		const northMapEl = document.getElementById('northImageMap');
-		const southImg = document.getElementById('southMapImage');
-		const southHighlight = document.getElementById('southMapHighlight');
-		const southMapEl = document.getElementById('southImageMap');
+		const mainImg = document.getElementById('mainMapImage');
+		const mainHighlight = document.getElementById('mainMapHighlight');
+		const mainMapEl = document.getElementById('mainImageMap');
 
 		// スマホ用モーダル要素
 		const modal = document.getElementById('venueMapModal');
@@ -505,7 +526,7 @@
 		const modalTitle = document.getElementById('venueMapModalTitle');
 		const modalBody = document.getElementById('venueMapModalBody');
 
-		if (!storeCount || !storeContainer || !northImg) return;
+		if (!storeCount || !storeContainer || !mainImg) return;
 
 		// スマホ判定（768px以下）
 		function isMobile() {
@@ -557,9 +578,7 @@
 			}
 
 			// ハイライト解除
-			northApi?.clearHighlight?.();
-			southApi?.clearHighlight?.();
-			currentHighlightApi = null;
+			mapApi?.clearHighlight?.();
 
 			// パネル表示を初期状態へ
 			if (storeCount) storeCount.textContent = 'ブース番号をクリックしてください';
@@ -613,30 +632,15 @@
 		};
 
 		// <area> を外部ファイルから読み込み（image-map.net の出力をそのまま管理できるようにする）
-		await loadAreasIntoMap(northMapEl, 'assets/venue-map-areas-north.html');
-		if (southImg && southMapEl) {
-			await loadAreasIntoMap(southMapEl, 'assets/venue-map-areas-south.html');
-		}
+		await loadAreasIntoMap(mainMapEl, 'assets/venue-map-areas.html');
 
-		const northApi = attachResponsiveImageMap(northImg, northHighlight, northMapEl);
-		const southApi = (southImg && southMapEl)
-			? attachResponsiveImageMap(southImg, southHighlight, southMapEl)
-			: null;
-
-		// グローバルにハイライトAPIを設定（相互に解除できるようにする）
-		let currentHighlightApi = null;
+		const mapApi = attachResponsiveImageMap(mainImg, mainHighlight, mainMapEl);
 
 		// マップ画像の「空白タップ」で選択解除（areaタップ時は抑止される）
-		northImg.addEventListener('click', () => {
+		mainImg.addEventListener('click', () => {
 			if (suppressOutsideClear) return;
 			clearSelection();
 		});
-		if (southImg) {
-			southImg.addEventListener('click', () => {
-				if (suppressOutsideClear) return;
-				clearSelection();
-			});
-		}
 
 		// マップ/パネル/モーダル以外のタップで選択解除（"画面外" の扱い）
 		document.addEventListener('click', (e) => {
@@ -649,44 +653,6 @@
 			if (target.closest('.map-container')) return;
 			clearSelection();
 		}, true);
-
-		// ハイライト表示を一元管理する関数
-		function highlightBoothGlobal(booth, targetApi, otherApi, options) {
-			// 他方のハイライトを解除
-			if (otherApi && otherApi !== targetApi) {
-				otherApi.clearHighlight?.();
-			}
-			// 対象のハイライトを表示
-			if (targetApi) {
-				targetApi.highlightBooth?.(booth, options);
-				currentHighlightApi = targetApi;
-			}
-		}
-
-		// areaクリック時に他方のハイライトも解除する
-		// 北側の各areaにイベント追加
-		if (northMapEl) {
-			const northAreas = Array.from(northMapEl.querySelectorAll('area'));
-			northAreas.forEach((area) => {
-				area.addEventListener('click', () => {
-					const booth = area.dataset.booth || area.getAttribute('title') || area.getAttribute('alt');
-					// 南側のハイライトを解除してから北側を表示
-					southApi?.clearHighlight?.();
-				});
-			});
-		}
-
-		// 南側の各areaにイベント追加
-		if (southMapEl) {
-			const southAreas = Array.from(southMapEl.querySelectorAll('area'));
-			southAreas.forEach((area) => {
-				area.addEventListener('click', () => {
-					const booth = area.dataset.booth || area.getAttribute('title') || area.getAttribute('alt');
-					// 北側のハイライトを解除してから南側を表示
-					northApi?.clearHighlight?.();
-				});
-			});
-		}
 
 		// 店舗検索候補の生成（datalist）
 		(function buildStoreNameCandidates() {
@@ -711,13 +677,6 @@
 			storeNameIndex = names.map((n) => ({ name: n, norm: normalizeForSearch(n) }));
 		})();
 
-		function areaExistsIn(mapEl, booth) {
-			const b = normalizeBooth(booth);
-			if (!mapEl || !b) return false;
-			const areas = Array.from(mapEl.querySelectorAll('area'));
-			return areas.some(a => (a.dataset.booth || a.getAttribute('title') || a.getAttribute('alt')) === b);
-		}
-
 		function triggerSearchRaw(rawInput) {
 			const raw = String(rawInput || '').trim();
 			if (!raw) return;
@@ -730,7 +689,8 @@
 					return;
 				}
 			}
-			const primaryBooth = String(store.boothNumber || '').split(/[\s,、\/]+/)[0];
+			const fullBoothNumber = String(store.boothNumber || '');
+			const primaryBooth = getBoothList(fullBoothNumber)[0] || '';
 			if (!primaryBooth) {
 				if (storeCount) storeCount.textContent = `店舗「${store.name}」はブース番号が未設定です`;
 				return;
@@ -741,17 +701,11 @@
 			if (storeCount && findStoreByName(raw) == null) {
 				storeCount.textContent = `曖昧検索：入力「${raw}」に最も近い店舗「${store.name}」を表示しています`;
 			}
-			// ハイライトの表示（該当エリアにスクロール）
+			// ハイライトの表示（全ブース番号を対象にスクロール）
 			const options = { shouldScroll: true };
-			if (areaExistsIn(northMapEl, primaryBooth)) {
-				northApi?.highlightBooth?.(primaryBooth, options);
-				southApi?.clearHighlight?.();
-			} else {
-				southApi?.highlightBooth?.(primaryBooth, options);
-				northApi?.clearHighlight?.();
-			}
+			mapApi?.highlightBooth?.(fullBoothNumber, options);
 			// クエリ維持（共有・ブラウザバック用）
-			setQueryBooth(primaryBooth);
+			setQueryBooth(fullBoothNumber);
 		}
 
 		// 店舗検索（店名入力）: IME変換中はEnter確定を検索として扱わない
@@ -832,23 +786,8 @@
 		const initialBooth = getQueryBooth();
 		if (initialBooth) {
 			// 店舗ページから来た場合はハイライトのみ表示（店舗カード/モーダルは表示しない）
-			// まず北側で試行
-			const northAreas = northMapEl ? Array.from(northMapEl.querySelectorAll('area')) : [];
-			const southAreas = southMapEl ? Array.from(southMapEl.querySelectorAll('area')) : [];
-			
-			const b = normalizeBooth(initialBooth);
-			const foundInNorth = northAreas.some(a => 
-				(a.dataset.booth || a.getAttribute('title') || a.getAttribute('alt')) === b
-			);
-			
 			const highlightOptions = { shouldScroll: true };
-			if (foundInNorth) {
-				// 北側にある場合
-				highlightBoothGlobal(initialBooth, northApi, southApi, highlightOptions);
-			} else {
-				// 南側にある場合
-				highlightBoothGlobal(initialBooth, southApi, northApi, highlightOptions);
-			}
+			mapApi?.highlightBooth?.(initialBooth, highlightOptions);
 			
 			// クエリ文字列は設定しておく（ブラウザバック時の状態保持用）
 			setQueryBooth(initialBooth);
