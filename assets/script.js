@@ -228,9 +228,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!sliderTrack) return;
   
-  // バナー画像データ（2枚のみ）
+  // バナー画像データ（3枚）
   const bannerImages = [
-    { src: 'assets/images/banner/fuwafuwabanner.jpg', alt: 'ふわふわ遊具', href: '#fuwafuwa' },
+    { src: 'assets/images/banner/huwahuwabanner.jpg', alt: 'ふわふわ遊具' },
+    { src: 'assets/images/banner/notPet.jpg', alt: 'ペット禁止のお知らせ' },
     { src: 'assets/images/banner/ShuttleBussBanner.jpg', alt: 'シャトルバス案内', href: 'access.html#bus-shuttle-section' }
   ];
   
