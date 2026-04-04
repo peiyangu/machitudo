@@ -105,6 +105,28 @@
     </section>
   </main>
 
+  <!-- プロダクトツアー -->
+  <div class="ptour-wrap" id="ptourWrap">
+    <div class="ptour-dim" id="ptourDim"></div>
+    <div class="ptour-spot" id="ptourSpot"></div>
+    <div class="ptour-popover" id="ptourPopover" role="tooltip">
+      <span class="ptour-arrow" id="ptourArrow"></span>
+      <div class="ptour-popover-body">
+        <div class="ptour-dots" aria-hidden="true">
+          <span class="ptour-dot"></span>
+          <span class="ptour-dot"></span>
+          <span class="ptour-dot"></span>
+        </div>
+        <p class="ptour-title" id="ptourTitle"></p>
+        <p class="ptour-desc" id="ptourDesc"></p>
+        <div class="ptour-footer">
+          <button class="ptour-btn-skip" id="ptourSkipBtn">スキップ</button>
+          <button class="ptour-btn-next" id="ptourNextBtn">次へ <i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- フッター -->
   <footer class="site-footer">
     <div class="container">
@@ -148,5 +170,198 @@
       </div>
     </div>
   </footer>
+  <script>
+    (function () {
+      var STEPS = [
+        {
+          sel: '#storeCount',
+          title: '全店舗が一覧で表示されています',
+          desc: 'フード・スイーツ・ドリンクなど全ジャンルの出店店舗をまとめて確認できます。',
+          pad: 10
+        },
+        {
+          sel: '.store-booth-badge',
+          title: 'ブース番号をタップ → 会場マップへ',
+          desc: '各カードのブース番号をタップすると、会場マップでその店舗の場所が表示されます。',
+          pad: 6
+        },
+        {
+          sel: '.all-stores-search-wrap',
+          title: '店舗名・キーワードで検索',
+          desc: '「コーヒー」「ハンドメイド」など気になるワードを入力して店舗を絞り込めます。',
+          pad: 10
+        }
+      ];
+
+      var TOTAL   = STEPS.length;
+      var current = 0;
+
+      var wrap    = document.getElementById('ptourWrap');
+      var dim     = document.getElementById('ptourDim');
+      var spot    = document.getElementById('ptourSpot');
+      var popover = document.getElementById('ptourPopover');
+      var arrow   = document.getElementById('ptourArrow');
+      var titleEl = document.getElementById('ptourTitle');
+      var descEl  = document.getElementById('ptourDesc');
+      var skipBtn = document.getElementById('ptourSkipBtn');
+      var nextBtn = document.getElementById('ptourNextBtn');
+      var dots    = document.querySelectorAll('.ptour-dot');
+
+      function closeTour() {
+        wrap.classList.remove('is-active');
+        document.body.style.overflow = '';
+      }
+
+      function positionTour(step) {
+        var target = document.querySelector(step.sel);
+        if (!target) { closeTour(); return; }
+
+        var pad = step.pad || 8;
+        var r   = target.getBoundingClientRect();
+        var sl  = r.left - pad;
+        var st  = r.top  - pad;
+        var sw  = r.width  + pad * 2;
+        var sh  = r.height + pad * 2;
+
+        spot.style.left   = sl + 'px';
+        spot.style.top    = st + 'px';
+        spot.style.width  = sw + 'px';
+        spot.style.height = sh + 'px';
+
+        // ポップオーバー配置
+        var vw   = window.innerWidth;
+        var vh   = window.innerHeight;
+        var MARGIN = 14;
+        // fixed 要素のサイズ取得（getBoundingClientRect が最も確実）
+        var popRect = popover.getBoundingClientRect();
+        var popW = popRect.width  || Math.min(290, vw - 28);
+        var popH = popRect.height || 150;
+        var popTop, popLeft, arrowDir;
+
+        if (vh - (st + sh) >= popH + MARGIN + 8) {
+          arrowDir = 'top';
+          popTop   = st + sh + MARGIN;
+        } else if (st >= popH + MARGIN + 8) {
+          arrowDir = 'bottom';
+          popTop   = st - popH - MARGIN;
+        } else {
+          arrowDir = sl > vw / 2 ? 'right' : 'left';
+          popTop   = Math.max(MARGIN, Math.min(vh - popH - MARGIN, st + sh / 2 - popH / 2));
+        }
+
+        if (arrowDir === 'top' || arrowDir === 'bottom') {
+          popLeft = sl + sw / 2 - popW / 2;
+          popLeft = Math.max(MARGIN, Math.min(vw - popW - MARGIN, popLeft));
+        } else if (arrowDir === 'right') {
+          popLeft = sl - popW - MARGIN;
+        } else {
+          popLeft = sl + sw + MARGIN;
+        }
+
+        popover.style.top  = popTop  + 'px';
+        popover.style.left = popLeft + 'px';
+
+        arrow.className = 'ptour-arrow ptour-arrow--' + arrowDir;
+        if (arrowDir === 'top' || arrowDir === 'bottom') {
+          arrow.style.left = Math.max(16, Math.min(popW - 36, (sl + sw / 2) - popLeft - 10)) + 'px';
+          arrow.style.top  = '';
+        } else {
+          arrow.style.left = '';
+          arrow.style.top  = Math.max(16, sh / 2 - 10) + 'px';
+        }
+      }
+
+      function showStep(index, instant) {
+        current = index;
+        var step = STEPS[index];
+
+        titleEl.textContent = step.title;
+        descEl.textContent  = step.desc;
+        dots.forEach(function (d, i) { d.classList.toggle('active', i === index); });
+
+        if (index === TOTAL - 1) {
+          nextBtn.innerHTML = '始める <i class="fas fa-arrow-right"></i>';
+        } else {
+          nextBtn.innerHTML = '次へ <i class="fas fa-chevron-right"></i>';
+        }
+
+        var target = document.querySelector(step.sel);
+        if (!target) { closeTour(); return; }
+
+        var r       = target.getBoundingClientRect();
+        var headerH = 70;
+        var inView  = r.top >= headerH + 8 && r.bottom <= window.innerHeight - 8;
+
+        if (instant || inView) {
+          if (instant) {
+            spot.style.transition    = 'none';
+            popover.style.transition = 'none';
+            requestAnimationFrame(function () {
+              spot.style.transition    = '';
+              popover.style.transition = '';
+            });
+          }
+          positionTour(step);
+        } else {
+          // スクロールしてから再配置
+          popover.style.opacity = '0';
+          document.body.style.overflow = '';
+          var scrollY = window.scrollY + r.top + r.height / 2 - window.innerHeight / 2;
+          window.scrollTo({ top: Math.max(0, scrollY), behavior: 'smooth' });
+          setTimeout(function () {
+            document.body.style.overflow = 'hidden';
+            positionTour(step);
+            popover.style.opacity = '1';
+          }, 500);
+        }
+      }
+
+      function startTour() {
+        wrap.classList.add('is-active');
+        // overflow:hidden を設定するとスクロールバー消失で要素が動くため
+        // 先に rAF でレイアウトを確定させてから測定・固定する
+        requestAnimationFrame(function () {
+          document.body.style.overflow = 'hidden';
+          // さらに 1 フレーム待ってポップオーバーのサイズを確定させてから配置
+          requestAnimationFrame(function () {
+            showStep(0, true);
+          });
+        });
+      }
+
+      // 店舗カードが描画された後に開始
+      function waitForStores(cb) {
+        var container = document.getElementById('storeContainer');
+        if (container && container.querySelector('.store-booth-badge')) { cb(); return; }
+        var obs = new MutationObserver(function () {
+          if (container.querySelector('.store-booth-badge')) { obs.disconnect(); cb(); }
+        });
+        if (container) { obs.observe(container, { childList: true, subtree: true }); }
+        else { setTimeout(cb, 800); }
+      }
+
+      skipBtn.addEventListener('click', closeTour);
+      nextBtn.addEventListener('click', function () {
+        if (current < TOTAL - 1) { showStep(current + 1); } else { closeTour(); }
+      });
+      dim.addEventListener('click', closeTour);
+      document.addEventListener('keydown', function (e) {
+        if (!wrap.classList.contains('is-active')) return;
+        if (e.key === 'Escape') { closeTour(); }
+        if (e.key === 'ArrowRight' && current < TOTAL - 1) { showStep(current + 1); }
+      });
+      window.addEventListener('resize', function () {
+        if (wrap.classList.contains('is-active')) { positionTour(STEPS[current]); }
+      });
+
+      var TOUR_KEY = 'machitudo_tour_done';
+      if (!localStorage.getItem(TOUR_KEY)) {
+        waitForStores(function () {
+          startTour();
+          localStorage.setItem(TOUR_KEY, '1');
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
