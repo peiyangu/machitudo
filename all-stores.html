@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1G7JHWX9Q5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1G7JHWX9Q5');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>店舗一覧 | まちつど（machitudo）</title>
+  <link rel="canonical" href="https://machitudo.com/all-stores.html">
+  <meta name="description" content="まちつどに出店する全店舗の一覧です。フード・スイーツ・ドリンク・ワークショップ・縁日・物販・グリーンなど約250店舗が集結。">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/logo.png">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/stores-data.js" defer></script>
+  <script src="assets/stores-render.js" defer></script>
+  <script src="assets/script.js" defer></script>
+</head>
+<body>
+  <div class="bg_pattern Paper_v2"></div>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">machitudo</h1>
+      <button class="hamburger-menu" aria-label="メニュー">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <a href="index.html">トップ</a>
+        <a href="about.html">machitudoについて</a>
+        <a href="stores.html">店舗紹介</a>
+        <a href="access.html">アクセス</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="container">
+          <h2 class="page-hero-title">店舗一覧</h2>
+          <p class="page-hero-subtitle">まちつどに集う、すべての店舗</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section all-stores-section" data-genre="all">
+      <div class="container">
+        <p class="section-subtitle">フード・スイーツ・ドリンク・ワークショップ・縁日・物販・グリーンなど、全ジャンルの出店店舗をご紹介します。</p>
+        <p class="store-count-list" id="storeCount">読み込み中...</p>
+
+        <div class="stores-grid" id="storeContainer">
+          <!-- JavaScriptで店舗カードが動的に生成されます -->
+        </div>
+
+        <!-- ジャンルナビゲーション -->
+        <div class="genre-navigation">
+          <p class="genre-nav-label">ジャンルで絞り込む</p>
+          <div class="genre-list">
+            <a href="food.html" class="genre-link">フード</a>
+            <a href="sweets.html" class="genre-link">スイーツ</a>
+            <a href="drink.html" class="genre-link">ドリンク</a>
+            <a href="workshop.html" class="genre-link">ワークショップ</a>
+            <a href="festival.html" class="genre-link">縁日</a>
+            <a href="sales.html" class="genre-link">物販</a>
+            <a href="green.html" class="genre-link">グリーン</a>
+            <a href="other.html" class="genre-link">その他</a>
+            <a href="pr.html" class="genre-link">企業PR</a>
+          </div>
+        </div>
+
+        <div class="genre-back-button">
+          <a href="stores.html" class="btn-secondary">店舗紹介トップに戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">MACHITUDO</h3>
+          <p class="footer-description">九州の味と出会う、特別な週末</p>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-heading">イベント情報</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">machitudoについて</a></li>
+            <li><a href="stores.html">店舗紹介</a></li>
+            <li><a href="access.html">アクセス</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-heading">カテゴリー</h4>
+          <ul class="footer-links">
+            <li><a href="sweets.html">スイーツ</a></li>
+            <li><a href="drink.html">ドリンク</a></li>
+            <li><a href="food.html">フード</a></li>
+            <li><a href="workshop.html">ワークショップ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-heading">SNS</h4>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/machitudo/" target="_blank" rel="noopener noreferrer" class="social-link">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+          </div>
+          <div class="footer-info">
+            <p><strong>開催日</strong><br>2026年4月4日（土）・5日（日）</p>
+            <p><strong>会場</strong><br>宗像ユリックス</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 machitudo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

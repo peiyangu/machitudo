@@ -801,6 +801,30 @@ body.menu-open {
   transform: translateY(-2px);
 }
 
+/* 全店舗ページの「もっと見る」ボタン */
+.btn-load-more {
+  display: block;
+  margin: 48px auto 32px;
+  padding: 16px 48px;
+  background: transparent;
+  color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+}
+
+.btn-load-more:hover {
+  background: var(--color-gold);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(167, 141, 109, 0.35);
+}
+
 /* 店E一覧の並び替えEタンE白背景に合わせて可視性を調整EE*/
 .index-sort-controls .btn-secondary {
   background-color: var(--color-white);
@@ -5353,4 +5377,69 @@ body.menu-open {
 
 .lightbox-zoomable {
   cursor: zoom-in;
+}
+
+/* ========================================
+   全店舗一覧ページ（all-stores.html）
+   スマホでカード2カラム表示
+======================================== */
+.all-stores-section .stores-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+@media (max-width: 767px) {
+  .all-stores-section .stores-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .all-stores-section .store-card-image,
+  .all-stores-section .store-card img {
+    height: 120px !important;
+    min-height: 120px !important;
+    max-height: 120px !important;
+  }
+
+  .all-stores-section .store-card-image-placeholder {
+    height: 120px !important;
+    min-height: 120px !important;
+  }
+
+  .all-stores-section .store-card-body {
+    padding: 10px !important;
+  }
+
+  .all-stores-section .store-name {
+    font-size: 0.85rem !important;
+  }
+
+  .all-stores-section .store-description {
+    font-size: 0.75rem !important;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .all-stores-section .store-meta {
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .all-stores-section .store-booth-badge,
+  .all-stores-section .store-days-badge {
+    font-size: 0.65rem !important;
+    padding: 2px 6px !important;
+  }
+
+  .all-stores-section .instagram-link {
+    font-size: 0.7rem !important;
+  }
+}
+
+@media (max-width: 374px) {
+  .all-stores-section .stores-grid {
+    gap: 8px !important;
+  }
 }
