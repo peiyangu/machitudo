@@ -801,9 +801,63 @@ body.menu-open {
   transform: translateY(-2px);
 }
 
-/* 全店舗ページの「もっと見る」ボタン */
-.btn-load-more {
+/* 全店舗ページ: 検索ボックス */
+.all-stores-search-wrap {
+  margin: 0 0 32px;
+}
+
+.all-stores-search-label {
   display: block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.all-stores-search-label .fa-search {
+  color: var(--color-gold);
+  margin-right: 6px;
+}
+
+.all-stores-search-input {
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 16px;
+  border: 1.5px solid rgba(167, 141, 109, 0.4);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-dark);
+  background: var(--color-white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.all-stores-search-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(167, 141, 109, 0.15);
+}
+
+.all-stores-search-hint {
+  margin: 8px 0 0;
+  font-size: 0.875rem;
+  color: var(--color-gold);
+  font-family: var(--font-body);
+  min-height: 1.4em;
+}
+
+@media (max-width: 767px) {
+  .all-stores-search-input {
+    font-size: 16px; /* iOSの自動ズーム防止 */
+    max-width: 100%;
+  }
+}
+
+/* 全店舗ページの「もっと見る」ボタン */
+.btn-load-more {  display: block;
   margin: 48px auto 32px;
   padding: 16px 48px;
   background: transparent;

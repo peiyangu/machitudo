@@ -57,6 +57,16 @@
     <section class="section all-stores-section" data-genre="all">
       <div class="container">
         <p class="section-subtitle">フード・スイーツ・ドリンク・ワークショップ・縁日・物販・グリーンなど、全ジャンルの出店店舗をご紹介します。</p>
+
+        <div class="all-stores-search-wrap">
+          <label for="allStoresSearch" class="all-stores-search-label">
+            <i class="fas fa-search"></i> 店舗名・キーワードで検索
+          </label>
+          <input type="search" id="allStoresSearch" class="all-stores-search-input"
+                 placeholder="例: コーヒー、ハンドメイド" autocomplete="off">
+          <p class="all-stores-search-hint" id="allStoresSearchHint"></p>
+        </div>
+
         <p class="store-count-list" id="storeCount">読み込み中...</p>
 
         <div class="stores-grid" id="storeContainer">
@@ -81,6 +91,15 @@
 
         <div class="genre-back-button">
           <a href="stores.html" class="btn-secondary">店舗紹介トップに戻る</a>
+        </div>
+
+        <!-- ブース番号一覧への導線 -->
+        <div class="venue-map-banner" style="margin-top: 16px;">
+          <a href="stores-index.html" class="venue-map-banner-link">
+            <i class="fas fa-list-ol"></i>
+            <span>ブース番号で探す（名前・番号の一覧表）</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </section>

@@ -159,5 +159,87 @@ document.addEventListener('DOMContentLoaded', function() {
   if (storeSection) {
     const genre = storeSection.getAttribute('data-genre');
     renderStores(genre);
+    if (genre === 'all') {
+      initAllStoresSearch();
+    }
   }
 });
+
+// --- 全店舗ページ専用: 検索機能 ---
+
+/** カタカナをひらがなに変換 */
+function katakanaToHiragana(str) {
+  let out = '';
+  for (const ch of str) {
+    const code = ch.codePointAt(0);
+    if (code >= 0x30A1 && code <= 0x30F6) {
+      out += String.fromCodePoint(code - 0x60);
+    } else {
+      out += ch;
+    }
+  }
+  return out;
+}
+
+/** 検索用に文字列を正規化（venue-map.js と同じロジック） */
+function normalizeForSearch(str) {
+  return katakanaToHiragana(
+    String(str || '').normalize('NFKC').toLowerCase().trim()
+  ).replace(/[\s\u3000・ー\-_\.]/g, '');
+}
+
+/** クエリで allStoresData をフィルタリング */
+function filterStores(query) {
+  const q = normalizeForSearch(query);
+  if (!q) return allStoresData;
+  return allStoresData.filter(store => {
+    const name = normalizeForSearch(store.name || '');
+    const desc = normalizeForSearch(store.description || '');
+    return name.includes(q) || desc.includes(q);
+  });
+}
+
+/** 全店舗ページの検索ボックスを初期化 */
+function initAllStoresSearch() {
+  const input = document.getElementById('allStoresSearch');
+  const container = document.getElementById('storeContainer');
+  const hint = document.getElementById('allStoresSearchHint');
+  if (!input || !container) return;
+
+  let debounceTimer = null;
+
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() {
+      const query = input.value.trim();
+
+      // 既存の「もっと見る」ボタンを削除
+      const btn = document.getElementById('loadMoreBtn');
+      if (btn) btn.remove();
+      container.innerHTML = '';
+
+      if (!query) {
+        // クリア → ページネーション形式に戻す
+        renderBatch(allStoresData, container, 0);
+        updateStoreCount(allStoresData.length, 'all');
+        if (hint) hint.textContent = '';
+        return;
+      }
+
+      const results = filterStores(query);
+
+      if (results.length === 0) {
+        container.innerHTML = '<div class="no-stores-message"><p>「' + query + '」に一致する店舗が見つかりませんでした。</p></div>';
+        updateStoreCount(0, 'all');
+        if (hint) hint.textContent = '';
+        return;
+      }
+
+      // 検索中は全件一括表示（ページネーションなし）
+      container.innerHTML = results.map(buildCardHtml).join('');
+      setupScrollAnimation();
+      updateStoreCount(results.length, 'all');
+      if (hint) hint.textContent = '「' + query + '」の検索結果：' + results.length + '件';
+    }, 200);
+  });
+}
